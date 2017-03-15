@@ -11,20 +11,6 @@ class App extends React.Component {
     };
   }
 
-  // componentDidMount() {
-  //   $.ajax({
-  //     url: '/items', 
-  //     success: (data) => {
-  //       this.setState({
-  //         items: data
-  //       })
-  //     },
-  //     error: (err) => {
-  //       console.log('err', err);
-  //     }
-  //   });
-  // }
-
   render() {
     return (<div>
       <h1>Hello World!</h1>
