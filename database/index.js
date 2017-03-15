@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
 
-mongoose.connection('mongodb://localhost');
+mongoose.connect('mongodb://localhost');
 
-const db = mongoose.connect();
+const db = mongoose.connection;
 
 db.on('error', console.error.bind('console', 'error connecting mongoose'));
 db.once('open', () => {
