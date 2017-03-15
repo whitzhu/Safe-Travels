@@ -4,10 +4,10 @@
 
 ## Team
 
-  - teamMember
-  - teamMember
-  - teamMember
-  - teamMember
+  - Jason
+  - Huan
+  - Gabe
+  - Billy
 
 ## Table of Contents
 
