@@ -1,4 +1,5 @@
 const express = require('express');
+const database = require('./../database/index');
 
 const handler = require('./../lib/utility');
 
