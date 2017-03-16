@@ -10,8 +10,8 @@ class Main extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      attractionsResults: dummyYelpAttractionData,
-      restaurantsResults: dummyYelpRestaurantData,
+      attractionResults: dummyYelpAttractionData,
+      restaurantResults: dummyYelpRestaurantData,
     };
   }
 
