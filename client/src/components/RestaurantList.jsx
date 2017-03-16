@@ -26,11 +26,9 @@ class RestaurantList extends React.Component {
           <option value="Restaurant">Restaurant</option>
         </select>
         <ol> 
-          {
-          //   this.props.results.map(value => 
-          //   <RestaurantListEntry result={value} />,
-          // )
-          }
+          {this.props.results.map(value => 
+            <RestaurantListEntry result={value} />,
+          )}
         </ol>
       </div>
     );
