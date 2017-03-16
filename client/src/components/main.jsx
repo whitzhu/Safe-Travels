@@ -7,10 +7,10 @@ const main = () => (
       The main page of Safe Travel
     </header>
     <div>
-      <Link to="/">Go back to Entrance</Link>
+      <Link to="/login">login</Link>
     </div>
     <div>
-      <Link to="/login">login</Link>
+      <Link to="/">Go back to Entrance</Link>
     </div>
     <footer>
       Be Safe!!
