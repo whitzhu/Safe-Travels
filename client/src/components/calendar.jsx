@@ -87,10 +87,12 @@ const Calendar = React.createClass({
         this.state.selectedElement.classList.remove('r-selected');
     }
     element.target.classList.add('r-selected');
-    console.log(year);
+    console.log('select year is ', year);
+    console.log('select month is ', month + 1);
+    console.log('select date is ', date);
     this.setState({
       selectedYear: year,
-      selectedMonth: month,
+      selectedMonth: month + 1,
       selectedDate: date,
       selectedDt: new Date(year, month, date),
       selectedElement: element.target,
@@ -162,75 +164,75 @@ const MonthDates = React.createClass({
     date: new Date().getDate(),
     today: new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()),
   },
-    render: function () {
-        var haystack, day, d, current, onClick,
-            isDate, className,
-            weekStack = Array.apply(null, {length: 7}).map(Number.call, Number),
-            that = this,
-            startDay = this.props.firstOfMonth.getUTCDay(),
-            first = this.props.firstOfMonth.getDay(),
-            janOne = new Date(that.props.year, 0, 1),
-            rows = 5;
+  render: function () {
+    var haystack, day, d, current, onClick,
+        isDate, className,
+        weekStack = Array.apply(null, {length: 7}).map(Number.call, Number),
+        that = this,
+        startDay = this.props.firstOfMonth.getUTCDay(),
+        first = this.props.firstOfMonth.getDay(),
+        janOne = new Date(that.props.year, 0, 1),
+        rows = 5;
 
-        if ((startDay == 5 && this.props.daysInMonth == 31) || (startDay == 6 && this.props.daysInMonth > 29)) {
-            rows = 6;
-        }
-
-        className = rows === 6 ? 'r-dates' : 'r-dates r-fix';
-        haystack = Array.apply(null, {length: rows}).map(Number.call, Number);
-        day = this.props.startDay + 1 - first;
-        while (day > 1) {
-            day -= 7;
-        }
-        day -= 1;
-        return (
-            <div className={className}>
-            {haystack.map(function (item, i) {
-                d = day + i * 7;
-                return (
-                    <div className="r-row">
-                    {(() => {
-                        if (that.props.weekNumbers) {
-                            var wn = Math.ceil((((new Date(that.props.year, that.props.month, d) - janOne) / 86400000) + janOne.getDay() + 1) / 7);
-                            return (
-                                <div className="r-cell r-weeknum">{wn}</div>
-                            );
-                        }
-                    })()}
-                    {weekStack.map(function (item, i) {
-                        d += 1;
-                        isDate = d > 0 && d <= that.props.daysInMonth;
-
-                        if (isDate) {
-                            current = new Date(that.props.year, that.props.month, d);
-                            className = current != that.constructor.today ? 'r-cell r-date' : 'r-cell r-date r-today';
-                            if (that.props.disablePast && current < that.constructor.today) {
-                                className += ' r-past';
-                            } else if (that.props.minDate !== null && current < that.props.minDate) {
-                                className += ' r-past';
-                            }
-
-                            if (/r-past/.test(className)) {
-                                return (
-                                    <div className={className} role="button" tabIndex="0">{d}</div>
-                                );
-                            }
-
-                            return (
-                                <div className={className} role="button" tabIndex="0" onClick={that.props.onSelect.bind(that, that.props.year, that.props.month, d)}>{d}</div>
-                            );
-                        }
-
-                        return (
-                            <div className="r-cell"></div>
-                        );
-                    })}
-                    </div>
-                );
-            })}
-            </div>
-        );
+    if ((startDay == 5 && this.props.daysInMonth == 31) || (startDay == 6 && this.props.daysInMonth > 29)) {
+        rows = 6;
     }
+
+    className = rows === 6 ? 'r-dates' : 'r-dates r-fix';
+    haystack = Array.apply(null, { length: rows }).map(Number.call, Number);
+    day = this.props.startDay + 1 - first;
+    while (day > 1) {
+        day -= 7;
+    }
+    day -= 1;
+    return (
+      <div className={className}>
+        {haystack.map(function (item, i) {
+          d = day + i * 7;
+            return (
+              <div className="r-row">
+                  {(() => {
+                      if (that.props.weekNumbers) {
+                          var wn = Math.ceil((((new Date(that.props.year, that.props.month, d) - janOne) / 86400000) + janOne.getDay() + 1) / 7);
+                          return (
+                              <div className="r-cell r-weeknum">{wn}</div>
+                          );
+                      }
+                  })()}
+                  {weekStack.map(function (item, i) {
+                      d += 1;
+                      isDate = d > 0 && d <= that.props.daysInMonth;
+
+                      if (isDate) {
+                          current = new Date(that.props.year, that.props.month, d);
+                          className = current != that.constructor.today ? 'r-cell r-date' : 'r-cell r-date r-today';
+                          if (that.props.disablePast && current < that.constructor.today) {
+                              className += ' r-past';
+                          } else if (that.props.minDate !== null && current < that.props.minDate) {
+                              className += ' r-past';
+                          }
+
+                          if (/r-past/.test(className)) {
+                              return (
+                                  <div className={className} role="button" tabIndex="0">{d}</div>
+                              );
+                          }
+
+                          return (
+                              <div className={className} role="button" tabIndex="0" onClick={that.props.onSelect.bind(that, that.props.year, that.props.month, d)}>{d}</div>
+                          );
+                      }
+
+                      return (
+                          <div className="r-cell"></div>
+                      );
+                  })}
+                  </div>
+              );
+          })}
+      </div>
+    );
+  }
 });
 
 export default Calendar;
