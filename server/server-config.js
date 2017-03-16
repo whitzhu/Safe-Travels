@@ -1,11 +1,37 @@
+const bodyParser = require('body-parser');
 const express = require('express');
+const https = require('https');
+const request = require('request');
 
 const database = require('./../database/index');
-
 const handler = require('./../lib/utility');
+const ApiKeys = require('../config/api-config.js');
 
 const app = express();
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use(express.static(`${__dirname}/../client/dist`));
+app.get('/yelp', (req, res) => {
+  const location = encodeURIComponent(req.query.location);
+  const query = encodeURIComponent(req.query.query);
+  const url = `https://api.yelp.com/v3/businesses/search?term=${query}&location=${location}`;
+
+  request({
+    uri: url,
+    headers: {
+      Authorization: `Bearer ${ApiKeys.yelpApiToken.token}`,
+    },
+    method: 'GET',
+  }, (error, response, body) => {
+    if (error) {
+      console.error('Yelp GET request error');
+    } else {
+      console.log('Yelp GET request successful');
+      res.status(200).send(body);
+    }
+  });
+});
 
 module.exports = app;
