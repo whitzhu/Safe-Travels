@@ -1,21 +1,18 @@
 import React from 'react';
+import AttractionListEntry from './AttractionListEntry.jsx';
 
 class AttractionList extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      query: null,
-    };
   }
 
   render() {
     return (
       <div className="yelp-results-attractions"> 
         <ol> 
-          {//this.props.results.map(value => 
-            //<AttractionListEntry result={value} />,
-          //)
-          }
+          {this.props.attractions.map(value => 
+            <AttractionListEntry attraction={value} />,
+          )}
         </ol>
       </div>
     );

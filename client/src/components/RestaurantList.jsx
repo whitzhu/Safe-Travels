@@ -1,11 +1,9 @@
 import React from 'react';
+import RestaurantListEntry from './RestaurantListEntry.jsx';
 
 class RestaurantList extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      query: null,
-    };
   }
 
   render() {
@@ -26,8 +24,8 @@ class RestaurantList extends React.Component {
           <option value="Restaurant">Restaurant</option>
         </select>
         <ol> 
-          {this.props.results.map(value => 
-            <RestaurantListEntry result={value} />,
+          {this.props.restaurants.map(value => 
+            <RestaurantListEntry restaurant={value} />,
           )}
         </ol>
       </div>
