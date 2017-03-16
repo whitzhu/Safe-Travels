@@ -87,9 +87,8 @@ const Calendar = React.createClass({
         this.state.selectedElement.classList.remove('r-selected');
     }
     element.target.classList.add('r-selected');
-    console.log('select year is ', year);
-    console.log('select month is ', month + 1);
-    console.log('select date is ', date);
+    var newDate = new Date(year, month + 1, date);
+    this.props.setSelectedDate(newDate);
     this.setState({
       selectedYear: year,
       selectedMonth: month + 1,
@@ -110,17 +109,6 @@ const Calendar = React.createClass({
     );
   },
 });
-
-// const Header = (props) => {
-//   return (
-//     <div className="r-row r-head">
-//       <div className="r-cell r-prev" onClick={props.onPrev.bind(this)} role="button" tabIndex="0"></div>
-//       <div className="r-cell r-title">{props.monthNames[props.month]}&nbsp;{props.year}</div>
-//       <div className="r-cell r-next" onClick={props.onNext.bind(this)} role="button" tabIndex="0"></div>
-//     </div>
-//   );
-// };
-
 
 const Header = React.createClass({
   render: function () {

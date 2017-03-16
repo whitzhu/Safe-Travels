@@ -8,12 +8,18 @@ class Entrance extends React.Component {
     super(props);
     this.state = {
       destination: null,
+      selectedDate: null,
     };
     this.setDestination = this.setDestination.bind(this);
+    this.setSelectedDate = this.setSelectedDate.bind(this);
   }
 
-  setDestination(string) {
-    this.setState({ destination: string });
+  setDestination(dest) {
+    this.setState({ destination: dest });
+  }
+
+  setSelectedDate(date) {
+    this.setState({ selectedDate: date });
   }
 
   render() {
@@ -29,7 +35,7 @@ class Entrance extends React.Component {
         <div>
           <Link to="/login">login</Link>
         </div>
-        <Calendar className="calendar" />
+        <Calendar className="calendar" setSelectedDate={this.setSelectedDate} />
       </div>
     );
   }
