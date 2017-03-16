@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Calendar from './calendar.jsx';
 import SearchBar from './search.jsx';
 import Calendar from './calendar.jsx';
 
@@ -29,6 +30,7 @@ class Entrance extends React.Component {
         <div>
           <Link to="/login">login</Link>
         </div>
+        <Calendar className="calendar" />
       </div>
     );
   }
