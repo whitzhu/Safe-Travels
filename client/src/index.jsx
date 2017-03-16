@@ -7,6 +7,7 @@ import Entrance from './components/entrance.jsx';
 import main from './components/main.jsx';
 import login from './components/login.jsx';
 import createHistory from '../../node_modules/history/createBrowserHistory';
+import './css/calendar.css';
 
 const history = createHistory();
 
