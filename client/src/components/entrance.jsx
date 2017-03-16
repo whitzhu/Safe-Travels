@@ -15,10 +15,6 @@ class Entrance extends React.Component {
     this.setState({ destination: string });
   }
 
-  componentDidUpdate() {
-
-  }
-
   render() {
     return (
       <div>
