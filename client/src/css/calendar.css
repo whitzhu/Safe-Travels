@@ -1,10 +1,18 @@
 .r-calendar{
+<<<<<<< d4ec247bb4f08b591e5a9190854fa9af5cffd3fb
     /*background-color: #eee;*/
+=======
+    background-color: #eee;
+>>>>>>> (feat)refactoring calendar code
     -moz-box-shadow: 0 0 5px #ccc;
     -webkit-box-shadow: 0 0 5px #ccc;
     box-shadow: 0 0 5px #ccc;
     font: normal 15px Helvetica Neue, Helvetica, Arial, sans-serif;
+<<<<<<< d4ec247bb4f08b591e5a9190854fa9af5cffd3fb
     min-width: 140px;
+=======
+    min-width: 280px;
+>>>>>>> (feat)refactoring calendar code
 }
 .r-calendar *{
     -moz-box-sizing: border-box;
@@ -18,6 +26,10 @@
 .r-calendar .r-row{
     display: flex;
     flex-flow: row nowrap;
+<<<<<<< d4ec247bb4f08b591e5a9190854fa9af5cffd3fb
+=======
+    width: 100%;
+>>>>>>> (feat)refactoring calendar code
     justify-content: center;
 }
 .r-calendar .r-cell{
@@ -129,8 +141,12 @@
 }
 .r-calendar{
     position: relative;
+<<<<<<< d4ec247bb4f08b591e5a9190854fa9af5cffd3fb
     width: 30%;
     margin: auto;
+=======
+    width: 100%;
+>>>>>>> (feat)refactoring calendar code
 }
 .r-calendar:after{
     content: "";
@@ -139,7 +155,10 @@
 }
 .r-calendar .r-inner{
     position: absolute;
+<<<<<<< d4ec247bb4f08b591e5a9190854fa9af5cffd3fb
     margin: auto;
+=======
+>>>>>>> (feat)refactoring calendar code
     width: 100%;
     height: 100%;
     display: flex;
