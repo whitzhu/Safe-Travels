@@ -1,11 +1,9 @@
-import './css/calendar.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route } from 'react-router-dom';
-import $ from 'jquery';  
-import Entrance from './components/entrance.jsx';
-import main from './components/main.jsx';
-import login from './components/login.jsx';
+import Entrance from './components/Entrance';
+import Main from './components/Main';
+import Login from './components/Login';
 import createHistory from '../../node_modules/history/createBrowserHistory';
 import './css/calendar.css';
 
@@ -28,8 +26,8 @@ class App extends React.Component {
       <Router history={history}>
         <div>
           <Route path="/" component={Entrance} />
-          <Route path="/main" component={main} />
-          <Route path="/login" component={login} />
+          <Route path="/main" component={Main} />
+          <Route path="/login" component={Login} />
         </div>
       </Router>
     );

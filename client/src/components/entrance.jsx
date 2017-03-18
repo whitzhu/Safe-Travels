@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Calendar from './calendar.jsx';
-import SearchBar from './search.jsx';
+import Calendar from './Calendar';
+import SearchBar from './Search';
 
 class Entrance extends React.Component {
   constructor(props) {
