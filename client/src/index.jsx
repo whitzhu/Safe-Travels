@@ -23,6 +23,8 @@ class App extends React.Component {
       displayMain: false,
     };
     this.selectDestination = this.selectDestination.bind(this);
+    this.setLocationFromSearch = this.setLocationFromSearch.bind(this);
+    this.queryYelp = this.queryYelp.bind(this);
   }
 
   selectDestination(yelpLocation) {
@@ -83,7 +85,7 @@ class App extends React.Component {
           {this.state.displayEntrance &&
             <Route
               path="/" component={() =>
-              (<Entrance setLocationFromSearch={this.setLocationFromSearch.bind(this)} queryYelp={this.queryYelp.bind(this)} />)}
+              (<Entrance setLocationFromSearch={this.setLocationFromSearch} queryYelp={this.queryYelp} />)}
             />
           }
           {this.state.displayMain &&
