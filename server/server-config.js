@@ -13,6 +13,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static(`${__dirname}/../client/dist`));
+app.get('/main', (req, res) => {
+  res.redirect('/');
+});
+app.get('/login', (req, res) => {
+  res.redirect('/');
+});
 app.get('/yelp', (req, res) => {
   const location = encodeURIComponent(req.query.location);
   const query = encodeURIComponent(req.query.query);

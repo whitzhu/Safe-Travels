@@ -1,5 +1,7 @@
 import React from 'react';
+
 import RestaurantListEntry from './RestaurantListEntry';
+
 
 class RestaurantList extends React.Component {
   constructor(props) {

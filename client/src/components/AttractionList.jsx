@@ -1,5 +1,7 @@
 import React from 'react';
+
 import AttractionListEntry from './AttractionListEntry';
+
 
 class AttractionList extends React.Component {
   constructor(props) {
