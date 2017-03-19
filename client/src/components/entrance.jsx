@@ -28,7 +28,7 @@ class Entrance extends React.Component {
         <h1>Hello World!</h1>
         <h1>Safe Travel</h1>
         <p> want to travel safe? </p>
-        <SearchBar setDestination={this.setDestination} />
+        <SearchBar setDestination={this.setDestination} setLocationFromSearch={this.props.setLocationFromSearch} />
         <div>
           <Link to="/main">public</Link>
         </div>
