@@ -18,6 +18,9 @@ class App extends React.Component {
       attractionResults: [],
       restaurantResults: [],
       mapDestinations: [],
+      displayEntrance: true,
+      displayLogin: false,
+      displayMain: false,
     };
     this.selectDestination = this.selectDestination.bind(this);
   }
@@ -77,12 +80,18 @@ class App extends React.Component {
     return (
       <Router>
         <div>
-          <Route
-            path="/" component={() =>
-            (<Entrance setLocationFromSearch={this.setLocationFromSearch.bind(this)} queryYelp={this.queryYelp.bind(this)} />)}
-          />
-          <Route path="/main" component={() => (<Main props={this.state} selectDestination={this.selectDestination} />)} />
-          <Route path="/login" component={Login} />
+          {this.state.displayEntrance &&
+            <Route
+              path="/" component={() =>
+              (<Entrance setLocationFromSearch={this.setLocationFromSearch.bind(this)} queryYelp={this.queryYelp.bind(this)} />)}
+            />
+          }
+          {this.state.displayMain &&
+            <Route path="/main" component={() => (<Main props={this.state} selectDestination={this.selectDestination} />)} />
+          }
+          {this.state.displayLogin &&
+            <Route path="/login" component={Login} />
+          }
         </div>
       </Router>
     );
