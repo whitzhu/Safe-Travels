@@ -1,19 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import $ from 'jquery';
 import 'react-dates/lib/css/_datepicker.css';
 import Entrance from './components/Entrance';
 import Main from './components/Main';
 import Login from './components/Login';
-import CreateHistory from '../../node_modules/history/createBrowserHistory';
-import './css/calendar.css';
 
 // import dummyYelpAttractionData from '../dummyYelpAttractionData.js';
 // import dummyYelpRestaurantData from '../dummyYelpRestaurantData.js';
-
-const history = CreateHistory();
-
 
 class App extends React.Component {
   constructor(props) {
@@ -35,7 +30,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <Router history={history}>
+      <Router>
         <div>
           <Route
             path="/" component={() =>
