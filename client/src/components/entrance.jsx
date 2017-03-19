@@ -1,14 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Calendar from './Calendar';
 import SearchBar from './Search';
+import AirbnbCalendar from './AirbnbCalendar';
 
 class Entrance extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       destination: null,
-      selectedDate: null,
+      selectedStartDate: null,
+      selectedEndDate: null,
     };
     this.setDestination = this.setDestination.bind(this);
     this.setSelectedDate = this.setSelectedDate.bind(this);
@@ -18,8 +19,11 @@ class Entrance extends React.Component {
     this.setState({ destination: dest });
   }
 
-  setSelectedDate(date) {
-    this.setState({ selectedDate: date });
+  setSelectedDate(startDate, endDate) {
+    console.log('selectedStartDate is ', startDate);
+    console.log('selectedEndDate is ', endDate);
+    this.setState({ selectedStartDate: startDate });
+    this.setState({ selectedEndDate: endDate });
   }
 
   render() {
@@ -35,10 +39,13 @@ class Entrance extends React.Component {
         <div>
           <Link to="/login">login</Link>
         </div>
-        <Calendar className="calendar" setSelectedDate={this.setSelectedDate} />
+        <div> Enter your travel date
+          <AirbnbCalendar setSelectedDate={this.setSelectedDate} />
+        </div>
       </div>
     );
   }
 }
 
 export default Entrance;
+         
