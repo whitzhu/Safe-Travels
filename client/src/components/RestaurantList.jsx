@@ -8,7 +8,7 @@ class RestaurantList extends React.Component {
     super(props);
   }
 
-  render() {
+  render() {  
     return (
       <div className="yelp-results-restaurants"> 
         <select className="yelp-select-price">
@@ -27,7 +27,7 @@ class RestaurantList extends React.Component {
         </select>
         <ol> 
           {this.props.restaurants.map(value => 
-            <RestaurantListEntry restaurant={value} />,
+            <RestaurantListEntry restaurant={value} selectDestination={this.props.selectDestination}/>,
           )}
         </ol>
       </div>

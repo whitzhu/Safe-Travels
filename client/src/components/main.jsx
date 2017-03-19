@@ -15,20 +15,20 @@ class Main extends React.Component {
   }
 
   render() {
-    console.log(this.props.attractionResults)
+    console.log(this.props.props.attractionResults)
     return (<div>
       <header>
         The main page of Safe Travel
       </header>
       <div>
         <Link to="/">Go back to Entrance</Link>
-        <AttractionList attractions={this.props.attractionResults.businesses || []} />
-        <RestaurantList restaurants={this.props.restaurantResults.businesses || []} />
+        <AttractionList attractions={this.props.props.attractionResults.businesses || []} selectDestination={this.props.selectDestination} />
+        <RestaurantList restaurants={this.props.props.restaurantResults.businesses || []} selectDestination={this.props.selectDestination} />
       </div>
       <div>
         <Link to="/login">login</Link>
       </div>
-      <Weather location={this.props.location} />
+      <Weather location={this.props.props.location} />
       <footer>
         Be Safe!!
       </footer>

@@ -7,9 +7,6 @@ import Entrance from './components/Entrance';
 import Main from './components/Main';
 import Login from './components/Login';
 
-import dummyYelpAttractionData from './../../dummyYelpAttractionData';
-import dummyYelpRestaurantData from './../../dummyYelpRestaurantData';
-
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -19,9 +16,17 @@ class App extends React.Component {
       location: '',
       attractionResults: [],
       restaurantResults: [],
+      mapDestinations: [],
     };
+    this.selectDestination = this.selectDestination.bind(this);
   }
 
+  selectDestination(yelpLocation) {
+    console.log(yelpLocation);
+    this.setState({
+      mapDestinations: this.state.mapDestinations.concat(yelpLocation),
+    });
+  }
 
   setLocationFromSearch(locationFromSearch) {
     this.setState({
@@ -73,9 +78,9 @@ class App extends React.Component {
         <div>
           <Route
             path="/" component={() =>
-            (<Entrance setLocationFromSearch={this.setLocationFromSearch.bind(this)} queryYelp={this.queryYelp.bind(this)}/>)}
+            (<Entrance setLocationFromSearch={this.setLocationFromSearch.bind(this)} queryYelp={this.queryYelp.bind(this)} />)}
           />
-          <Route path="/main" component={() => (<Main location={this.state.location} attractionResults={this.state.attractionResults} restaurantResults={this.state.restaurantResults}/>)} />
+          <Route path="/main" component={() => (<Main props={this.state} selectDestination={this.selectDestination} />)} />
           <Route path="/login" component={Login} />
         </div>
       </Router>

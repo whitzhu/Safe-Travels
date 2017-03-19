@@ -13,7 +13,7 @@ class AttractionList extends React.Component {
       <div className="yelp-results-attractions"> 
         <ol> 
           {this.props.attractions.map(value => 
-            <AttractionListEntry attraction={value} />,
+            <AttractionListEntry attraction={value} selectDestination={this.props.selectDestination} />,
           )}
         </ol>
       </div>
