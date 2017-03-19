@@ -30,15 +30,25 @@ class Entrance extends React.Component {
   render() {
     return (
       <div>
-        <h1>Hello World!</h1>
-        <h1>Safe Travel</h1>
-        <p> want to travel safe? </p>
-        <SearchBar setDestination={this.setDestination} setLocationFromSearch={this.props.setLocationFromSearch} />
+        <nav className="navbar navbar-default navbar-static-top">
+          <div className="container">
+            <div className="navbar-header">
+              <Link to="/" className="navbar-brand">Safe Travel</Link>
+            </div>
+            <div id="navbar" className="navbar-collapse collapse">
+              <ul className="nav navbar-nav">
+                <li><Link to="/main">Public</Link></li>
+                <li><Link to="/login">Login</Link></li>
+                <li><Link to="/">Home</Link></li>
+              </ul>
+              <ul className="nav navbar-nav navbar-right">
+                <li><Link to="/">Contact Us</Link></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
         <div>
-          <Link to="/main">public</Link>
-        </div>
-        <div>
-          <Link to="/login">login</Link>
+          <SearchBar setDestination={this.setDestination} setLocationFromSearch={this.props.setLocationFromSearch} />
         </div>
         <div> Enter your travel date
           <AirbnbCalendar setSelectedDate={this.setSelectedDate} />
@@ -49,4 +59,4 @@ class Entrance extends React.Component {
 }
 
 export default Entrance;
-         
+

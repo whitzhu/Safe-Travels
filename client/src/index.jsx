@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import $ from 'jquery';
 import 'react-dates/lib/css/_datepicker.css';
+import './css/style.css';
 import Entrance from './components/Entrance';
 import Main from './components/Main';
 import Login from './components/Login';
