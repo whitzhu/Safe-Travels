@@ -12,21 +12,18 @@ import Weather from './weather.jsx';
 class Main extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      attractionResults: dummyYelpAttractionData,
-      restaurantResults: dummyYelpRestaurantData,
-    };
   }
 
   render() {
+    console.log(this.props.attractionResults)
     return (<div>
       <header>
         The main page of Safe Travel
       </header>
       <div>
         <Link to="/">Go back to Entrance</Link>
-        <AttractionList attractions={this.state.attractionResults.businesses} />
-        <RestaurantList restaurants={this.state.restaurantResults.businesses} />
+        <AttractionList attractions={this.props.attractionResults.businesses || []} />
+        <RestaurantList restaurants={this.props.restaurantResults.businesses || []} />
       </div>
       <div>
         <Link to="/login">login</Link>

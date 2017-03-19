@@ -19,9 +19,10 @@ app.get('/main', (req, res) => {
 app.get('/login', (req, res) => {
   res.redirect('/');
 });
-app.get('/yelp', (req, res) => {
-  const location = encodeURIComponent(req.query.location);
-  const query = encodeURIComponent(req.query.query);
+app.post('/yelp', (req, res) => {
+  console.log(req.body);
+  const location = encodeURIComponent(req.body.location);
+  const query = encodeURIComponent(req.body.query);
   const url = `https://api.yelp.com/v3/businesses/search?term=${query}&location=${location}`;
 
   request({

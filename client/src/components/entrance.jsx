@@ -16,6 +16,7 @@ class Entrance extends React.Component {
   }
 
   setDestination(dest) {
+    this.props.queryYelp(dest);
     this.setState({ destination: dest });
   }
 
