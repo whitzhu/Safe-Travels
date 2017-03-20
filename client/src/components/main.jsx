@@ -19,6 +19,7 @@ class Main extends React.Component {
     console.log(this.props.props.attractionResults)
     return (
       <div>
+        <Navbar />
         <header>
           The main page of Safe Travel
         </header>
