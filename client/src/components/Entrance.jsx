@@ -25,14 +25,18 @@ class Entrance extends React.Component {
     return (
       <div>
         <Navbar />
-        <div>
-          <SearchBar
-            setLocationFromSearch={this.props.setLocationFromSearch}
-            queryYelp={this.props.queryYelp}
-          />
-        </div>
-        <div> Enter your travel date
-          <AirbnbCalendar setSelectedDate={this.setSelectedDate} />
+        <div className="container">
+          <div className="jumbotron">
+            <h1>Plan Your Trip and Safe Travel</h1>
+            <div className="row">
+              <div className="form-group col-xs-6">
+                <SearchBar setDestination={this.setDestination} setLocationFromSearch={this.props.setLocationFromSearch} />
+              </div>
+              <div className="form-group col-xs-6">
+                <AirbnbCalendar setSelectedDate={this.setSelectedDate} />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     );
