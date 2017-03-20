@@ -146,6 +146,8 @@ app.get('/weather', (req, res) => {
   });
 });
 app.get('/crime', (req, res) => {
+  const location = req.query.location;
+  console.log(location);
   const baseUrl = 'http://api.spotcrime.com/crimes.json';
   const key = 'privatekeyforspotcrimepublicusers-commercialuse-877.410.1607';
   const loc = { lat: 33.39657, lon: -112.03422 };

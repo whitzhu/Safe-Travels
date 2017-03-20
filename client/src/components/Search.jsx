@@ -28,6 +28,7 @@ class SearchBar extends React.Component {
     event.preventDefault();
     this.props.setLocationFromSearch(destination);
     this.props.queryYelp(destination);
+    this.props.queryCrime(destination);
     this.setState({ text: '' });
   }
 

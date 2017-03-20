@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import $ from 'jquery';
+import Axios from 'axios';
 import 'react-dates/lib/css/_datepicker.css';
 import './style.css';
 import Entrance from './components/Entrance';
@@ -33,6 +34,20 @@ class App extends React.Component {
     console.log(locationFromSearch);
     this.setState({
       location: locationFromSearch,
+    });
+  }
+
+  queryCrime(searchLocation) {
+    return Axios.get('/crime', {
+      params: {
+        searchLocation,
+      },
+    })
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((error) => {
+      console.log(error);
     });
   }
 
@@ -82,7 +97,7 @@ class App extends React.Component {
             exact path="/" component={() =>
             (<Entrance
               setLocationFromSearch={this.setLocationFromSearch}
-              queryYelp={this.queryYelp}
+              queryYelp={this.queryYelp} queryCrime={this.queryCrime}
               location={this.state.location}
             />)}
           />
