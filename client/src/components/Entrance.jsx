@@ -7,17 +7,10 @@ class Entrance extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      destination: null,
       selectedStartDate: null,
       selectedEndDate: null,
     };
-    this.setDestination = this.setDestination.bind(this);
     this.setSelectedDate = this.setSelectedDate.bind(this);
-  }
-
-  setDestination(dest) {
-    this.props.queryYelp(dest);
-    this.setState({ destination: dest });
   }
 
   setSelectedDate(startDate, endDate) {
@@ -27,12 +20,16 @@ class Entrance extends React.Component {
     this.setState({ selectedEndDate: endDate });
   }
 
+  // location is passed in as a property
   render() {
     return (
       <div>
         <Navbar />
         <div>
-          <SearchBar setDestination={this.setDestination} setLocationFromSearch={this.props.setLocationFromSearch} />
+          <SearchBar
+            setLocationFromSearch={this.props.setLocationFromSearch}
+            queryYelp={this.props.queryYelp}
+          />
         </div>
         <div> Enter your travel date
           <AirbnbCalendar setSelectedDate={this.setSelectedDate} />

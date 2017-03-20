@@ -37,10 +37,10 @@ class App extends React.Component {
     });
   }
 
-  queryYelp(destination) {
+  queryYelp(searchLocation) {
     const yelpQuery = {
       // change when correct
-      location: destination || 'san francisco',
+      location: searchLocation || 'san francisco',
       // default query -- add on based on user input after initial list
       query: 'casual',
     };
@@ -81,9 +81,21 @@ class App extends React.Component {
         <div>
           <Route
             exact path="/" component={() =>
-            (<Entrance setLocationFromSearch={this.setLocationFromSearch} queryYelp={this.queryYelp} />)}
+            (<Entrance
+              setLocationFromSearch={this.setLocationFromSearch}
+              queryYelp={this.queryYelp}
+              location={this.state.location}
+            />)}
           />
-          <Route path="/main" component={() => (<Main props={this.state} selectDestination={this.selectDestination} />)} />
+          <Route
+            path="/main"
+            component={() => (
+              <Main
+                props={this.state}
+                selectDestination={this.selectDestination}
+                location={this.state.location}
+              />)}
+          />
           <Route path="/login" component={Login} />
         </div>
       </Router>

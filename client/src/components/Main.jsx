@@ -15,7 +15,8 @@ class Main extends React.Component {
   }
 
   render() {
-    console.log(this.props.props.attractionResults)
+    console.log(this.props.location);
+    console.log(this.props.props.attractionResults);
     return (
       <div>
         <Navbar />
@@ -23,8 +24,14 @@ class Main extends React.Component {
           The main page of Safe Travel
         </header>
         <div>
-          <AttractionList attractions={this.props.props.attractionResults.businesses || []} selectDestination={this.props.selectDestination} />
-          <RestaurantList restaurants={this.props.props.restaurantResults.businesses || []} selectDestination={this.props.selectDestination} />
+          <AttractionList
+            attractions={this.props.props.attractionResults.businesses || []}
+            selectDestination={this.props.selectDestination}
+          />
+          <RestaurantList
+            restaurants={this.props.props.restaurantResults.businesses || []}
+            selectDestination={this.props.selectDestination}
+          />
         </div>
         <Weather location={this.props.props.location} />
         <footer>

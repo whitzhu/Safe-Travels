@@ -24,8 +24,10 @@ class SearchBar extends React.Component {
   // }
 
   handleSubmit(event) {
+    const destination = document.getElementById('pac-input').value;
     event.preventDefault();
-    this.props.setLocationFromSearch(document.getElementById('pac-input').value);
+    this.props.setLocationFromSearch(destination);
+    this.props.queryYelp(destination);
     this.setState({ text: '' });
   }
 
