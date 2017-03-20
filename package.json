@@ -53,5 +53,11 @@
     "presets": [
       "es2015"
     ]
-  }
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://github.com/wearefractal/spotcrime/raw/master/LICENSE"
+    }
+  ]
 }

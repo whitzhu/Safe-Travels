@@ -145,5 +145,31 @@ app.get('/weather', (req, res) => {
     }
   });
 });
+app.get('/crime', (req, res) => {
+  const baseUrl = 'http://api.spotcrime.com/crimes.json';
+  const key = 'privatekeyforspotcrimepublicusers-commercialuse-877.410.1607';
+  const loc = { lat: 33.39657, lon: -112.03422 };
+  const radius = 0.01;
+
+  const rOpt = {
+    url: baseUrl,
+    json: true,
+    qs: {
+      lat: loc.lat,
+      lon: loc.lon,
+      key,
+      radius,
+    },
+  };
+
+  request(rOpt, (error, response, body) => {
+    if (error || !body) {
+      console.error('Spot Crime API GET request error');
+    } else {
+      console.log(body.crimes);
+      res.status(200).send(body.crimes);
+    }
+  });
+});
 
 module.exports = app;
