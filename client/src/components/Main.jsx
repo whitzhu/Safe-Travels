@@ -2,16 +2,15 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Weather from './Weather';
 import Navbar from './Navbar';
-
 import AttractionList from './AttractionList';
 import RestaurantList from './RestaurantList';
-
 import dummyYelpAttractionData from './../../../dummyYelpAttractionData';
 import dummyYelpRestaurantData from './../../../dummyYelpRestaurantData';
 
 class Main extends React.Component {
   constructor(props) {
     super(props);
+    console.log("wrong!!!!!!!!", props);
   }
 
   render() {

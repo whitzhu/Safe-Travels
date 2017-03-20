@@ -81,6 +81,21 @@ app.post('/yelp', (req, res) => {
   console.log(req.body);
   const location = encodeURIComponent(req.body.location);
   const query = encodeURIComponent(req.body.query);
+  const url = `https://api.yelp.com/v3/businesses/search?term=${query}&location=${location}`;
+  request({
+    uri: url,
+    headers: {
+      Authorization: `Bearer ${ApiKeys.yelpApiToken.token}`,
+    },
+    method: 'GET',
+  }, (error, response, body) => {
+    if (error) {
+      console.error('Yelp GET request error');
+    } else {
+      console.log('Yelp GET request successful');
+      res.status(200).send(body);
+    }
+  });
 });
 
 app.get('/yelp', (req, res) => {
