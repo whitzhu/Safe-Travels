@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import $ from 'jquery';
 import 'react-dates/lib/css/_datepicker.css';
-import './css/style.css';
+import './style.css';
 import Entrance from './components/Entrance';
 import Main from './components/Main';
 import Login from './components/Login';
@@ -11,7 +11,6 @@ import Login from './components/Login';
 class App extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       items: [],
       location: '',
