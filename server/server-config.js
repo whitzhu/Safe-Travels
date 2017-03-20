@@ -2,23 +2,75 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const https = require('https');
 const request = require('request');
-
 const database = require('./../database/index');
+const User = require('./../database/models/user');
 const handler = require('./../lib/utility');
-const ApiKeys = require('../config/api-config.js');
+const ApiKeys = require('../config/api-config');
+const passport = require('passport');
+const Strategy = require('passport-facebook').Strategy;
+const cookie = require('cookie-parser');
+const session = require('express-session');
+
+passport.serializeUser(function(user, cb) {
+  cb(null, user);
+});
+
+passport.deserializeUser(function(obj, cb) {
+  cb(null, obj);
+});
 
 const app = express();
 
+app.use(cookie("delicious cookie"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
+app.use(session({ secret: 'could travel safe be true', resave: true, saveUninitialized: true }));
 app.use(express.static(`${__dirname}/../client/dist`));
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.use(new Strategy({
+    clientID: ApiKeys.facebookApiKey.clientID,
+    clientSecret: ApiKeys.facebookApiKey.clientSecret,
+    callbackURL: ApiKeys.facebookApiKey.callbackURL,
+    profileFields: ['id', 'displayName', 'email']
+  },
+  function(accessToken, refreshToken, profile, done) {
+    User.findOne({ userID : profile.id }, function(err, oldUser){
+      if(oldUser){
+          done(null, oldUser);
+      }else{
+        console.log(profile);
+        var newUser = new User({
+          userID : profile.id,
+          username : profile.displayName,
+          email : profile.emails[0].value,
+          trip : null
+        }).save(function(err, newUser){
+          if(err) throw err;
+          done(null, newUser);
+        });
+      }
+    });
+  }));
+
+app.get('/login/facebook',
+  passport.authenticate('facebook', { scope: 'email' }));
+
+app.get('/login/facebook/return',
+  passport.authenticate('facebook', { failureRedirect: '/login' }),
+  (req, res) => {
+    res.redirect('/');
+  });
+
 app.get('/main', (req, res) => {
   res.redirect('/');
 });
+
 app.get('/login', (req, res) => {
   res.redirect('/');
 });
+
 app.post('/yelp', (req, res) => {
   console.log(req.body);
   const location = encodeURIComponent(req.body.location);
