@@ -68,12 +68,16 @@ app.get('/main', (req, res) => {
   res.redirect('/');
 });
 
-app.get('/login', (req, res) => {
+app.get('/*', (req, res) => {
   res.redirect('/');
 });
 
 app.get('/logout', (req, res) => {
   req.logout();
+  req.redirect('/');
+});
+
+app.get('/*', (req, res) => {
   res.redirect('/');
 });
 
