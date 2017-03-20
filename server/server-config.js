@@ -30,24 +30,25 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 passport.use(new Strategy({
-    clientID: ApiKeys.facebookApiKey.clientID,
-    clientSecret: ApiKeys.facebookApiKey.clientSecret,
-    callbackURL: ApiKeys.facebookApiKey.callbackURL,
-    profileFields: ['id', 'displayName', 'email']
-  },
-  function(accessToken, refreshToken, profile, done) {
-    User.findOne({ userID : profile.id }, function(err, oldUser){
-      if(oldUser){
-          done(null, oldUser);
-      }else{
-        console.log(profile);
-        var newUser = new User({
-          userID : profile.id,
-          username : profile.displayName,
-          email : profile.emails[0].value,
-          trip : null
-        }).save(function(err, newUser){
-          if(err) throw err;
+  clientID: ApiKeys.facebookApiKey.clientID,
+  clientSecret: ApiKeys.facebookApiKey.clientSecret,
+  callbackURL: ApiKeys.facebookApiKey.callbackURL,
+  profileFields: ['id', 'displayName', 'email']
+},
+  (accessToken, refreshToken, profile, done) => {
+    User.findOne({ userID: profile.id }, (err, oldUser) => {
+      if (oldUser) {
+        done(null, oldUser);
+      } else {
+        const newUser = new User({
+          userID: profile.id,
+          username: profile.displayName,
+          email: profile.emails[0].value,
+          trip: null
+        }).save((err, newUser) => {
+          if (err) {
+            throw err;
+          }
           done(null, newUser);
         });
       }
@@ -71,10 +72,20 @@ app.get('/login', (req, res) => {
   res.redirect('/');
 });
 
+app.get('/logout', (req, res) => {
+  req.logout();
+  res.redirect('/');
+});
+
 app.post('/yelp', (req, res) => {
   console.log(req.body);
   const location = encodeURIComponent(req.body.location);
   const query = encodeURIComponent(req.body.query);
+});
+
+app.get('/yelp', (req, res) => {
+  const location = encodeURIComponent(req.query.location);
+  const query = encodeURIComponent(req.query.query);
   const url = `https://api.yelp.com/v3/businesses/search?term=${query}&location=${location}`;
 
   request({
