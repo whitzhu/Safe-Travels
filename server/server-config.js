@@ -145,6 +145,7 @@ app.get('/weather', (req, res) => {
     }
   });
 });
+
 app.get('/crime', (req, res) => {
   const location = req.query.location;
   console.log(location);

@@ -22,6 +22,7 @@ class App extends React.Component {
     this.selectDestination = this.selectDestination.bind(this);
     this.setLocationFromSearch = this.setLocationFromSearch.bind(this);
     this.queryYelp = this.queryYelp.bind(this);
+    this.queryCrime = this.queryCrime.bind(this);
   }
 
   selectDestination(yelpLocation) {
@@ -44,6 +45,7 @@ class App extends React.Component {
       },
     })
     .then((response) => {
+      console.log('success fetching crim spots from server');
       console.log(response);
     })
     .catch((error) => {
