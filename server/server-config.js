@@ -123,13 +123,19 @@ app.get('/yelp', (req, res) => {
   });
 });
 app.get('/weather', (req, res) => {
-  const location = req.query.location;
+  const location = encodeURIComponent(req.query.location);
   const openWeatherApiKey = ApiKeys.openWeatherApiKey;
-  const apiUrl = `http://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${openWeatherApiKey}&units=imperial`;
+  const apiUrl = 'http://api.openweathermap.org/data/2.5/forecast/daily';
 
   request({
     uri: apiUrl,
     method: 'GET',
+    qs: {
+      q: location,
+      appid: openWeatherApiKey,
+      units: 'imperial',
+      cnt: 7,
+    },
   }, (error, response, body) => {
     if (error) {
       console.error('Open Weather API GET request error');
