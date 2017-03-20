@@ -7,7 +7,7 @@ export default class Weather extends React.Component {
     super(props);
     this.state = {
       name: '',
-      temperatureInFahrenheit: '',
+      sevenDayForecast: [],
       temperatureLoaded: false,
     };
   }
@@ -24,8 +24,8 @@ export default class Weather extends React.Component {
     })
       .then((response) => {
         this.setState({
-          name: response.data.name,
-          temperatureInFahrenheit: response.data.main.temp,
+          name: `${response.data.city.name}, ${response.data.city.country}`,
+          sevenDayForecast: response.data.list,
           temperatureLoaded: true,
         });
       })
@@ -36,10 +36,24 @@ export default class Weather extends React.Component {
 
   render() {
     return this.state.temperatureLoaded ? (
-      <div>
+      <div className="container">
         <h2>{this.state.name}</h2>
-        <h3>{this.state.temperatureInFahrenheit} &deg;F</h3>
+        <div className="row">
+          {this.state.sevenDayForecast.map((forecast, counter) => {
+            const date = new Date();
+            const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            const day = weekdays[(date.getDay() + counter) % 6];
+            return (
+              <div className="col-md-1">
+                <h4>{day}</h4>
+                <h3>{forecast.temp.day}&deg;F</h3>
+                <h3>{forecast.weather[0].main}</h3>
+                <h4>{forecast.weather[0].description}</h4>
+              </div>
+            );
+          })}
+        </div>
       </div>
-    ) : (<div></div>);
+    ) : (<div />);
   }
 }
