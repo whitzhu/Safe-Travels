@@ -9,7 +9,6 @@ import RestaurantList from './RestaurantList';
 import dummyYelpAttractionData from './../../../dummyYelpAttractionData';
 import dummyYelpRestaurantData from './../../../dummyYelpRestaurantData';
 
-
 class Main extends React.Component {
   constructor(props) {
     super(props);
