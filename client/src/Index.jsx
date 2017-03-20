@@ -25,15 +25,15 @@ class App extends React.Component {
   }
 
   selectDestination(yelpLocation) {
-    console.log(yelpLocation);
     this.setState({
       mapDestinations: this.state.mapDestinations.concat(yelpLocation),
     });
   }
 
   setLocationFromSearch(locationFromSearch) {
+    console.log(locationFromSearch);
     this.setState({
-      location: locationFromSearch.value,
+      location: locationFromSearch,
     });
   }
 

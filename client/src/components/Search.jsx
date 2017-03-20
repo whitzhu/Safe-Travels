@@ -6,7 +6,7 @@ class SearchBar extends React.Component {
     this.state = {
       text: '',
     };
-    this.handleChange = this.handleChange.bind(this);
+    // this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -15,31 +15,41 @@ class SearchBar extends React.Component {
     const autocomplete = new google.maps.places.Autocomplete(input);
     autocomplete.addListener('place_changed', () => {
       const place = autocomplete.getPlace();
-      this.setState({ text: place.formatted_address });
+      // this.setState({ text: place.formatted_address });
     });
   }
 
-  handleChange(event) {
-    this.setState({ text: event.target.value });
-  }
+  // handleChange(event) {
+  //   this.setState({ text: event.target.value });
+  // }
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.setDestination(this.state.text);
+    this.props.setLocationFromSearch(document.getElementById('pac-input').value);
     this.setState({ text: '' });
   }
 
   render() {
     return (
-      <form id="pac-container">
-        <input id="pac-input" type="text" placeholder="Enter a destination" onChange={this.handleChange} style={{ width: 150, height: 25, backgroundColor: 'powderblue', fontSize: 15 }} />
+      <form
+        id="pac-container"
+        onSubmit={event =>
+          this.handleSubmit(event)
+        }
+      >
+        <input
+          id="pac-input"
+          type="text"
+          placeholder="Enter a destination"
+          /*onChange={this.handleChange}*/ 
+          style={{ width: 150, height: 25, backgroundColor: 'powderblue', fontSize: 15 }}
+        />
         <input
           id="search-input"
           type="submit"
-          value="Submit" onClick={(event) => {
-            this.handleSubmit(event);
-            this.props.setLocationFromSearch(document.getElementById('pac-input'));
-          }}
+          value="Submit" onClick={event =>
+            this.handleSubmit(event)
+          }
         />
       </form>
     );
