@@ -31,6 +31,7 @@ class App extends React.Component {
   }
 
   setLocationFromSearch(locationFromSearch) {
+    console.log('location is ======', locationFromSearch);
     this.setState({
       location: locationFromSearch.value,
     });

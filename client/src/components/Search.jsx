@@ -32,7 +32,7 @@ class SearchBar extends React.Component {
   render() {
     return (
       <form id="pac-container">
-        <input id="pac-input" type="text" placeholder="Enter a destination" onChange={this.handleChange} style={{ width: 150, height: 25, backgroundColor: 'powderblue', fontSize: 15 }} />
+        <input className="form-control" id="pac-input" type="text" placeholder="Enter a destination" onChange={this.handleChange} style={{ width: 286, height: 50, backgroundColor: 'powderblue', fontSize: 14, lineHeight: 1.428 }} />
         <input
           id="search-input"
           type="submit"
