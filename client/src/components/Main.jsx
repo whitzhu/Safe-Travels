@@ -19,23 +19,23 @@ class Main extends React.Component {
         <Navbar />
         <div className="container">
           <div className="row">
-            <h1>
+            <h2>
               Welcome to Your Destination {this.props.location}. Safe Travel!
-            </h1>
+            </h2>
           </div>
           <div className="row">
             <h2>Hungry?</h2>
             <RestaurantList
               restaurants={this.props.restaurantResults.businesses || []}
               selectDestination={this.props.selectDestination}
+              queryYelp={this.props.queryYelp}
             />    
           </div>
           <div className="row">
             <h2>Check out some of these attractions!</h2>
             <AttractionList
               attractions={this.props.attractionResults.businesses || []}
-              selectDestination={this.props.selectDestination}
-              queryYelp={this.props.queryYelp}
+              selectDestination={this.props.selectDestination}  
             />
           </div>
           <div className="row">

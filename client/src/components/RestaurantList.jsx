@@ -34,7 +34,6 @@ class RestaurantList extends React.Component {
           <option value="2">**</option>
           <option value="3">***</option>
           <option value="4">****</option>
-          <option value="5">*****</option>
         </select>
         <select className="yelp-select-style" value={this.state.style} onChange={(event) => {
           this.onChange({style: event.target.value});
