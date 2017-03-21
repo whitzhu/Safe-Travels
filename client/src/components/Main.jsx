@@ -13,7 +13,7 @@ import GoogleMap from './GoogleMap';
 class Main extends React.Component {
   constructor(props) {
     super(props);
-    console.log("wrong!!!!!!!!", props);
+    // console.log("wrong!!!!!!!!", props);
   }
 
   render() {

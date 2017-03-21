@@ -82,7 +82,7 @@ class App extends React.Component {
           type: 'POST',
           data: yelpQuery,
           success: function(attractions) {
-            console.log('sucess fetching attractions from server', attractions);
+            // console.log('sucess fetching attractions from server', attractions);
             this.setState({
               // returns stringified
               attractionResults: JSON.parse(restaurants),

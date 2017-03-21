@@ -64,22 +64,62 @@ app.get('/login/facebook/return',
     res.redirect('/');
   });
 
+app.get('/crime', (req, res) => {
+  const lat = req.query.lat;
+  const lon = req.query.lon;
+  const baseUrl = 'http://api.spotcrime.com/crimes.json';
+  const key = 'privatekeyforspotcrimepublicusers-commercialuse-877.410.1607';
+  const loc = { lat, lon };
+  const radius = 0.01;
+
+  const rOpt = {
+    url: baseUrl,
+    json: true,
+    qs: {
+      lat: loc.lat,
+      lon: loc.lon,
+      key,
+      radius,
+    },
+  };
+
+  request(rOpt, (error, response, body) => {
+    if (error || !body) {
+      console.error('Spot Crime API GET request error');
+    } else {
+      res.status(200).send(body.crimes);
+    }
+  });
+});
+
+app.get('/weather', (req, res) => {
+  const location = req.query.location;
+  const openWeatherApiKey = ApiKeys.openWeatherApiKey;
+  const apiUrl = `http://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${openWeatherApiKey}&units=imperial`;
+
+  request({
+    uri: apiUrl,
+    method: 'GET',
+  }, (error, response, body) => {
+    if (error) {
+      console.error('Open Weather API GET request error');
+    } else {
+      console.log('Open Weather API GET request successful');
+      res.status(200).send(body);
+    }
+  });
+});
+
 app.get('/main', (req, res) => {
   res.redirect('/');
 });
 
-app.get('/*', (req, res) => {
-  res.redirect('/');
-});
 
 app.get('/logout', (req, res) => {
   req.logout();
   req.redirect('/');
 });
 
-app.get('/*', (req, res) => {
-  res.redirect('/');
-});
 
 app.post('/yelp', (req, res) => {
   console.log(req.body);
@@ -122,56 +162,10 @@ app.get('/yelp', (req, res) => {
     }
   });
 });
-app.get('/weather', (req, res) => {
-  const location = encodeURIComponent(req.query.location);
-  const openWeatherApiKey = ApiKeys.openWeatherApiKey;
-  const apiUrl = 'http://api.openweathermap.org/data/2.5/forecast/daily';
 
-  request({
-    uri: apiUrl,
-    method: 'GET',
-    qs: {
-      q: location,
-      appid: openWeatherApiKey,
-      units: 'imperial',
-      cnt: 7,
-    },
-  }, (error, response, body) => {
-    if (error) {
-      console.error('Open Weather API GET request error');
-    } else {
-      console.log('Open Weather API GET request successful');
-      res.status(200).send(body);
-    }
-  });
+app.get('/*', (req, res) => {
+  res.redirect('/');
 });
 
-app.get('/crime', (req, res) => {
-  const lat = req.query.lat;
-  const lon = req.query.lon;
-  const baseUrl = 'http://api.spotcrime.com/crimes.json';
-  const key = 'privatekeyforspotcrimepublicusers-commercialuse-877.410.1607';
-  const loc = { lat, lon };
-  const radius = 0.01;
-
-  const rOpt = {
-    url: baseUrl,
-    json: true,
-    qs: {
-      lat: loc.lat,
-      lon: loc.lon,
-      key,
-      radius,
-    },
-  };
-
-  request(rOpt, (error, response, body) => {
-    if (error || !body) {
-      console.error('Spot Crime API GET request error');
-    } else {
-      res.status(200).send(body.crimes);
-    }
-  });
-});
 
 module.exports = app;
