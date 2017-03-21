@@ -19,9 +19,9 @@ class RestaurantList extends React.Component {
     });
   }
 
-  render() {  
+  render() {
     return (
-      <div className="yelp-results-restaurants"> 
+      <div className="yelp-results-restaurants">
         <select className="yelp-select-price" value={this.state.price} onChange={(event) => {
           this.onChange({price: event.target.value});
           // use event.target.value instead of state because setState is async
@@ -48,9 +48,11 @@ class RestaurantList extends React.Component {
           <option value="Clubs">Clubs</option>
           <option value="Restaurant">Restaurant</option>
         </select>
-        <ol> 
-          {this.props.restaurants.map(value => 
-            <RestaurantListEntry restaurant={value} selectDestination={this.props.selectDestination}/>,
+        <ol>
+          {this.props.restaurants.map(value =>
+            <RestaurantListEntry restaurant={value} selectDestination={this.props.selectDestination}
+              saveDestination={this.props.saveDestination}
+            />,
           )}
         </ol>
       </div>

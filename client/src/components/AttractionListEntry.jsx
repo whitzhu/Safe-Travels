@@ -12,14 +12,17 @@ const AttractionListEntry = (props) => (
           <h5>Address: {props.attraction.location.display_address[0]}</h5>
           <h5>{props.attraction.location.display_address[1]}</h5>
         </p>
-        <button href="#" className="btn btn-primary" onClick={ () =>
-          props.selectDestination(props.attraction)} >Add to Trip!
+        <button href="#" className="btn btn-primary"
+          onClick={() => {
+            props.saveDestination(props.attraction);
+            props.selectDestination(props.attraction);
+          }}
+        >Add to Trip!
         </button>
       </div>
       <br />
     </div>
   </div>
-
 );
 
 export default AttractionListEntry;
