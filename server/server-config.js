@@ -15,49 +15,22 @@ passport.serializeUser((user, done) => {
   done(null, user.id);
 });
 
-<<<<<<< HEAD
-passport.deserializeUser((id, done) => {
-=======
-<<<<<<< HEAD
-passport.deserializeUser(function(id, done) {
-  console.log("second time user login info ==========>", id);
->>>>>>> (refactor) shows main button only when user enters destination
-  User.findById(id, (err, user) => {
-    console.log('user from session', user);
-=======
 passport.deserializeUser((id, done) => {
   User.findById(id, (err, user) => {
->>>>>>> (refactor) shows main button only when user enters destination
     done(err, user);
   });
 });
 
 const app = express();
 
-<<<<<<< HEAD
 app.use(cookie('delicious cookie'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-=======
-<<<<<<< HEAD
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cookie("delicious cookie"));
-app.use(session({ secret: 'could travel safe be true', resave: true, saveUninitialized: true, cookie: { maxAge: null } }));
-=======
-app.use(cookie('delicious cookie'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
->>>>>>> (refactor) shows main button only when user enters destination
 app.use(session({
   secret: 'could travel safe be true',
   resave: true,
   saveUninitialized: true,
 }));
-<<<<<<< HEAD
-=======
->>>>>>> (refactor) shows main button only when user enters destination
->>>>>>> (refactor) shows main button only when user enters destination
 app.use(express.static(`${__dirname}/../client/dist`));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -224,6 +197,7 @@ app.post('/saveTrip', (req, res) => {
       { $addToSet: { trips: trip } },
       { safe: true, new: true, upsert: true },
       (err, result) => {
+        res.sendStatus(201);
       });
   } else {
     res.sendStatus(400);
