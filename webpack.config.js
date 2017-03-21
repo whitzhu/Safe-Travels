@@ -28,6 +28,11 @@ module.exports = {
         test: /\.css$/,
         loader: 'style-loader!css-loader',
       },
+      {
+        //IMAGE LOADER
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        loader: 'file-loader',
+      },
     ],
   },
 };
