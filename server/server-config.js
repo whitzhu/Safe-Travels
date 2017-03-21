@@ -171,6 +171,20 @@ app.get('/weather', (req, res) => {
   });
 });
 
+app.get('/savedTrips', (req, res) => {
+  if (req.user) {
+    console.log('user is logged in');
+  } else {
+    console.log('user is not logged in');
+  }
+  res.sendStatus(200);
+});
+
+app.post('/saveTrip', (req, res) => {
+  console.log('user----', req.user);
+  res.sendStatus(201);
+});
+
 app.get('/*', (req, res) => {
   res.redirect('/');
 });
