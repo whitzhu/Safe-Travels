@@ -81,8 +81,12 @@ class App extends React.Component {
     return Axios.post('/yelp', yelpQuery)
       .then((restaurants) => {
         console.log('success fetching restaurants from server', restaurants.data);
+        
+        // must query attractions to get attractions
+        yelpQuery.query = 'tourist attractions';
         return Axios.post('/yelp', yelpQuery)
         .then((attractions) => {
+          console.log('yelp query', yelpQuery);
           console.log('success fetching attractions from server', attractions.data);
           this.setState({
             attractionResults: restaurants.data,
