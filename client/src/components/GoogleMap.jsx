@@ -27,10 +27,10 @@ class GoogleMap extends React.Component {
 
   createMap() {
     // LatLng data should be passed in as properties
-    const sanfrancisco = new google.maps.LatLng(37.774546, -122.433523);
+    const geoLocation = new google.maps.LatLng(this.props.geoLocation.lat, this.props.geoLocation.lng);
     const mapOptions = {
       zoom: 14,
-      center: sanfrancisco,
+      center: geoLocation,
     }
     return new google.maps.Map(this.refs.map, mapOptions);
   }
@@ -70,19 +70,11 @@ class GoogleMap extends React.Component {
 
   getPoints() {
     // converts into google.maps with latitudes and longitudes
-    /*
-      var data = [];
-      this.crimeData.forEach(value => 
-        data.push(new google.maps.LatLng(value.lat, value.lng))
-      });
-    */
-    return [
-      new google.maps.LatLng(37.782551, -122.445368),
-      new google.maps.LatLng(37.782745, -122.444586),
-      new google.maps.LatLng(37.782842, -122.443688),
-      new google.maps.LatLng(37.782919, -122.442815),
-      new google.maps.LatLng(37.782992, -122.442112),
-    ];
+    var mapCrimeData = [];
+    this.props.crimeData.forEach(value => 
+      mapCrimeData.push(new google.maps.LatLng(value.lat, value.lon)),
+    );
+    return mapCrimeData;
   }
 
   render() {

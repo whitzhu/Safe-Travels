@@ -13,8 +13,7 @@ class Main extends React.Component {
   }
 
   render() {
-    console.log(this.props.location);
-    console.log(this.props.attractionResults);
+    console.log('queried location, ', this.props.location);
     return (
       <div>
         <Navbar />
@@ -31,8 +30,13 @@ class Main extends React.Component {
             selectDestination={this.props.selectDestination}
           />
         </div>
-        <Weather location={this.props.location} />
-        <GoogleMap />
+        <Weather
+          location={this.props.location}
+        />
+        <GoogleMap
+          crimeData={this.props.crimeData}
+          geoLocation={this.props.geoLocation}
+        />
         <footer>
           Be Safe!!
         </footer>
