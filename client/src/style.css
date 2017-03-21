@@ -21,3 +21,26 @@
   font-size: 36px;
   margin-bottom: 36px;
  }
+
+.jumbotron {
+  background-image: url('./img/bridge.jpg');
+  height: 600px;
+ }
+
+ .search-location {
+  width: 280px; 
+  height: 50px;
+  font-size: 18px;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-weight: 300;
+  text-align: center;
+ }
+
+ #pac-container {
+  height: 100px;
+ }
+
+ #search-input {
+  height: 50px;
+  margin-left: 10px;
+ }
