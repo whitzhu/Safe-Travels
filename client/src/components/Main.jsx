@@ -37,6 +37,7 @@ class Main extends React.Component {
         <GoogleMap
           crimeData={this.props.crimeData}
           geoLocation={this.props.geoLocation}
+          mapDestinations={this.props.mapDestinations}
         />
         <footer>
           Be Safe!!

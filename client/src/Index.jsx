@@ -122,6 +122,7 @@ class App extends React.Component {
                 crimeData={this.state.crimeData}
                 location={this.state.location}
                 queryYelp={this.queryYelp}
+                mapDestinations={this.state.mapDestinations}
               />)}
           />
           <Route path="/login" component={Login} />

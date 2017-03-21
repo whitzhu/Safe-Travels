@@ -6,13 +6,13 @@ class GoogleMap extends React.Component {
   }
 
   componentDidMount() {
-    this.map = this.createMap();
-    console.log(this.map);
     const directionsDisplay = new google.maps.DirectionsRenderer();
     const directionsService = new google.maps.DirectionsService;
+    this.map = this.createMap();
     directionsDisplay.setMap(this.map);
+    console.log(this.map);
 
-    // calcRoute(directionsService, directionsDisplay);
+    this.calcRoute(directionsService, directionsDisplay);
     // Add event handler and pass in display and service**
     // document.getElementById('end').addEventListener('change', () => {
     //   this.calcRoute(directionsService, directionsDisplay);
@@ -52,38 +52,39 @@ class GoogleMap extends React.Component {
     return new google.maps.Map(this.refs.map, mapOptions);
   }
 
-  // calcRoute(directionsService, directionsDisplay) {
-  //   const sampleRequest = {
-  //     origin: 'Los Angeles, CA',
-  //     destination: 'San Francisco, CA',
-  //     waypoints: [
-  //       {
-  //         location: 'San Jose, CA',
-  //         // stop over adds a marker
-  //         stopover: true
-  //       }, {
-  //         location: 'Santa Clarita, CA',
-  //         stopover: true
-  //       }],
-  //     provideRouteAlternatives: false,
-  //     travelMode: 'DRIVING',
-  //     drivingOptions: {
-  //       departureTime: new Date, // ( now, or future date ),
-  //       trafficModel: 'pessimistic'
-  //     },
-  //     unitSystem: google.maps.UnitSystem.IMPERIAL,
-  //   };
+  calcRoute(directionsService, directionsDisplay) {
+    if (this.props.mapDestinations.length > 1) {
+      const destinations = []
+      this.props.mapDestinations.forEach((value) => {
+        destinations.push({
+          location: value.location.display_address[0] + value.location.display_address[1],
+          stopover: true,
+        });
+      });
+      const sampleRequest = {
+        origin: destinations[0].location,
+        destination: destinations[destinations.length - 1].location,
+        waypoints: destinations.slice(1, destinations.length - 1),
+        provideRouteAlternatives: false,
+        travelMode: 'DRIVING',
+        drivingOptions: {
+          departureTime: new Date, // ( now, or future date ),
+          trafficModel: 'pessimistic'
+        },
+        unitSystem: google.maps.UnitSystem.IMPERIAL,
+      };
 
-  //   // request is literally the route directions you want 
-  //   directionsService.route(sampleRequest, (result, status) => {
-  //     if (status == 'OK') {
-  //       directionsDisplay.setDirections(result);
-  //     } else {
-  //       console.log(status);
-  //       console.log('there was an error');
-  //     }
-  //   });
-  // }
+      // request is literally the route directions you want 
+      directionsService.route(sampleRequest, (result, status) => {
+        if (status == 'OK') {
+          directionsDisplay.setDirections(result);
+        } else {
+          console.log(status);
+          console.log('there was an error');
+        }
+      });
+    }
+  }
 
   getPoints() {
     // converts into google.maps with latitudes and longitudes
