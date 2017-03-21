@@ -10,9 +10,9 @@ class AttractionList extends React.Component {
 
   render() {
     return (
-      <div className="yelp-results-attractions"> 
-        <ol> 
-          {this.props.attractions.map(value => 
+      <div className="yelp-results-attractions">
+        <ol>
+          {this.props.attractions.map(value =>
             <AttractionListEntry attraction={value} selectDestination={this.props.selectDestination} />,
           )}
         </ol>

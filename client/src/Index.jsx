@@ -8,6 +8,7 @@ import Entrance from './components/Entrance';
 import Main from './components/Main';
 import Login from './components/Login';
 import Navbar from './components/Navbar';
+import Profile from './components/Profile';
 
 class App extends React.Component {
   constructor(props) {
@@ -141,6 +142,7 @@ class App extends React.Component {
               />)}
           />
           <Route path="/login" component={Login} />
+          <Route path="/profile" component={Profile} />
         </div>
       </Router>
     );
