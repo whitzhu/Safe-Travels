@@ -74,23 +74,21 @@ class App extends React.Component {
       location: search.destination || this.state.location || 'san francisco',
       // default query -- add on based on user input after initial list.
       // default blank for first search
-      style: search.style ? search.style : '',
+      query: search.style ? search.style : 'casual',
       price: search.price ? search.price : '',
     };
     console.log(yelpQuery);
     return Axios.post('/yelp', yelpQuery)
       .then((restaurants) => {
         console.log('success fetching restaurants from server', restaurants.data);
-        
         // must query attractions to get attractions
         yelpQuery.query = 'tourist attractions';
         return Axios.post('/yelp', yelpQuery)
         .then((attractions) => {
-          console.log('yelp query', yelpQuery);
           console.log('success fetching attractions from server', attractions.data);
           this.setState({
-            attractionResults: restaurants.data,
-            restaurantResults: attractions.data,
+            attractionResults: attractions.data,
+            restaurantResults: restaurants.data,
           });
         })
         .catch(error => console.log(error));

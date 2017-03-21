@@ -125,11 +125,11 @@ app.post('/yelp', (req, res) => {
   console.log('in post yelp')
   console.log(req.body);
   const location = encodeURIComponent(req.body.location);
-  const style = encodeURIComponent(req.body.style);
+  const query = encodeURIComponent(req.body.query);
   // only search price if provided
   const price = req.body.price.length ? `&price=${encodeURIComponent(req.body.price)}` : '';
   // default sort by rating
-  const url = `https://api.yelp.com/v3/businesses/search?term=${style}&location=${location}${price}&sort_by=rating&limit=5`;
+  const url = `https://api.yelp.com/v3/businesses/search?term=${query}&location=${location}${price}&sort_by=rating&limit=5`;
   request({
     uri: url,
     headers: {
