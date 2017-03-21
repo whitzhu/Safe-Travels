@@ -65,6 +65,7 @@ class GoogleMap extends React.Component {
           stopover: true,
         });
       });
+      
       const directionsRequest = {
         origin: destinations[0].location,
         destination: destinations[destinations.length - 1].location,

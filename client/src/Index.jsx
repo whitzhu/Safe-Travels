@@ -107,7 +107,8 @@ class App extends React.Component {
             (<Entrance
               setLocationFromSearch={this.setLocationFromSearch}
               setGeoLocationFromSearch={this.setGeoLocationFromSearch}
-              queryYelp={this.queryYelp} queryCrime={this.queryCrime}
+              queryYelp={this.queryYelp}
+              queryCrime={this.queryCrime}
               location={this.state.location}
             />)}
           />
