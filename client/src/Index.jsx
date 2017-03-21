@@ -43,11 +43,15 @@ class App extends React.Component {
   }
 
   setGeoLocationFromSearch(geoLocationFromSearch) {
-    this.setState({ geoLocation: geoLocationFromSearch });
+    console.log('setting geolocation state in index.jsx', geoLocationFromSearch);
+    this.setState({ geoLocation: {
+      lat: geoLocationFromSearch.lat(),
+      lng: geoLocationFromSearch.lng(),
+    } });
   }
 
   queryCrime(geoLocation) {
-    console.log('geoLocation', geoLocation);
+    console.log('requesting crime data with', geoLocation);
     return Axios.get('/crime', {
       params: {
         lat: geoLocation.lat(),
