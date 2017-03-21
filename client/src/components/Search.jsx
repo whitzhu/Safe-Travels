@@ -31,7 +31,20 @@ class SearchBar extends React.Component {
     this.props.setLocationFromSearch(destination);
     this.props.setGeoLocationFromSearch(this.state.geoLocation);
     this.props.queryYelp(destination);
-    this.props.queryCrime(this.state.geoLocation);
+    //geoLocation can only be retrieved when user select one of addresses from autocomplete list. if user submit an address they type in, we need to user google geocoding service to convert an address to lat and lon.
+    if (Object.keys(this.state.geoLocation).length === 0 && this.state.geoLocation.constructor === Object) {
+      let geocoder = new google.maps.Geocoder();
+      geocoder.geocode({ address: destination }, (results, status) => {
+        if (status === 'OK') {
+          //console.log(results[0].geometry.location);
+          this.props.queryCrime(results[0].geometry.location);
+        } else {
+          alert('Geocode was not successful for the following reason: ' + status);
+        }
+      });
+    } else {
+      this.props.queryCrime(this.state.geoLocation);
+    }
     this.setState({ text: '' });
   }
 
