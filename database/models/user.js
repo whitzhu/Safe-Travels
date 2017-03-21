@@ -4,9 +4,10 @@ const userSchema = mongoose.Schema({
   username: String,
   userID: String,
   email: String,
-  trip: [{
+  trips: [{
     destination: String,
-    date: String,
+    dateStart: String,
+    dateEnd: String,
     mapUrl: String,
   }],
 });
