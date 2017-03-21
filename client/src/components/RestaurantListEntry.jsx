@@ -8,11 +8,16 @@ const RestaurantListEntry = (props) => (
         <h4 className="card-title restaurant-li">
           <a href={props.restaurant.url}>{props.restaurant.name}</a>
         </h4>
-        <p className="card-text"><span>price: {props.restaurant.price}</span>
-        <span>  rating: {props.restaurant.rating}</span>
+        <p className="card-text"><span>Price: {props.restaurant.price}</span>
+        <span>  Rating: {props.restaurant.rating}</span>
+        </p>
+        <p>
+          <h5>Address: {props.restaurant.location.display_address[0]}</h5>
+          <h5>{props.restaurant.location.display_address[1]}</h5>
         </p>
         <button href="#" className="btn btn-primary" onClick={ () =>
-      props.selectDestination(props.restaurant)} >Add to Trip!</button>
+          props.selectDestination(props.restaurant)} >Add to Trip!
+        </button>
       </div>
       <br />
     </div>
