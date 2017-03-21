@@ -70,7 +70,7 @@ app.get('/crime', (req, res) => {
   const baseUrl = 'http://api.spotcrime.com/crimes.json';
   const key = 'privatekeyforspotcrimepublicusers-commercialuse-877.410.1607';
   const loc = { lat, lon };
-  const radius = 0.01;
+  const radius = 0.1;
 
   const rOpt = {
     url: baseUrl,
