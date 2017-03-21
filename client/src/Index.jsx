@@ -19,12 +19,15 @@ class App extends React.Component {
       restaurantResults: [],
       mapDestinations: [],
       crimeData: {},
+      startDate: null,
+      endDate: null,
     };
     this.selectDestination = this.selectDestination.bind(this);
     this.setLocationFromSearch = this.setLocationFromSearch.bind(this);
     this.setGeoLocationFromSearch = this.setGeoLocationFromSearch.bind(this);
     this.queryYelp = this.queryYelp.bind(this);
     this.queryCrime = this.queryCrime.bind(this);
+    this.setSelectedDate = this.setSelectedDate.bind(this);
   }
 
 
@@ -50,6 +53,12 @@ class App extends React.Component {
     });
   }
 
+  setSelectedDate(startDate, endDate) {
+    this.setState({
+      startDate: startDate,
+      endDate: endDate,
+    });
+  }
 
   queryCrime(geoLocation) {
     console.log('requesting crime data with', geoLocation);
@@ -111,6 +120,7 @@ class App extends React.Component {
               queryYelp={this.queryYelp}
               queryCrime={this.queryCrime}
               location={this.state.location}
+              setSelectedDate={this.setSelectedDate}
             />)}
           />
           <Route
