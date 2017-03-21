@@ -77,12 +77,13 @@ class App extends React.Component {
       query: search.style ? search.style : 'casual',
       price: search.price ? search.price : '',
     };
-    console.log(yelpQuery);
     return Axios.post('/yelp', yelpQuery)
       .then((restaurants) => {
         console.log('success fetching restaurants from server', restaurants.data);
         // must query attractions to get attractions
+        // reset price prior to attractions query
         yelpQuery.query = 'tourist attractions';
+        yelpQuery.price ='';
         return Axios.post('/yelp', yelpQuery)
         .then((attractions) => {
           console.log('success fetching attractions from server', attractions.data);
