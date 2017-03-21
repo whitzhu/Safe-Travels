@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import $ from 'jquery';
 import Axios from 'axios';
 import 'react-dates/lib/css/_datepicker.css';
 import './style.css';
@@ -36,12 +35,6 @@ class App extends React.Component {
     });
   }
 
-  selectDestination(yelpLocation) {
-    this.setState({
-      mapDestinations: this.state.mapDestinations.concat(yelpLocation),
-    });
-  }
-
   setGeoLocationFromSearch(geoLocationFromSearch) {
     console.log('setting geolocation state in index.jsx', geoLocationFromSearch);
     this.setState({ geoLocation: {
@@ -49,6 +42,13 @@ class App extends React.Component {
       lng: geoLocationFromSearch.lng(),
     } });
   }
+
+  selectDestination(yelpLocation) {
+    this.setState({
+      mapDestinations: this.state.mapDestinations.concat(yelpLocation),
+    });
+  }
+
 
   queryCrime(geoLocation) {
     console.log('requesting crime data with', geoLocation);
@@ -75,19 +75,19 @@ class App extends React.Component {
       query: 'casual',
     };
     return Axios.post('/yelp', yelpQuery)
-      .then(restaurants => {
+      .then((restaurants) => {
         console.log('success fetching restaurants from server', restaurants.data);
         return Axios.post('/yelp', yelpQuery)
-        .then(attractions => {
+        .then((attractions) => {
           console.log('success fetching attractions from server', attractions.data);
           this.setState({
             attractionResults: restaurants.data,
-            restaurantResults: attractions.data,        
+            restaurantResults: attractions.data,
           });
         })
         .catch(error => console.log(error));
       })
-      .catch(error => 
+      .catch(error =>
         console.log(error),
       );
   }
@@ -112,6 +112,8 @@ class App extends React.Component {
                 attractionResults={this.state.attractionResults}
                 restaurantResults={this.state.restaurantResults}
                 selectDestination={this.selectDestination}
+                geoLocation={this.state.geoLocation}
+                crimeData={this.state.crimeData}
                 location={this.state.location}
               />)}
           />
