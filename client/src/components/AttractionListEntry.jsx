@@ -1,14 +1,20 @@
 import React from 'react';
 
 const AttractionListEntry = (props) => (
-  <div className="attraction-list-entry">
-    <img className="rounded yelp-img" src={props.attraction.image_url} alt="" />
-    <li>{props.attraction.name}</li>
-    <button
-      value="add to trip" onClick={() =>
-      props.selectDestination(props.attraction) 
-    }>Add to Trip!</button>  
+  <div className="restaurant-list-entry col-md-4">
+    <div className="card card-block">
+      <img className="rounded card-img-top yelp-img" src={props.attraction.image_url} alt="picture of a restaurant" />
+      <div>
+        <h4 className="card-title restaurant-li">
+          <a href={props.attraction.url} >{props.attraction.name}</a>
+        </h4>
+        <button href="#" className="btn btn-primary" onClick={ () =>
+      props.selectDestination(props.attraction)} >Add to Trip!</button>
+      </div>
+      <br />
+    </div>
   </div>
+
 );
 
 export default AttractionListEntry;

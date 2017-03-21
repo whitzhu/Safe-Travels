@@ -24,21 +24,20 @@ class Main extends React.Component {
             </header>
           </div>
           <div className="row">
-          <div className="col-md-6">
             <h2>Hungry?</h2>
+            <AttractionList
+              attractions={this.props.attractionResults.businesses || []}
+              selectDestination={this.props.selectDestination}
+              queryYelp={this.props.queryYelp}
+            />
+          </div>
+          <div className="row">
+            <h2>Check out some of these attractions!</h2>
             <RestaurantList
-                restaurants={this.props.restaurantResults.businesses || []}
-                selectDestination={this.props.selectDestination}
-                queryYelp={this.props.queryYelp}
-              />
-            </div>
-            <div className="col-md-6">
-              <h2>Check out some of these attractions!</h2>
-              <AttractionList
-                attractions={this.props.attractionResults.businesses || []}
-                selectDestination={this.props.selectDestination}
-              />
-            </div> 
+              restaurants={this.props.restaurantResults.businesses || []}
+              selectDestination={this.props.selectDestination}
+            />
+>>>>>>> (feat) make three restaurants show up in one row
           </div>
           <div className="row">
             <Weather
