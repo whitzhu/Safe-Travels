@@ -23,6 +23,7 @@ export default class Weather extends React.Component {
       },
     })
       .then((response) => {
+        console.log('weather======', response);
         this.setState({
           name: `${response.data.city.name}, ${response.data.city.country}`,
           sevenDayForecast: response.data.list,
