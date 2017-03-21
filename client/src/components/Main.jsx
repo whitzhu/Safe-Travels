@@ -37,7 +37,6 @@ class Main extends React.Component {
               restaurants={this.props.restaurantResults.businesses || []}
               selectDestination={this.props.selectDestination}
             />
->>>>>>> (feat) make three restaurants show up in one row
           </div>
           <div className="row">
             <Weather
