@@ -187,9 +187,9 @@ app.get('/weather', (req, res) => {
   });
 });
 
-// app.get('/*', (req, res) => {
-//   res.redirect('/');
-// });
+app.get('/*', (req, res) => {
+  res.redirect('/');
+});
 
 
 module.exports = app;
