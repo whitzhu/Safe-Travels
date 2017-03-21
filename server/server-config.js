@@ -92,24 +92,6 @@ app.get('/crime', (req, res) => {
   });
 });
 
-// app.get('/weather', (req, res) => {
-//   const location = req.query.location;
-//   const openWeatherApiKey = ApiKeys.openWeatherApiKey;
-//   const apiUrl = `http://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${openWeatherApiKey}&units=imperial`;
-
-//   request({
-//     uri: apiUrl,
-//     method: 'GET',
-//   }, (error, response, body) => {
-//     if (error) {
-//       console.error('Open Weather API GET request error');
-//     } else {
-//       console.log('Open Weather API GET request successful');
-//       res.status(200).send(body);
-//     }
-//   });
-// });
-
 app.get('/main', (req, res) => {
   res.redirect('/');
 });
