@@ -3,6 +3,10 @@ import React from 'react';
 class GoogleMap extends React.Component {
   constructor(props) {
     super(props);
+    this.state={
+      travelMode: 'DRIVING',
+    };
+    this.onChange = this.onChange.bind(this);
   }
 
   componentDidMount() {
@@ -54,33 +58,35 @@ class GoogleMap extends React.Component {
 
   calcRoute(directionsService, directionsDisplay) {
     if (this.props.mapDestinations.length > 1) {
-      const destinations = []
+      const destinations = [];
       this.props.mapDestinations.forEach((value) => {
         destinations.push({
           location: value.location.display_address[0] + value.location.display_address[1],
           stopover: true,
         });
       });
-      const sampleRequest = {
+      const directionsRequest = {
         origin: destinations[0].location,
         destination: destinations[destinations.length - 1].location,
         waypoints: destinations.slice(1, destinations.length - 1),
+        // necessary
+        optimizeWaypoints: true,
         provideRouteAlternatives: false,
-        travelMode: 'DRIVING',
+        travelMode: this.state.travelMode,
         drivingOptions: {
           departureTime: new Date, // ( now, or future date ),
-          trafficModel: 'pessimistic'
+          trafficModel: 'pessimistic',
         },
         unitSystem: google.maps.UnitSystem.IMPERIAL,
       };
 
       // request is literally the route directions you want 
-      directionsService.route(sampleRequest, (result, status) => {
+      directionsService.route(directionsRequest, (result, status) => {
         if (status == 'OK') {
           directionsDisplay.setDirections(result);
         } else {
           console.log(status);
-          console.log('there was an error');
+          console.log('there was an error regarding the directions service');
         }
       });
     }
@@ -97,8 +103,20 @@ class GoogleMap extends React.Component {
     return mapCrimeData;
   }
 
+  onChange(event) {
+    this.setState({
+      travelMode: event.target.value,
+    });
+  }
+
   render() {
     return (<div className="google-map">  
+      <select className="" value={this.state.travelMode} onChange={this.onChange}>
+        <option value="DRIVING">Driving</option>
+        <option value="BICYCLING">Biking</option>
+        <option value="TRANSIT">Public Transit</option>
+        <option value="WALKING">Walking</option>
+      </select>
       <div ref="map" className="map">
       </div>
     </div>);
