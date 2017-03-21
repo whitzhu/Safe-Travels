@@ -90,35 +90,6 @@ class App extends React.Component {
       .catch(error => 
         console.log(error),
       );
-    // $.ajax({
-    //   url: '/yelp',
-    //   type: 'POST',
-    //   data: yelpQuery,
-    //   success: function(restaurants) {
-    //     // this is by default and will not change
-    //     console.log('success fetching restaurants from server');
-    //     yelpQuery.query = 'tourist attractions';
-    //     $.ajax({
-    //       url: '/yelp',
-    //       type: 'POST',
-    //       data: yelpQuery,
-    //       success: function(attractions) {
-    //         // console.log('sucess fetching attractions from server', attractions);
-    //         this.setState({
-    //           // returns stringified
-    //           attractionResults: JSON.parse(restaurants),
-    //           restaurantResults: JSON.parse(attractions),
-    //         });
-    //       }.bind(this),
-    //       error: function(error) {
-    //         console.log('there was an error in fetching attractions from server');
-    //       }
-    //     });
-    //   }.bind(this),
-    //   error: function(error) {
-    //     console.log('there was an error in fetching restaurants from server');
-    //   },
-    // });
   }
 
   render() {
@@ -138,7 +109,8 @@ class App extends React.Component {
             path="/main"
             component={() => (
               <Main
-                props={this.state}
+                attractionResults={this.state.attractionResults}
+                restaurantResults={this.state.restaurantResults}
                 selectDestination={this.selectDestination}
                 location={this.state.location}
               />)}

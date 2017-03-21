@@ -4,21 +4,17 @@ import Weather from './Weather';
 import Navbar from './Navbar';
 import AttractionList from './AttractionList';
 import RestaurantList from './RestaurantList';
-
-import dummyYelpAttractionData from './../../../dummyYelpAttractionData';
-import dummyYelpRestaurantData from './../../../dummyYelpRestaurantData';
 import GoogleMap from './GoogleMap';
 
 
 class Main extends React.Component {
   constructor(props) {
     super(props);
-    // console.log("wrong!!!!!!!!", props);
   }
 
   render() {
     console.log(this.props.location);
-    console.log(this.props.props.attractionResults);
+    console.log(this.props.attractionResults);
     return (
       <div>
         <Navbar />
@@ -27,15 +23,15 @@ class Main extends React.Component {
         </header>
         <div>
           <AttractionList
-            attractions={this.props.props.attractionResults.businesses || []}
+            attractions={this.props.attractionResults.businesses || []}
             selectDestination={this.props.selectDestination}
           />
           <RestaurantList
-            restaurants={this.props.props.restaurantResults.businesses || []}
+            restaurants={this.props.restaurantResults.businesses || []}
             selectDestination={this.props.selectDestination}
           />
         </div>
-        <Weather location={this.props.props.location} />
+        <Weather location={this.props.location} />
         <GoogleMap />
         <footer>
           Be Safe!!
