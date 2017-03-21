@@ -19,9 +19,9 @@ class Main extends React.Component {
         <Navbar />
         <div className="container">
           <div className="row">
-            <header>
-              The main page of Safe Travel
-            </header>
+            <h1>
+              Welcome to Your Destination {this.props.location}. Safe Travel!
+            </h1>
           </div>
           <div className="row">
             <h2>Hungry?</h2>
