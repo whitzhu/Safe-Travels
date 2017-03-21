@@ -17,30 +17,40 @@ class Main extends React.Component {
     return (
       <div>
         <Navbar />
-        <header>
-          The main page of Safe Travel
-        </header>
-        <div>
-          <h2>Hungry?</h2>
-          <RestaurantList
-            restaurants={this.props.restaurantResults.businesses || []}
-            selectDestination={this.props.selectDestination}
-            queryYelp={this.props.queryYelp}
-          />
-          <h2>Check out some of these attractions!</h2>
-          <AttractionList
-            attractions={this.props.attractionResults.businesses || []}
-            selectDestination={this.props.selectDestination}
+        <div className="container">
+          <div className="row">
+            <header>
+              The main page of Safe Travel
+            </header>
+          </div>
+          <div className="row">
+          <div className="col-md-6">
+            <h2>Hungry?</h2>
+            <RestaurantList
+                restaurants={this.props.restaurantResults.businesses || []}
+                selectDestination={this.props.selectDestination}
+                queryYelp={this.props.queryYelp}
+              />
+            </div>
+            <div className="col-md-6">
+              <h2>Check out some of these attractions!</h2>
+              <AttractionList
+                attractions={this.props.attractionResults.businesses || []}
+                selectDestination={this.props.selectDestination}
+              />
+            </div> 
+          </div>
+          <div className="row">
+            <Weather
+              location={this.props.location}
+            />
+          </div>
+          <GoogleMap
+            crimeData={this.props.crimeData}
+            geoLocation={this.props.geoLocation}
+            mapDestinations={this.props.mapDestinations}
           />
         </div>
-        <Weather
-          location={this.props.location}
-        />
-        <GoogleMap
-          crimeData={this.props.crimeData}
-          geoLocation={this.props.geoLocation}
-          mapDestinations={this.props.mapDestinations}
-        />
         <footer>
           Be Safe!!
         </footer>
