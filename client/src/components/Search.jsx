@@ -5,6 +5,7 @@ class SearchBar extends React.Component {
     super(props);
     this.state = {
       text: '',
+      geoLocation: {},
     };
     // this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -15,6 +16,7 @@ class SearchBar extends React.Component {
     const autocomplete = new google.maps.places.Autocomplete(input);
     autocomplete.addListener('place_changed', () => {
       const place = autocomplete.getPlace();
+      this.setState({ geoLocation: place.geometry.location });
       // this.setState({ text: place.formatted_address });
     });
   }
@@ -27,8 +29,9 @@ class SearchBar extends React.Component {
     const destination = document.getElementById('pac-input').value;
     event.preventDefault();
     this.props.setLocationFromSearch(destination);
+    this.props.setGeoLocationFromSearch(this.state.geoLocation);
     this.props.queryYelp(destination);
-    this.props.queryCrime(destination);
+    this.props.queryCrime(this.state.geoLocation);
     this.setState({ text: '' });
   }
 

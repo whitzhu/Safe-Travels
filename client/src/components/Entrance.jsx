@@ -30,7 +30,7 @@ class Entrance extends React.Component {
             <h1>Plan Your Trip and Safe Travel</h1>
             <div className="row">
               <div className="form-group col-xs-6">
-                <SearchBar queryYelp={this.props.queryYelp} queryCrime={this.props.queryCrime} setDestination={this.setDestination} setLocationFromSearch={this.props.setLocationFromSearch} />
+                <SearchBar queryYelp={this.props.queryYelp} queryCrime={this.props.queryCrime} setDestination={this.setDestination} setLocationFromSearch={this.props.setLocationFromSearch} setGeoLocationFromSearch={this.props.setGeoLocationFromSearch} />
               </div>
               <div className="form-group col-xs-6">
                 <AirbnbCalendar setSelectedDate={this.setSelectedDate} />

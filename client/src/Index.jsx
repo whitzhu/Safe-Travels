@@ -15,21 +15,19 @@ class App extends React.Component {
     this.state = {
       items: [],
       location: '',
+      geoLocation: {},
       attractionResults: [],
       restaurantResults: [],
       mapDestinations: [],
+      crimeData: {},
     };
     this.selectDestination = this.selectDestination.bind(this);
     this.setLocationFromSearch = this.setLocationFromSearch.bind(this);
+    this.setGeoLocationFromSearch = this.setGeoLocationFromSearch.bind(this);
     this.queryYelp = this.queryYelp.bind(this);
     this.queryCrime = this.queryCrime.bind(this);
   }
 
-  selectDestination(yelpLocation) {
-    this.setState({
-      mapDestinations: this.state.mapDestinations.concat(yelpLocation),
-    });
-  }
 
   setLocationFromSearch(locationFromSearch) {
     console.log(locationFromSearch);
@@ -38,15 +36,26 @@ class App extends React.Component {
     });
   }
 
-  queryCrime(searchLocation) {
+  selectDestination(yelpLocation) {
+    this.setState({
+      mapDestinations: this.state.mapDestinations.concat(yelpLocation),
+    });
+  }
+
+  setGeoLocationFromSearch(geoLocationFromSearch) {
+    this.setState({ geoLocation: geoLocationFromSearch });
+  }
+
+  queryCrime(geoLocation) {
     return Axios.get('/crime', {
       params: {
-        searchLocation,
+        lat: geoLocation.lat(),
+        lon: geoLocation.lng(),
       },
     })
     .then((response) => {
-      console.log('success fetching crim spots from server');
-      console.log(response);
+      console.log('success fetching crime spots from server');
+      this.setState({ crimeData: response.data });
     })
     .catch((error) => {
       console.log(error);
@@ -99,6 +108,7 @@ class App extends React.Component {
             exact path="/" component={() =>
             (<Entrance
               setLocationFromSearch={this.setLocationFromSearch}
+              setGeoLocationFromSearch={this.setGeoLocationFromSearch}
               queryYelp={this.queryYelp} queryCrime={this.queryCrime}
               location={this.state.location}
             />)}
