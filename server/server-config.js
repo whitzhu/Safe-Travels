@@ -122,31 +122,14 @@ app.get('/logout', (req, res) => {
 
 
 app.post('/yelp', (req, res) => {
+  console.log('in post yelp')
   console.log(req.body);
   const location = encodeURIComponent(req.body.location);
-  const query = encodeURIComponent(req.body.query);
-  const url = `https://api.yelp.com/v3/businesses/search?term=${query}&location=${location}`;
-  request({
-    uri: url,
-    headers: {
-      Authorization: `Bearer ${ApiKeys.yelpApiToken.token}`,
-    },
-    method: 'GET',
-  }, (error, response, body) => {
-    if (error) {
-      console.error('Yelp GET request error');
-    } else {
-      console.log('Yelp GET request successful');
-      res.status(200).send(body);
-    }
-  });
-});
-
-app.get('/yelp', (req, res) => {
-  const location = encodeURIComponent(req.query.location);
-  const query = encodeURIComponent(req.query.query);
-  const url = `https://api.yelp.com/v3/businesses/search?term=${query}&location=${location}`;
-
+  const style = encodeURIComponent(req.body.style);
+  // only search price if provided
+  const price = req.body.price.length ? `&price=${encodeURIComponent(req.body.price)}` : '';
+  // default sort by rating
+  const url = `https://api.yelp.com/v3/businesses/search?term=${style}&location=${location}${price}&sort_by=rating&limit=5`;
   request({
     uri: url,
     headers: {

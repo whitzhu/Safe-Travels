@@ -22,7 +22,7 @@ class SearchBar extends React.Component {
     event.preventDefault();
     // can refactor these two calls to use lat/lng
     this.props.setLocationFromSearch(destination);
-    this.props.queryYelp(destination);
+    this.props.queryYelp({destination: destination});
 
     const geocoder = new google.maps.Geocoder();
     geocoder.geocode({ address: destination }, (results, status) => {

@@ -44,6 +44,7 @@ class App extends React.Component {
   }
 
   selectDestination(yelpLocation) {
+    // this is an object
     this.setState({
       mapDestinations: this.state.mapDestinations.concat(yelpLocation),
     });
@@ -67,13 +68,16 @@ class App extends React.Component {
     });
   }
 
-  queryYelp(searchLocation) {
+  queryYelp(search) {
     const yelpQuery = {
       // change when correct
-      location: searchLocation || 'san francisco',
-      // default query -- add on based on user input after initial list
-      query: 'casual',
+      location: search.destination || this.state.location || 'san francisco',
+      // default query -- add on based on user input after initial list.
+      // default blank for first search
+      style: search.style ? search.style : '',
+      price: search.price ? search.price : '',
     };
+    console.log(yelpQuery);
     return Axios.post('/yelp', yelpQuery)
       .then((restaurants) => {
         console.log('success fetching restaurants from server', restaurants.data);
@@ -115,6 +119,7 @@ class App extends React.Component {
                 geoLocation={this.state.geoLocation}
                 crimeData={this.state.crimeData}
                 location={this.state.location}
+                queryYelp={this.queryYelp}
               />)}
           />
           <Route path="/login" component={Login} />

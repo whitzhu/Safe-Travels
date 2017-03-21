@@ -28,6 +28,7 @@ class Main extends React.Component {
           <RestaurantList
             restaurants={this.props.restaurantResults.businesses || []}
             selectDestination={this.props.selectDestination}
+            queryYelp={this.props.queryYelp}
           />
         </div>
         <Weather
