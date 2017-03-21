@@ -74,35 +74,51 @@ class App extends React.Component {
       // default query -- add on based on user input after initial list
       query: 'casual',
     };
-    $.ajax({
-      url: '/yelp',
-      type: 'POST',
-      data: yelpQuery,
-      success: function(restaurants) {
-        // this is by default and will not change
-        console.log('success fetching restaurants from server');
-        yelpQuery.query = 'tourist attractions';
-        $.ajax({
-          url: '/yelp',
-          type: 'POST',
-          data: yelpQuery,
-          success: function(attractions) {
-            // console.log('sucess fetching attractions from server', attractions);
-            this.setState({
-              // returns stringified
-              attractionResults: JSON.parse(restaurants),
-              restaurantResults: JSON.parse(attractions),
-            });
-          }.bind(this),
-          error: function(error) {
-            console.log('there was an error in fetching attractions from server');
-          }
-        });
-      }.bind(this),
-      error: function(error) {
-        console.log('there was an error in fetching restaurants from server');
-      },
-    });
+    return Axios.post('/yelp', yelpQuery)
+      .then(restaurants => {
+        console.log('success fetching restaurants from server', restaurants.data);
+        return Axios.post('/yelp', yelpQuery)
+        .then(attractions => {
+          console.log('success fetching attractions from server', attractions.data);
+          this.setState({
+            attractionResults: restaurants.data,
+            restaurantResults: attractions.data,        
+          });
+        })
+        .catch(error => console.log(error));
+      })
+      .catch(error => 
+        console.log(error),
+      );
+    // $.ajax({
+    //   url: '/yelp',
+    //   type: 'POST',
+    //   data: yelpQuery,
+    //   success: function(restaurants) {
+    //     // this is by default and will not change
+    //     console.log('success fetching restaurants from server');
+    //     yelpQuery.query = 'tourist attractions';
+    //     $.ajax({
+    //       url: '/yelp',
+    //       type: 'POST',
+    //       data: yelpQuery,
+    //       success: function(attractions) {
+    //         // console.log('sucess fetching attractions from server', attractions);
+    //         this.setState({
+    //           // returns stringified
+    //           attractionResults: JSON.parse(restaurants),
+    //           restaurantResults: JSON.parse(attractions),
+    //         });
+    //       }.bind(this),
+    //       error: function(error) {
+    //         console.log('there was an error in fetching attractions from server');
+    //       }
+    //     });
+    //   }.bind(this),
+    //   error: function(error) {
+    //     console.log('there was an error in fetching restaurants from server');
+    //   },
+    // });
   }
 
   render() {
