@@ -60,15 +60,12 @@ class SearchBar extends React.Component {
           id="pac-input"
           type="text"
           placeholder="Enter a destination"
-          /*onChange={this.handleChange}*/ 
+          /*onChange={this.handleChange}*/
           style={{ width: 150, height: 25, backgroundColor: 'powderblue', fontSize: 15 }}
         />
         <input
           id="search-input"
           type="submit"
-          value="Submit" onClick={event =>
-            this.handleSubmit(event)
-          }
         />
       </form>
     );
