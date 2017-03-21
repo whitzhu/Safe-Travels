@@ -21,11 +21,13 @@ class Main extends React.Component {
           The main page of Safe Travel
         </header>
         <div>
+          <h2>Hungry?</h2>
           <RestaurantList
             restaurants={this.props.restaurantResults.businesses || []}
             selectDestination={this.props.selectDestination}
             queryYelp={this.props.queryYelp}
           />
+          <h2>Check out some of these attractions!</h2>
           <AttractionList
             attractions={this.props.attractionResults.businesses || []}
             selectDestination={this.props.selectDestination}
