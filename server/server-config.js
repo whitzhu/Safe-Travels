@@ -15,7 +15,8 @@ passport.serializeUser((user, done) => {
   done(null, user.id);
 });
 
-passport.deserializeUser((id, done) => {
+passport.deserializeUser(function(id, done) {
+  console.log("second time user login info ==========>", id);
   User.findById(id, (err, user) => {
     done(err, user);
   });
