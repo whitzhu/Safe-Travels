@@ -13,6 +13,7 @@ const userSchema = mongoose.Schema({
     zipCode: Number,
     dateStart: String,
     dateEnd: String,
+    imageUrl: String,
   }],
 });
 
