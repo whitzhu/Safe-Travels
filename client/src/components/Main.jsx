@@ -9,7 +9,11 @@ import GoogleMap from './GoogleMap';
 class Main extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      showMap: false,
+    }
     this.saveDestination = this.saveDestination.bind(this);
+    this.handleShowMap = this.handleShowMap.bind(this);
   }
 
   saveDestination(destination) {
@@ -24,14 +28,6 @@ class Main extends React.Component {
     .catch((error) => {
       console.log('error from /saveTrip', error);
     })
-  }
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      showMap: false,
-    };
-    this.handleShowMap = this.handleShowMap.bind(this);
   }
 
   handleShowMap() {
@@ -50,7 +46,7 @@ class Main extends React.Component {
         mapDestinations={this.props.mapDestinations}
       />);
     } 
-    return (
+    return (  
       <div>
         <div className="container">
           <div className="row">

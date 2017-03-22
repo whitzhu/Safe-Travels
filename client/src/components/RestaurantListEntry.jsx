@@ -12,10 +12,8 @@ const RestaurantListEntry = (props) => (
         <p className="card-text"><span>Price: {props.restaurant.price}</span>
         <span>Rating: {props.restaurant.rating}</span>
         </p>
-        <p>
-          <h5>Address: {props.restaurant.location.display_address[0]}</h5>
-          <h5>{props.restaurant.location.display_address[1]}</h5>
-        </p>
+        <h5>Address: {props.restaurant.location.display_address[0]}</h5>
+        <h5>{props.restaurant.location.display_address[1]}</h5>
         <SelectDestinationButton 
           destination={props.restaurant}
           selectDestination={props.selectDestination}

@@ -54,6 +54,7 @@ class App extends React.Component {
 
   selectDestination(yelpLocation) {
     // this is an object
+    console.log('this is the selected destination', yelpLocation.name);
     this.setState({
       mapDestinations: this.state.mapDestinations.concat(yelpLocation),
     });
