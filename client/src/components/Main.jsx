@@ -48,6 +48,7 @@ class Main extends React.Component {
     } 
     return (  
       <div>
+        {!this.state.showMap &&
         <div className="container">
           <div className="row">
             <h2>
@@ -79,8 +80,15 @@ class Main extends React.Component {
               location={this.props.location}
             />
           </div>
-          {map}
         </div>
+      }
+      {this.state.showMap &&
+        <GoogleMap
+          crimeData={this.props.crimeData}
+          geoLocation={this.props.geoLocation}
+          mapDestinations={this.props.mapDestinations}
+        />  
+      }
         <footer>
           Be Safe!!
         </footer>
