@@ -1,4 +1,12 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
+
+const propTypes = {
+  setLocationFromSearch: PropTypes.func.isRequired,
+  setGeoLocationFromSearch: PropTypes.func.isRequired,
+  queryYelp: PropTypes.func.isRequired,
+  queryCrime: PropTypes.func.isRequired,
+};
+
 
 class SearchBar extends React.Component {
   constructor(props) {
@@ -62,4 +70,5 @@ class SearchBar extends React.Component {
   }
 }
 
+SearchBar.propTypes = propTypes;
 export default SearchBar;
