@@ -40,6 +40,7 @@ class App extends React.Component {
     this.setState({
       location: locationFromSearch,
     });
+    this.forceUpdate();
   }
 
   setGeoLocationFromSearch(geoLocationFromSearch) {
