@@ -30,6 +30,9 @@ class App extends React.Component {
     this.setSelectedDate = this.setSelectedDate.bind(this);
   }
 
+  shouldComponentUpdate() {
+    return false;
+  }
 
   setLocationFromSearch(locationFromSearch) {
     console.log(locationFromSearch);
@@ -53,11 +56,8 @@ class App extends React.Component {
     });
   }
 
-  setSelectedDate(startDate, endDate) {
-    this.setState({
-      startDate: startDate,
-      endDate: endDate,
-    });
+  setSelectedDate({ startDate, endDate }) {
+    this.setState({ startDate, endDate });
   }
 
   queryCrime(geoLocation) {
