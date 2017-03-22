@@ -111,16 +111,14 @@ class GoogleMap extends React.Component {
   }
 
   render() {
-    return (<div className="google-map">
-      <select className="" value={this.state.travelMode} onChange={this.onChange}>
-        <option value="DRIVING">Driving</option>
-        <option value="BICYCLING">Biking</option>
-        <option value="TRANSIT">Public Transit</option>
-        <option value="WALKING">Walking</option>
-      </select>
-      <div ref="map" className="map">
-      </div>
-    </div>);
+    return (
+      <div className="google-map">
+        <button href="#" className="btn btn-primary"
+          onClick={this.props.handleShowMap}>Return to Search Results
+        </button>      
+        <div ref="map" className="map">
+        </div>
+      </div>);
   }
 }
 

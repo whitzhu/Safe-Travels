@@ -42,20 +42,12 @@ class Main extends React.Component {
   handleShowMap() {
     console.log(this.state.mapDestinations);
     this.setState({
-      showMap: true,
+      showMap: !this.state.showMap,
     });
   }
 
   render() {
     console.log('queried location, ', this.props.location);
-    let map = null;
-    if (this.state.showMap) {
-      map = (<GoogleMap
-        crimeData={this.props.crimeData}
-        geoLocation={this.props.geoLocation}
-        mapDestinations={this.props.mapDestinations}
-      />);
-    } 
     return (  
       <div>
         {!this.state.showMap &&
@@ -95,6 +87,7 @@ class Main extends React.Component {
       {this.state.showMap &&
         <GoogleMap
           crimeData={this.props.crimeData}
+          handleShowMap={this.handleShowMap}
           geoLocation={this.props.geoLocation}
           mapDestinations={this.state.mapDestinations}
         />  
