@@ -17,6 +17,7 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser((id, done) => {
   User.findById(id, (err, user) => {
+    console.log('user from session', user);
     done(err, user);
   });
 });
@@ -50,7 +51,6 @@ passport.use(new Strategy({
           userID: profile.id,
           username: profile.displayName,
           email: profile.emails[0].value,
-          trip: null
         }).save((err, newUser) => {
           if (err) {
             throw err;
@@ -181,8 +181,29 @@ app.get('/savedTrips', (req, res) => {
 });
 
 app.post('/saveTrip', (req, res) => {
-  console.log('user----', req.user);
-  res.sendStatus(201);
+  const body = req.body;
+  const destination = body.name;
+  const address = body.destination.location.address1;
+  const city = body.destination.location.city;
+  const state = body.destination.location.state;
+  const zipCode = body.destination.location.zip_code;
+  const dateStart = body.startDate || null;
+  const dateEnd = body.endDate || null;
+  const trip = { destination, address, city, state, zipCode, dateStart, dateEnd };
+  const user = req.user;
+  console.log('user:', user);
+  if (user) {
+    const email = user.email;
+    User.findByIdAndUpdate(
+      user._id,
+      { $addToSet: { trips: trip } },
+      { safe: true, new: true, upsert: true },
+      (err, result) => {
+        console.log(result);
+      });
+  } else {
+    res.sendStatus(400);
+  }
 });
 
 app.get('/*', (req, res) => {
