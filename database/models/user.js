@@ -5,6 +5,7 @@ const userSchema = mongoose.Schema({
   userID: String,
   email: String,
   trips: [{
+    _id: false,
     destination: String,
     address: String,
     city: String,

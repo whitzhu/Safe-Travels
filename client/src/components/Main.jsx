@@ -7,18 +7,24 @@ import RestaurantList from './RestaurantList';
 import GoogleMap from './GoogleMap';
 
 class Main extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.saveDestination = this.saveDestination.bind(this);
+  }
 
   saveDestination(destination) {
-    console.log('destination:', destination);
     Axios.post('/saveTrip', {
       destination: destination,
+      startDate: this.props.startDate,
+      endDate: this.props.endDate,
     })
     .then((res) => {
       console.log('response from /saveTrip', res);
     })
     .catch((error) => {
       console.log('error from /saveTrip', error);
-    });
+    })
   }
 
   render() {

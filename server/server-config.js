@@ -191,7 +191,6 @@ app.post('/saveTrip', (req, res) => {
   const dateEnd = body.endDate || null;
   const trip = { destination, address, city, state, zipCode, dateStart, dateEnd };
   const user = req.user;
-  console.log('user:', user);
   if (user) {
     const email = user.email;
     User.findByIdAndUpdate(
@@ -199,7 +198,6 @@ app.post('/saveTrip', (req, res) => {
       { $addToSet: { trips: trip } },
       { safe: true, new: true, upsert: true },
       (err, result) => {
-        console.log(result);
       });
   } else {
     res.sendStatus(400);
