@@ -16,7 +16,7 @@ export default class AirbnbCalendar extends React.Component {
 
   onDatesChange({ startDate, endDate }) {
     this.setState({ startDate, endDate });
-    this.props.setSelectedDate(startDate, endDate);
+    this.props.setSelectedDate({ startDate, endDate });
   }
 
   onFocusChange(focusedInput) {
@@ -25,6 +25,7 @@ export default class AirbnbCalendar extends React.Component {
 
   render() {
     const { focusedInput, startDate, endDate } = this.state;
+    console.log(this.state);
     return (
       <div>
         <DateRangePicker
