@@ -23,13 +23,7 @@ class Main extends React.Component {
       destination: destination,
       startDate: this.props.startDate,
       endDate: this.props.endDate,
-    })
-    .then((res) => {
-      console.log('response from /saveTrip', res);
-    })
-    .catch((error) => {
-      console.log('error from /saveTrip', error);
-    })
+    });
   }
 
   selectDestination(yelpLocation) {
