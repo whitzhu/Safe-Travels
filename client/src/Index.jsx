@@ -52,16 +52,17 @@ class App extends React.Component {
     } });
   }
 
+
+  setSelectedDate({ startDate, endDate }) {
+    this.setState({ startDate, endDate });
+  }
+  
   selectDestination(yelpLocation) {
     // this is an object
     console.log('this is the selected destination', yelpLocation.name);
     this.setState({
       mapDestinations: this.state.mapDestinations.concat(yelpLocation),
     });
-  }
-
-  setSelectedDate({ startDate, endDate }) {
-    this.setState({ startDate, endDate });
   }
 
   queryCrime(geoLocation) {
