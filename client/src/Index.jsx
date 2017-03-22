@@ -139,6 +139,8 @@ class App extends React.Component {
                 location={this.state.location}
                 queryYelp={this.queryYelp}
                 mapDestinations={this.state.mapDestinations}
+                startDate={this.state.startDate}
+                endDate={this.state.endDate}
               />)}
           />
           <Route path="/login" component={Login} />

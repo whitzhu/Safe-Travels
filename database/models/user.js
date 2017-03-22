@@ -6,9 +6,12 @@ const userSchema = mongoose.Schema({
   email: String,
   trips: [{
     destination: String,
+    address: String,
+    city: String,
+    state: String,
+    zipCode: Number,
     dateStart: String,
     dateEnd: String,
-    mapUrl: String,
   }],
 });
 
