@@ -1,4 +1,5 @@
 import React from 'react';
+import SelectDestinationButton from './SelectDestinationButton';
 
 const AttractionListEntry = (props) => (
   <div className="restaurant-list-entry col-md-4">
@@ -12,13 +13,10 @@ const AttractionListEntry = (props) => (
           <h5>Address: {props.attraction.location.display_address[0]}</h5>
           <h5>{props.attraction.location.display_address[1]}</h5>
         </p>
-        <button href="#" className="btn btn-primary"
-          onClick={() => {
-            props.saveDestination(props.attraction);
-            props.selectDestination(props.attraction);
-          }}
-        >Add to Trip!
-        </button>
+        <SelectDestinationButton 
+          destination={props.attraction}
+          selectDestination={props.selectDestination}
+        />        
       </div>
       <br />
     </div>

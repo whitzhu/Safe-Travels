@@ -31,6 +31,13 @@ class Main extends React.Component {
     this.state = {
       showMap: false,
     };
+    this.handleShowMap = this.handleShowMap.bind(this);
+  }
+
+  handleShowMap() {
+    this.setState({
+      showMap: true,
+    });
   }
 
   render() {
@@ -68,6 +75,7 @@ class Main extends React.Component {
               selectDestination={this.props.selectDestination}
             />
           </div>
+          <button onClick={this.handleShowMap}>Map Destinations</button>
           <div className="row">
             <Weather
               location={this.props.location}
