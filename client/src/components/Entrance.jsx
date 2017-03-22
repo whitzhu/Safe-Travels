@@ -6,10 +6,6 @@ import Navbar from './Navbar';
 class Entrance extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      selectedStartDate: null,
-      selectedEndDate: null,
-    };
   }
 
   // location is passed in as a property
