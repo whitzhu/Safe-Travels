@@ -19,13 +19,11 @@ class App extends React.Component {
       geoLocation: {},
       attractionResults: [],
       restaurantResults: [],
-      mapDestinations: [],
       crimeData: {},
       startDate: null,
       endDate: null,
       isSent: false,
     };
-    this.selectDestination = this.selectDestination.bind(this);
     this.setLocationFromSearch = this.setLocationFromSearch.bind(this);
     this.setGeoLocationFromSearch = this.setGeoLocationFromSearch.bind(this);
     this.queryYelp = this.queryYelp.bind(this);
@@ -55,14 +53,6 @@ class App extends React.Component {
 
   setSelectedDate({ startDate, endDate }) {
     this.setState({ startDate, endDate });
-  }
-
-  selectDestination(yelpLocation) {
-    // this is an object
-    console.log('this is the selected destination', yelpLocation.name);
-    this.setState({
-      mapDestinations: this.state.mapDestinations.concat(yelpLocation),
-    });
   }
 
   handleIsSent() {
@@ -150,7 +140,6 @@ class App extends React.Component {
                 crimeData={this.state.crimeData}
                 location={this.state.location}
                 queryYelp={this.queryYelp}
-                mapDestinations={this.state.mapDestinations}
                 startDate={this.state.startDate}
                 endDate={this.state.endDate}
               />)}

@@ -111,7 +111,7 @@ class GoogleMap extends React.Component {
   }
 
   render() {
-    return (<div className="google-map">  
+    return (<div className="google-map">
       <select className="" value={this.state.travelMode} onChange={this.onChange}>
         <option value="DRIVING">Driving</option>
         <option value="BICYCLING">Biking</option>
