@@ -23,6 +23,7 @@ class App extends React.Component {
       crimeData: {},
       startDate: null,
       endDate: null,
+      isSent: false,
     };
     this.selectDestination = this.selectDestination.bind(this);
     this.setLocationFromSearch = this.setLocationFromSearch.bind(this);
@@ -30,14 +31,14 @@ class App extends React.Component {
     this.queryYelp = this.queryYelp.bind(this);
     this.queryCrime = this.queryCrime.bind(this);
     this.setSelectedDate = this.setSelectedDate.bind(this);
+    this.handleIsSent = this.handleIsSent.bind(this);
   }
 
-  shouldComponentUpdate() {
-    return false;
-  }
+  // shouldComponentUpdate() {
+  //   return false;
+  // }
 
   setLocationFromSearch(locationFromSearch) {
-    console.log(locationFromSearch);
     this.setState({
       location: locationFromSearch,
     });
@@ -52,17 +53,20 @@ class App extends React.Component {
     } });
   }
 
-
   setSelectedDate({ startDate, endDate }) {
     this.setState({ startDate, endDate });
   }
-  
+
   selectDestination(yelpLocation) {
     // this is an object
     console.log('this is the selected destination', yelpLocation.name);
     this.setState({
       mapDestinations: this.state.mapDestinations.concat(yelpLocation),
     });
+  }
+
+  handleIsSent() {
+    this.setState({ isSent: true });
   }
 
   queryCrime(geoLocation) {
@@ -130,6 +134,9 @@ class App extends React.Component {
               queryCrime={this.queryCrime}
               location={this.state.location}
               setSelectedDate={this.setSelectedDate}
+              getlocation={this.state.geoLocation}
+              isSent={this.state.isSent}
+              handleIsSent={this.handleIsSent}
             />)}
           />
           <Route

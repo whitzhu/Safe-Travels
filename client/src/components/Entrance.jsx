@@ -21,6 +21,9 @@ class Entrance extends React.Component {
                   setDestination={this.setDestination}
                   setLocationFromSearch={this.props.setLocationFromSearch}
                   setGeoLocationFromSearch={this.props.setGeoLocationFromSearch}
+                  geolocation={this.props.geolocation}
+                  isSent={this.props.isSent}
+                  handleIsSent={this.props.handleIsSent}
                 />
               </div>
               <div className="form-group col-xs-6">

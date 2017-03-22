@@ -70,6 +70,10 @@ passport.use(new Strategy({
 //   }
 // });
 
+app.get('/waiting', (req, res) => {
+  res.json('waiting');
+});
+
 app.get('/login/facebook',
   passport.authenticate('facebook', { scope: 'email' }));
 

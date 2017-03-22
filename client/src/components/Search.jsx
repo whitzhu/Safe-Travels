@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { PropTypes } from 'react';
 
 const propTypes = {
@@ -7,6 +8,10 @@ const propTypes = {
   queryCrime: PropTypes.func.isRequired,
 };
 
+=======
+import React from 'react';
+import { Redirect } from 'react-router';
+>>>>>>> (refactor) user will be redirected to main page after submit destination
 
 class SearchBar extends React.Component {
   constructor(props) {
@@ -25,6 +30,7 @@ class SearchBar extends React.Component {
     });
   }
 
+<<<<<<< HEAD
   handleSubmit(event) {
     const destination = this.textInput.value;
     event.preventDefault();
@@ -32,26 +38,56 @@ class SearchBar extends React.Component {
     this.props.setLocationFromSearch(destination);
     this.props.queryYelp({ destination: destination });
 
+=======
+  handleSubmit() {
+    const destination = document.getElementById('pac-input').value;
+>>>>>>> (refactor) user will be redirected to main page after submit destination
     const geocoder = new google.maps.Geocoder();
-    geocoder.geocode({ address: destination }, (results, status) => {
-      if (status === 'OK') {
-        this.props.queryCrime(results[0].geometry.location);
-        this.props.setGeoLocationFromSearch(results[0].geometry.location);
-      } else {
-        alert('Geocode was not successful for the following reason: ' + status);
-      }
+    // can refactor these two calls to use lat/lng
+    Promise.all([
+      this.props.setLocationFromSearch(destination),
+      this.props.queryYelp({destination: destination}),
+      geocoder.geocode({ address: destination }, (results, status) => {
+        if (status === 'OK') {
+          this.props.queryCrime(results[0].geometry.location);
+          this.props.setGeoLocationFromSearch(results[0].geometry.location);
+        } else {
+          alert('Geocode was not successful for the following reason: ' + status);
+        }
+      }),
+    ]).then(() => {
+      this.props.handleIsSent();
+    }).catch((err) => {
+      console.log("===== this is the error", err);
     });
-
-    this.setState({ text: '' });
   }
 
   render() {
     return (
-      <form
-        id="pac-container"
-        onSubmit={event =>
-          this.handleSubmit(event)
+      <div>
+        { this.props.isSent ?
+          <Redirect to="/main" /> :
+          <form
+            id="pac-container"
+            onSubmit={event =>
+              this.handleSubmit(event)
+            }
+          >
+            <input
+              className="search-location"
+              id="pac-input"
+              type="text"
+              placeholder="Enter a destination"
+              /* onChange={this.handleChange} */
+            />
+            <input
+              id="search-input"
+              className="btn btn-info"
+              type="submit"
+            />
+          </form>
         }
+<<<<<<< HEAD
       >
         <input
           className="search-location"
@@ -66,6 +102,9 @@ class SearchBar extends React.Component {
           type="submit"
         />
       </form>
+=======
+      </div>
+>>>>>>> (refactor) user will be redirected to main page after submit destination
     );
   }
 }
