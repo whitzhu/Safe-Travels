@@ -1,22 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Weather from './Weather';
-import Navbar from './Navbar';
 import AttractionList from './AttractionList';
 import RestaurantList from './RestaurantList';
 import GoogleMap from './GoogleMap';
 
-
 class Main extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     console.log('queried location, ', this.props.location);
     return (
       <div>
-        <Navbar />
         <div className="container">
           <div className="row">
             <h2>

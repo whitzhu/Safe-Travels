@@ -23,40 +23,48 @@
 .jumbotron h1 {
   font-size: 36px;
   margin-bottom: 36px;
- }
+}
 
 .jumbotron {
   background-image: url('./img/bridge.jpg');
   height: 600px;
   width: 1100px;
   margin: 0 auto;
- }
+}
 
 /*google location search bar styling*/
- .search-location {
-  width: 280px;
+.search-location {
+  width: 280px; 
   height: 50px;
   font-size: 18px;
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
   font-weight: 300;
   text-align: center;
- }
+}
 
- #pac-container {
+#pac-container {
   height: 100px;
- }
+}
 
- #search-input {
+#search-input {
   height: 50px;
   margin-left: 10px;
- }
+}
 
- /*yelp restaurant styling*/
- .yelp-img {
+/*yelp restaurant styling*/
+.yelp-img {
   width: 300px;
   height: 200px;
- }
+}
 
-
-
+/* styling for asking user to enter destination */
+#noDestination {
+  padding: 15px 20px;
+  position: relative;
+  display: block;
+  color: #777;
+  text-decoration: none;
+  background-color: transparent;
+  box-sizing: border-box;
+}
 

@@ -7,6 +7,7 @@ import './style.css';
 import Entrance from './components/Entrance';
 import Main from './components/Main';
 import Login from './components/Login';
+import Navbar from './components/Navbar';
 
 class App extends React.Component {
   constructor(props) {
@@ -112,6 +113,7 @@ class App extends React.Component {
     return (
       <Router>
         <div>
+          <Navbar location={this.state.location} />
           <Route
             exact path="/" component={() =>
             (<Entrance
@@ -143,6 +145,5 @@ class App extends React.Component {
     );
   }
 }
-
 
 ReactDOM.render(<App />, document.getElementById('app'));

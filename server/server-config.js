@@ -11,20 +11,26 @@ const Strategy = require('passport-facebook').Strategy;
 const cookie = require('cookie-parser');
 const session = require('express-session');
 
-passport.serializeUser(function(user, cb) {
-  cb(null, user);
+passport.serializeUser((user, done) => {
+  done(null, user.id);
 });
 
-passport.deserializeUser(function(obj, cb) {
-  cb(null, obj);
+passport.deserializeUser((id, done) => {
+  User.findById(id, (err, user) => {
+    done(err, user);
+  });
 });
 
 const app = express();
 
-app.use(cookie("delicious cookie"));
+app.use(cookie('delicious cookie'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(session({ secret: 'could travel safe be true', resave: true, saveUninitialized: true }));
+app.use(session({
+  secret: 'could travel safe be true',
+  resave: true,
+  saveUninitialized: true,
+}));
 app.use(express.static(`${__dirname}/../client/dist`));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -33,7 +39,7 @@ passport.use(new Strategy({
   clientID: ApiKeys.facebookApiKey.clientID,
   clientSecret: ApiKeys.facebookApiKey.clientSecret,
   callbackURL: ApiKeys.facebookApiKey.callbackURL,
-  profileFields: ['id', 'displayName', 'email']
+  profileFields: ['id', 'displayName', 'email'],
 },
   (accessToken, refreshToken, profile, done) => {
     User.findOne({ userID: profile.id }, (err, oldUser) => {
@@ -96,15 +102,14 @@ app.get('/main', (req, res) => {
   res.redirect('/');
 });
 
-
-app.get('/logout', (req, res) => {
-  req.logout();
-  req.redirect('/');
-});
-
+// backlog
+// app.get('/logout', (req, res) => {
+//   req.logout();
+//   req.redirect('/');
+// });
 
 app.post('/yelp', (req, res) => {
-  console.log('in post yelp')
+  console.log('in post yelp');
   console.log(req.body);
   const location = encodeURIComponent(req.body.location);
   const query = encodeURIComponent(req.body.query);
@@ -155,6 +160,5 @@ app.get('/weather', (req, res) => {
 app.get('/*', (req, res) => {
   res.redirect('/');
 });
-
 
 module.exports = app;

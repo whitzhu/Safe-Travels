@@ -1,7 +1,6 @@
 import React from 'react';
 import { DateRangePicker } from 'react-dates';
 
-
 export default class AirbnbCalendar extends React.Component {
   constructor(props) {
     super(props);
