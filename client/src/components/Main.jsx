@@ -24,7 +24,7 @@ class Main extends React.Component {
     })
     .catch((error) => {
       console.log('error from /saveTrip', error);
-    })
+    });
   }
 
   render() {
