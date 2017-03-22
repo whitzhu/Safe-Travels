@@ -1,5 +1,5 @@
-<<<<<<< HEAD
 import React, { PropTypes } from 'react';
+import { Redirect } from 'react-router';
 
 const propTypes = {
   setLocationFromSearch: PropTypes.func.isRequired,
@@ -7,11 +7,6 @@ const propTypes = {
   queryYelp: PropTypes.func.isRequired,
   queryCrime: PropTypes.func.isRequired,
 };
-
-=======
-import React from 'react';
-import { Redirect } from 'react-router';
->>>>>>> (refactor) user will be redirected to main page after submit destination
 
 class SearchBar extends React.Component {
   constructor(props) {
@@ -30,18 +25,8 @@ class SearchBar extends React.Component {
     });
   }
 
-<<<<<<< HEAD
-  handleSubmit(event) {
-    const destination = this.textInput.value;
-    event.preventDefault();
-    // can refactor these two calls to use lat/lng
-    this.props.setLocationFromSearch(destination);
-    this.props.queryYelp({ destination: destination });
-
-=======
   handleSubmit() {
     const destination = document.getElementById('pac-input').value;
->>>>>>> (refactor) user will be redirected to main page after submit destination
     const geocoder = new google.maps.Geocoder();
     // can refactor these two calls to use lat/lng
     Promise.all([
@@ -87,24 +72,7 @@ class SearchBar extends React.Component {
             />
           </form>
         }
-<<<<<<< HEAD
-      >
-        <input
-          className="search-location"
-          id="pac-input"
-          type="text"
-          placeholder="Enter a destination"
-          ref={(input) => { this.textInput = input; }}
-        />
-        <input
-          id="search-input"
-          className="btn btn-info"
-          type="submit"
-        />
-      </form>
-=======
       </div>
->>>>>>> (refactor) user will be redirected to main page after submit destination
     );
   }
 }
