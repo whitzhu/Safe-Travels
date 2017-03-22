@@ -26,8 +26,23 @@ class Main extends React.Component {
     })
   }
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      showMap: false,
+    };
+  }
+
   render() {
     console.log('queried location, ', this.props.location);
+    let map = null;
+    if (this.state.showMap) {
+      map = (<GoogleMap
+        crimeData={this.props.crimeData}
+        geoLocation={this.props.geoLocation}
+        mapDestinations={this.props.mapDestinations}
+      />);
+    } 
     return (
       <div>
         <div className="container">
@@ -58,11 +73,7 @@ class Main extends React.Component {
               location={this.props.location}
             />
           </div>
-          <GoogleMap
-            crimeData={this.props.crimeData}
-            geoLocation={this.props.geoLocation}
-            mapDestinations={this.props.mapDestinations}
-          />
+          {map}
         </div>
         <footer>
           Be Safe!!
