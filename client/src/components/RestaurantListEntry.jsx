@@ -10,7 +10,7 @@ const RestaurantListEntry = (props) => (
           <a href={props.restaurant.url}>{props.restaurant.name}</a>
         </h4>
         <p className="card-text"><span>Price: {props.restaurant.price}</span>
-        <span>  Rating: {props.restaurant.rating}</span>
+        <span>Rating: {props.restaurant.rating}</span>
         </p>
         <p>
           <h5>Address: {props.restaurant.location.display_address[0]}</h5>

@@ -75,7 +75,9 @@ class Main extends React.Component {
               selectDestination={this.props.selectDestination}
             />
           </div>
-          <button onClick={this.handleShowMap}>Map Destinations</button>
+          <button href="#" className="btn btn-primary"
+            onClick={this.handleShowMap}>Map Destinations
+          </button>
           <div className="row">
             <Weather
               location={this.props.location}
