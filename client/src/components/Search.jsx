@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { PropTypes } from 'react';
 import { Redirect } from 'react-router';
 
@@ -9,14 +8,6 @@ const propTypes = {
   queryCrime: PropTypes.func.isRequired,
 };
 
-<<<<<<< HEAD
-=======
-=======
-import React from 'react';
-import { Redirect } from 'react-router';
->>>>>>> (refactor) user will be redirected to main page after submit destination
-
->>>>>>> (fix) rebase
 class SearchBar extends React.Component {
   constructor(props) {
     super(props);
@@ -34,28 +25,14 @@ class SearchBar extends React.Component {
     });
   }
 
-<<<<<<< HEAD
-  handleSubmit() {
-    const destination = document.getElementById('pac-input').value;
-=======
-<<<<<<< HEAD
   handleSubmit(event) {
-    const destination = this.textInput.value;
     event.preventDefault();
-    // can refactor these two calls to use lat/lng
-    this.props.setLocationFromSearch(destination);
-    this.props.queryYelp({ destination: destination });
-
-=======
-  handleSubmit() {
-    const destination = document.getElementById('pac-input').value;
->>>>>>> (refactor) user will be redirected to main page after submit destination
->>>>>>> (fix) rebase
+    const destination = this.textInput.value;
     const geocoder = new google.maps.Geocoder();
     // can refactor these two calls to use lat/lng
     Promise.all([
       this.props.setLocationFromSearch(destination),
-      this.props.queryYelp({destination: destination}),
+      this.props.queryYelp({ destination: destination }),
       geocoder.geocode({ address: destination }, (results, status) => {
         if (status === 'OK') {
           this.props.queryCrime(results[0].geometry.location);
@@ -87,6 +64,7 @@ class SearchBar extends React.Component {
               id="pac-input"
               type="text"
               placeholder="Enter a destination"
+              ref={(input) => { this.textInput = input; }}
               /* onChange={this.handleChange} */
             />
             <input
@@ -96,28 +74,7 @@ class SearchBar extends React.Component {
             />
           </form>
         }
-<<<<<<< HEAD
       </div>
-=======
-<<<<<<< HEAD
-      >
-        <input
-          className="search-location"
-          id="pac-input"
-          type="text"
-          placeholder="Enter a destination"
-          ref={(input) => { this.textInput = input; }}
-        />
-        <input
-          id="search-input"
-          className="btn btn-info"
-          type="submit"
-        />
-      </form>
-=======
-      </div>
->>>>>>> (refactor) user will be redirected to main page after submit destination
->>>>>>> (fix) rebase
     );
   }
 }
