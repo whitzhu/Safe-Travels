@@ -18,6 +18,7 @@ passport.serializeUser((user, done) => {
 passport.deserializeUser(function(id, done) {
   console.log("second time user login info ==========>", id);
   User.findById(id, (err, user) => {
+    console.log('user from session', user);
     done(err, user);
   });
 });
