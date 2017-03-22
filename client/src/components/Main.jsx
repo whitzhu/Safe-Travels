@@ -9,7 +9,6 @@ import GoogleMap from './GoogleMap';
 class Main extends React.Component {
   constructor(props) {
     super(props);
-
     this.saveDestination = this.saveDestination.bind(this);
   }
 
@@ -24,20 +23,7 @@ class Main extends React.Component {
     })
     .catch((error) => {
       console.log('error from /saveTrip', error);
-    });
-  }
-
-  saveDestination(destination) {
-    console.log('destination:', destination);
-    Axios.post('/saveTrip', {
-      destination: destination,
     })
-    .then((res) => {
-      console.log('response from /saveTrip', res);
-    })
-    .catch((error) => {
-      console.log('error from /saveTrip', error);
-    });
   }
 
   render() {
