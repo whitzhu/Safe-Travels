@@ -10,7 +10,7 @@ class SearchBar extends React.Component {
   }
 
   componentDidMount() {
-    const input = document.getElementById('pac-input');
+    const input = this.textInput;
     const autocomplete = new google.maps.places.Autocomplete(input);
     autocomplete.addListener('place_changed', () => {
       const place = autocomplete.getPlace();
@@ -18,11 +18,11 @@ class SearchBar extends React.Component {
   }
 
   handleSubmit(event) {
-    const destination = document.getElementById('pac-input').value;
+    const destination = this.textInput.value;
     event.preventDefault();
     // can refactor these two calls to use lat/lng
     this.props.setLocationFromSearch(destination);
-    this.props.queryYelp({destination: destination});
+    this.props.queryYelp({ destination: destination });
 
     const geocoder = new google.maps.Geocoder();
     geocoder.geocode({ address: destination }, (results, status) => {
@@ -45,11 +45,12 @@ class SearchBar extends React.Component {
           this.handleSubmit(event)
         }
       >
-        <input className="search-location"
+        <input
+          className="search-location"
           id="pac-input"
           type="text"
           placeholder="Enter a destination"
-          /*onChange={this.handleChange}*/
+          ref={(input) => { this.textInput = input; }}
         />
         <input
           id="search-input"
