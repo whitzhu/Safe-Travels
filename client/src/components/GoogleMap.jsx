@@ -141,13 +141,13 @@ class GoogleMap extends React.Component {
   render() {
     return (
       <div className="google-map">
-        <button href="#" className="btn btn-primary"
-          onClick={this.props.handleShowMap}>Return to Search Results
-        </button>      
         <div ref="map" className="map">
         </div>
       </div>);
   }
 }
 
+//<button href="#" className="btn btn-primary"
+//  onClick={this.props.handleShowMap}>Return to Search Results
+//</button>      
 export default GoogleMap;

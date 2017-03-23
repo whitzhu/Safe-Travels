@@ -10,12 +10,12 @@ class Main extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      mapDestinations: [],
+     // mapDestinations: [],
       showMap: false,
     };
     this.saveDestination = this.saveDestination.bind(this);
     this.handleShowMap = this.handleShowMap.bind(this);
-    this.selectDestination = this.selectDestination.bind(this);
+    //this.selectDestination = this.selectDestination.bind(this);
   }
 
   saveDestination(destination) {
@@ -28,12 +28,12 @@ class Main extends React.Component {
     .catch(error => console.log(error));
   }
 
-  selectDestination(yelpLocation) {
-    // this is an object
-    this.setState({
-      mapDestinations: this.state.mapDestinations.concat(yelpLocation),
-    });
-  }
+  // selectDestination(yelpLocation) {
+  //   // this is an object
+  //   this.setState({
+  //     mapDestinations: this.state.mapDestinations.concat(yelpLocation),
+  //   });
+  // }
 
   handleShowMap() {
     console.log(this.state.mapDestinations);
@@ -58,7 +58,7 @@ class Main extends React.Component {
             <RestaurantList
               saveDestination={this.saveDestination}
               restaurants={this.props.restaurantResults.businesses || []}
-              selectDestination={this.selectDestination}
+              selectDestination={this.props.selectDestination}
               queryYelp={this.props.queryYelp}
               price={this.props.yelpPrice}
               style={this.props.yelpStyle}
@@ -69,7 +69,7 @@ class Main extends React.Component {
             <AttractionList
               saveDestination={this.saveDestination}
               attractions={this.props.attractionResults.businesses || []}
-              selectDestination={this.selectDestination}
+              selectDestination={this.props.selectDestination}
             />
           </div>
           <button href="#" className="btn btn-primary"

@@ -9,6 +9,7 @@ import Main from './components/Main';
 import Login from './components/Login';
 import Navbar from './components/Navbar';
 import Profile from './components/Profile';
+import GoogleMap from './components/GoogleMap';
 
 class App extends React.Component {
   constructor(props) {
@@ -26,6 +27,7 @@ class App extends React.Component {
       savedTrips: [],
       yelpPrice: '3',
       yelpStyle: 'casual',
+      mapDestinations: [],
     };
     this.setLocationFromSearch = this.setLocationFromSearch.bind(this);
     this.setGeoLocationFromSearch = this.setGeoLocationFromSearch.bind(this);
@@ -34,6 +36,7 @@ class App extends React.Component {
     this.setSelectedDate = this.setSelectedDate.bind(this);
     this.handleIsSent = this.handleIsSent.bind(this);
     this.getSavedTrips = this.getSavedTrips.bind(this);
+    this.selectDestination = this.selectDestination.bind(this);
   }
 
   shouldComponentUpdate() {
@@ -53,6 +56,13 @@ class App extends React.Component {
       location: locationFromSearch,
     });
     this.forceUpdate();
+  }
+
+  selectDestination(yelpLocation) {
+    // this is an object
+    this.setState({
+      mapDestinations: this.state.mapDestinations.concat(yelpLocation),
+    });
   }
 
   setGeoLocationFromSearch(geoLocationFromSearch) {
@@ -130,7 +140,7 @@ class App extends React.Component {
     return (
       <Router>
         <div>
-          <Navbar location={this.state.location} getSavedTrips={this.getSavedTrips} />
+          <Navbar geoLocation={this.state.geoLocation} location={this.state.location} getSavedTrips={this.getSavedTrips} />
           <Route
             exact path="/" component={() =>
             (<Entrance
@@ -159,6 +169,7 @@ class App extends React.Component {
                 endDate={this.state.endDate}
                 yelpPrice={this.state.yelpPrice}
                 yelpStyle={this.state.yelpStyle}
+                selectDestination={this.selectDestination}
               />)}
           />
           <Route path="/login" component={Login} />
@@ -169,6 +180,7 @@ class App extends React.Component {
                 savedTrips={this.state.savedTrips}
               />)}
           />
+          <Route path="/map" component={() => (<GoogleMap geoLocation={this.state.geoLocation} crimeData={this.state.crimeData} mapDestinations={this.state.mapDestinations} />)} />
         </div>
       </Router>
     );
