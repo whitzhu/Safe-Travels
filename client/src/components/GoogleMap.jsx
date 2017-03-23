@@ -105,7 +105,6 @@ class GoogleMap extends React.Component {
   //   return mapCrimeData;
   // }
   createMarkers(map) {
-    console.log(this.props.crimeData);
     const pinIcon = new google.maps.MarkerImage(
         'https://www.shareicon.net/download/128x128/2016/08/18/810246_security_512x512.png',
         null, /* size is determined at runtime */
