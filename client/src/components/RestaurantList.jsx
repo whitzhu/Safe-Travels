@@ -13,6 +13,7 @@ class RestaurantList extends React.Component {
         <select className="yelp-select-price" value={this.props.price} onChange={(event) => {
           this.props.queryYelp({
             price: event.target.value,
+            style: this.props.style,
           });
         }}>
           <option value="1">*</option>
@@ -22,6 +23,7 @@ class RestaurantList extends React.Component {
         </select>
         <select className="yelp-select-style" value={this.props.style} onChange={(event) => {
           this.props.queryYelp({
+            price: this.props.price,
             style: event.target.value,
           })
         }}>
