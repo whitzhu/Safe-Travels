@@ -149,7 +149,6 @@ class App extends React.Component {
               <Main
                 attractionResults={this.state.attractionResults}
                 restaurantResults={this.state.restaurantResults}
-                selectDestination={this.selectDestination}
                 geoLocation={this.state.geoLocation}
                 crimeData={this.state.crimeData}
                 location={this.state.location}

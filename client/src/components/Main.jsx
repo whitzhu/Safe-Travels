@@ -85,7 +85,7 @@ class Main extends React.Component {
           crimeData={this.props.crimeData}
           handleShowMap={this.handleShowMap}
           geoLocation={this.props.geoLocation}
-          mapDestinations={this.props.mapDestinations}
+          mapDestinations={this.state.mapDestinations}
         />
       }
       </div>
