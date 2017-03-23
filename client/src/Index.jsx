@@ -97,7 +97,7 @@ class App extends React.Component {
       // default query -- add on based on user input after initial list.
       // default blank for first search
       query: search.style ? search.style : this.state.yelpStyle,
-      price: search.price ? search.price : this.state.yelpPrice,
+      price: search.price ? search.price : '',
     };
     return Axios.post('/yelp', yelpRestaurantQuery)
       .then((restaurants) => {
