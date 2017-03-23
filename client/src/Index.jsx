@@ -69,6 +69,7 @@ class App extends React.Component {
 
   handleIsSent() {
     this.setState({ isSent: true });
+    this.forceUpdate();
   }
 
   queryCrime(geoLocation) {
