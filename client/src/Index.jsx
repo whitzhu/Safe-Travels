@@ -112,7 +112,6 @@ class App extends React.Component {
         return Axios.post('/yelp', yelpAttractionQuery)
           .then((attractions) => {
             console.log('success fetching attractions from server', attractions.data);
-            console.log('state price and style', statePrice, stateStyle)
             this.setState({
               attractionResults: attractions.data,
               restaurantResults: restaurants.data,
