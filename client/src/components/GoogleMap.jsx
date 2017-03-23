@@ -105,7 +105,8 @@ class GoogleMap extends React.Component {
   //   return mapCrimeData;
   // }
   createMarkers(map) {
-    var pinIcon = new google.maps.MarkerImage(
+    console.log(this.props.crimeData);
+    const pinIcon = new google.maps.MarkerImage(
         'https://www.shareicon.net/download/128x128/2016/08/18/810246_security_512x512.png',
         null, /* size is determined at runtime */
         null, /* origin is 0,0 */
@@ -113,12 +114,20 @@ class GoogleMap extends React.Component {
         new google.maps.Size(40, 40),
     );
     if (this.props.crimeData.length) {
-      this.props.crimeData.forEach(value => {  
+      this.props.crimeData.forEach(value => {        
+        let infowindow = new google.maps.InfoWindow({
+          content: '<div>' + value.type +'</div>',
+        });
         const marker = new google.maps.Marker({
           animation: google.maps.Animation.DROP,
           position: new google.maps.LatLng(value.lat, value.lon),
           map: map,
           icon: pinIcon,
+        });
+        google.maps.event.addListener(marker, 'mouseover', () => 
+        { 
+          infowindow.open(map, marker);
+          setTimeout(() => { infowindow.close()}, '1500');
         });
       });
     }
