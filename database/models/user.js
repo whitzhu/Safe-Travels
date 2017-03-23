@@ -6,7 +6,7 @@ const userSchema = mongoose.Schema({
   email: String,
   trips: [{
     _id: false,
-    destination: String,
+    name: String,
     address: String,
     city: String,
     state: String,
@@ -14,6 +14,7 @@ const userSchema = mongoose.Schema({
     dateStart: String,
     dateEnd: String,
     imageUrl: String,
+    informationUrl: String,
   }],
 });
 
