@@ -11,10 +11,11 @@ const AttractionListEntry = (props) => (
         </h4>
         <h5>Address: {props.attraction.location.display_address[0]}</h5>
         <h5>{props.attraction.location.display_address[1]}</h5>
-        <SelectDestinationButton 
+        <SelectDestinationButton
           destination={props.attraction}
           selectDestination={props.selectDestination}
-        />        
+          saveDestination={props.saveDestination}
+        />
       </div>
       <br />
     </div>

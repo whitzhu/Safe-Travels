@@ -14,9 +14,10 @@ const RestaurantListEntry = (props) => (
         </p>
         <h5>Address: {props.restaurant.location.display_address[0]}</h5>
         <h5>{props.restaurant.location.display_address[1]}</h5>
-        <SelectDestinationButton 
+        <SelectDestinationButton
           destination={props.restaurant}
           selectDestination={props.selectDestination}
+          saveDestination={props.saveDestination}
         />
       </div>
       <br />

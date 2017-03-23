@@ -42,19 +42,7 @@ class Main extends React.Component {
 
   render() {
     console.log('queried location, ', this.props.location);
-<<<<<<< HEAD
-    return (  
-=======
-    let map = null;
-    if (this.state.showMap) {
-      map = (<GoogleMap
-        crimeData={this.props.crimeData}
-        geoLocation={this.props.geoLocation}
-        mapDestinations={this.props.mapDestinations}
-      />);
-    }
     return (
->>>>>>> (feat display logged-in user's saved trips
       <div>
         {!this.state.showMap &&
         <div className="container">
@@ -95,13 +83,8 @@ class Main extends React.Component {
           crimeData={this.props.crimeData}
           handleShowMap={this.handleShowMap}
           geoLocation={this.props.geoLocation}
-<<<<<<< HEAD
-          mapDestinations={this.state.mapDestinations}
-        />  
-=======
           mapDestinations={this.props.mapDestinations}
         />
->>>>>>> (feat display logged-in user's saved trips
       }
       </div>
     );
