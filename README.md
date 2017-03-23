@@ -21,15 +21,15 @@
 
 ## Usage
 
-> Some usage instructions
+1. Enter country, city, or state you'd like to visit. 
+1. Select travel dates.
+1. View trips, weather, route of added destinations, and crime heat map
+1. Log in to save trips. 
 
 ## Requirements
 
-- Node 6.4.x
-- Redis 2.6.x
-- Postgresql 9.1.x
-- etc
-- etc
+- Node >= 6.4.0
+- MongoDB
 
 ## Development
 
@@ -38,14 +38,12 @@
 From within the root directory:
 
 ```sh
-npm install -g bower
 npm install
-bower install
 ```
 
 ### Roadmap
 
-View the project roadmap [here](LINK_TO_DOC)
+View the project roadmap [here](https://docs.google.com/document/d/12-V6J3PTRq5fnfYkZIMe5OTl5odaBaj9uVi1xcCJCkY/edit?ts=58c75ba2)
 
 
 ## Contributing
