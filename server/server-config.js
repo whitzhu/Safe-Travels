@@ -15,7 +15,7 @@ passport.serializeUser((user, done) => {
   done(null, user.id);
 });
 
-passport.deserializeUser((id, done) => {
+passport.deserializeUser(function(id, done) {
   User.findById(id, (err, user) => {
     done(err, user);
   });
@@ -175,24 +175,30 @@ app.get('/weather', (req, res) => {
 });
 
 app.get('/savedTrips', (req, res) => {
-  if (req.user) {
-    console.log('user is logged in');
+  const user = req.user;
+  if (user) {
+    User.findOne({
+      _id: user._id,
+    }, (error, response) => {
+      res.status(200).json(response.trips);
+    });
   } else {
-    console.log('user is not logged in');
+    res.sendStatus(400);
   }
-  res.sendStatus(200);
 });
 
 app.post('/saveTrip', (req, res) => {
   const body = req.body;
-  const destination = body.name;
+  const name = body.destination.name;
   const address = body.destination.location.address1;
   const city = body.destination.location.city;
   const state = body.destination.location.state;
   const zipCode = body.destination.location.zip_code;
   const dateStart = body.startDate || null;
   const dateEnd = body.endDate || null;
-  const trip = { destination, address, city, state, zipCode, dateStart, dateEnd };
+  const imageUrl = body.destination.image_url;
+  const informationUrl = body.destination.url;
+  const trip = { name, address, city, state, zipCode, dateStart, dateEnd, imageUrl, informationUrl };
   const user = req.user;
   if (user) {
     const email = user.email;

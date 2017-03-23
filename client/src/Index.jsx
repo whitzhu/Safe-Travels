@@ -23,6 +23,7 @@ class App extends React.Component {
       startDate: null,
       endDate: null,
       isSent: false,
+      savedTrips: [],
     };
     this.setLocationFromSearch = this.setLocationFromSearch.bind(this);
     this.setGeoLocationFromSearch = this.setGeoLocationFromSearch.bind(this);
@@ -30,11 +31,20 @@ class App extends React.Component {
     this.queryCrime = this.queryCrime.bind(this);
     this.setSelectedDate = this.setSelectedDate.bind(this);
     this.handleIsSent = this.handleIsSent.bind(this);
+    this.getSavedTrips = this.getSavedTrips.bind(this);
   }
 
   // shouldComponentUpdate() {
   //   return false;
   // }
+
+  getSavedTrips() {
+    Axios.get('/savedTrips')
+    .then((res) => {
+      this.setState({ savedTrips: res.data });
+      this.forceUpdate();
+    });
+  }
 
   setLocationFromSearch(locationFromSearch) {
     this.setState({
@@ -87,25 +97,25 @@ class App extends React.Component {
     };
 
     Axios.post('/yelp', yelpQuery)
-      .then((restaurants) => {
-        console.log('success fetching restaurants from server', restaurants.data);
-        this.setState({
-          restaurantResults: restaurants.data,
-        });
-      })
-      .catch(error => console.log(error));
-
-    // must query attractions to get attractions
-    // reset price prior to attractions query
-    yelpQuery.price = '';
-    yelpQuery.query = 'tourist attractions';
-
-    Axios.post('/yelp', yelpQuery)
       .then((attractions) => {
         console.log('success fetching attractions from server', attractions.data);
         this.setState({
           attractionResults: attractions.data,
         });
+        // must query attractions to get attractions
+        // reset price prior to attractions query
+        yelpQuery.query = 'tourist attractions';
+        yelpQuery.price ='';
+        return Axios.post('/yelp', yelpQuery)
+        .then((attractions) => {
+          console.log('success fetching attractions from server', attractions.data);
+          this.setState({
+            attractionResults: attractions.data,
+            restaurantResults: restaurants.data,
+          });
+          this.forceUpdate();
+        })
+        .catch(error => console.log(error));
       })
       .catch(error => console.log(error));
   }
@@ -114,7 +124,7 @@ class App extends React.Component {
     return (
       <Router>
         <div>
-          <Navbar location={this.state.location} />
+          <Navbar location={this.state.location} getSavedTrips={this.getSavedTrips} />
           <Route
             exact path="/" component={() =>
             (<Entrance
@@ -145,7 +155,13 @@ class App extends React.Component {
               />)}
           />
           <Route path="/login" component={Login} />
-          <Route path="/profile" component={Profile} />
+          <Route
+            path="/profile"
+            component={() => (
+              <Profile
+                savedTrips={this.state.savedTrips}
+              />)}
+          />
         </div>
       </Router>
     );
