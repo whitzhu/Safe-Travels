@@ -58,6 +58,8 @@ class Main extends React.Component {
               restaurants={this.props.restaurantResults.businesses || []}
               selectDestination={this.selectDestination}
               queryYelp={this.props.queryYelp}
+              price={this.props.yelpPrice}
+              style={this.props.yelpStyle}
             />
           </div>
           <div className="row">

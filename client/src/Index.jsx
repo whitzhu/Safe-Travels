@@ -24,6 +24,8 @@ class App extends React.Component {
       endDate: null,
       isSent: false,
       savedTrips: [],
+      yelpPrice: null,
+      yelpStyle: null,
     };
     this.setLocationFromSearch = this.setLocationFromSearch.bind(this);
     this.setGeoLocationFromSearch = this.setGeoLocationFromSearch.bind(this);
@@ -87,7 +89,7 @@ class App extends React.Component {
   }
 
   queryYelp(search) {
-    const yelpQuery = {
+    const yelpRestaurantQuery = {
       // change when correct
       location: search.destination || this.state.location || 'san francisco',
       // default query -- add on based on user input after initial list.
@@ -96,19 +98,24 @@ class App extends React.Component {
       price: search.price ? search.price : '',
     };
 
-    return Axios.post('/yelp', yelpQuery)
+    return Axios.post('/yelp', yelpRestaurantQuery)
       .then((restaurants) => {
         console.log('success fetching restaurants from server', restaurants.data);
         // must query attractions to get attractions
         // reset price prior to attractions query
-        yelpQuery.price = '';
-        yelpQuery.query = 'tourist attractions';
-        return Axios.post('/yelp', yelpQuery)
+        const yelpAttractionQuery = {
+          location: yelpRestaurantQuery.location,
+          query: 'tourist attractions',
+          price: '',
+        }
+        return Axios.post('/yelp', yelpAttractionQuery)
           .then((attractions) => {
             console.log('success fetching attractions from server', attractions.data);
             this.setState({
               attractionResults: attractions.data,
               restaurantResults: restaurants.data,
+              yelpPrice: yelpRestaurantQuery.price,
+              yelpStyle: yelpRestaurantQuery.query,
             });
           })
           .catch(error => console.log(error));
@@ -148,6 +155,8 @@ class App extends React.Component {
                 queryYelp={this.queryYelp}
                 startDate={this.state.startDate}
                 endDate={this.state.endDate}
+                yelpPrice={this.state.yelpPrice}
+                yelpStyle={this.state.yelpStyle}
               />)}
           />
           <Route path="/login" component={Login} />
