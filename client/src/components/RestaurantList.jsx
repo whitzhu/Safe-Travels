@@ -13,9 +13,9 @@ class RestaurantList extends React.Component {
   }
 
   onChange(change) {
-    this.setState({
-      price: change.price ? change.price : this.state.price,
-      style: change.style ? change.style: this.state.style,
+    this.props.queryYelp({
+      price: change.price,
+      style: this.state.style,
     });
   }
 
@@ -25,10 +25,6 @@ class RestaurantList extends React.Component {
         <select className="yelp-select-price" value={this.state.price} onChange={(event) => {
           this.onChange({price: event.target.value});
           // use event.target.value instead of state because setState is async
-          this.props.queryYelp({
-            price: event.target.value,
-            stlye: this.state.style,
-          });
         }}>
           <option value="1">*</option>
           <option value="2">**</option>
