@@ -119,6 +119,7 @@ class App extends React.Component {
               yelpPrice: statePrice,
               yelpStyle: stateStyle,
             });
+            this.forceUpdate();
           })
           .catch(error => console.log(error));
       })
