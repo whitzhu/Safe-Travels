@@ -23,7 +23,9 @@ class Main extends React.Component {
       destination: destination,
       startDate: this.props.startDate,
       endDate: this.props.endDate,
-    });
+    })
+    .then(response => console.log(response))
+    .catch(error => console.log(error));
   }
 
   selectDestination(yelpLocation) {
