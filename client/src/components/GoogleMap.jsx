@@ -104,13 +104,21 @@ class GoogleMap extends React.Component {
   //   }
   //   return mapCrimeData;
   // }
-
   createMarkers(map) {
+    var pinIcon = new google.maps.MarkerImage(
+        'https://www.shareicon.net/download/128x128/2016/08/18/810246_security_512x512.png',
+        null, /* size is determined at runtime */
+        null, /* origin is 0,0 */
+        null, /* anchor is bottom center of the scaled image */
+        new google.maps.Size(40, 40),
+    );
     if (this.props.crimeData.length) {
-      this.props.crimeData.forEach(value => {    
+      this.props.crimeData.forEach(value => {  
         const marker = new google.maps.Marker({
+          animation: google.maps.Animation.DROP,
           position: new google.maps.LatLng(value.lat, value.lon),
           map: map,
+          icon: pinIcon,
         });
       });
     }

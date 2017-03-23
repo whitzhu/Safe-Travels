@@ -1,7 +1,7 @@
 .google-map {
   height: 95%;
   position: absolute;
-  width: 95%;
+  width: 100%;
 }
 .map {
   top: 20px;

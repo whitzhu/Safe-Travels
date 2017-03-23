@@ -9,6 +9,7 @@ import Main from './components/Main';
 import Login from './components/Login';
 import Navbar from './components/Navbar';
 import Profile from './components/Profile';
+import GoogleMap from './components/GoogleMap';
 
 class App extends React.Component {
   constructor(props) {
