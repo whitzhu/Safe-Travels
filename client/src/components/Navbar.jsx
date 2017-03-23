@@ -10,10 +10,14 @@ const Navbar = (props) => (
         </div>
         <div id="navbar" className="navbar-collapse collapse">
           <ul className="nav navbar-nav">
-            <li><Link to="/login">Login</Link></li>
+            <li>
+              <form action="/login/facebook" method="GET">
+                <input type="submit" value="Log In with facebook" className="NavbarButton"></input>
+              </form>
+            </li>
             { props.location ?
               <li><Link to="/main">Main</Link></li> :
-              <li><span id="noDestination">Please enter your destination</span></li>
+              <li><span className="NavbarButton">Please enter your destination</span></li>
             }
             <li onClick={props.getSavedTrips}><Link to="/profile">Profile</Link></li>
           </ul>

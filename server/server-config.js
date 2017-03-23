@@ -15,7 +15,7 @@ passport.serializeUser((user, done) => {
   done(null, user.id);
 });
 
-passport.deserializeUser(function(id, done) {
+passport.deserializeUser((id, done) => {
   User.findById(id, (err, user) => {
     done(err, user);
   });
@@ -60,18 +60,6 @@ passport.use(new Strategy({
     });
   }));
 
-// if logout happens
-// app.get('/', (req, res) => {
-//   if (req.user && req.user.displayName) {
-//     res.send(
-//     );
-//   }
-// });
-
-app.get('/waiting', (req, res) => {
-  res.json('waiting');
-});
-
 app.get('/login/facebook',
   passport.authenticate('facebook', { scope: 'email' }));
 
@@ -80,12 +68,6 @@ app.get('/login/facebook/return',
   (req, res) => {
     res.redirect('/');
   });
-
-// logout
-// app.get('/logout', (req, res) => {
-//   req.logout();
-//   res.redirect('/');
-// });
 
 app.get('/crime', (req, res) => {
   const lat = req.query.lat;
@@ -118,12 +100,6 @@ app.get('/crime', (req, res) => {
 app.get('/main', (req, res) => {
   res.redirect('/');
 });
-
-// backlog
-// app.get('/logout', (req, res) => {
-//   req.logout();
-//   req.redirect('/');
-// });
 
 app.post('/yelp', (req, res) => {
   console.log('in post yelp');

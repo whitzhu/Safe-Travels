@@ -57,8 +57,8 @@
   height: 200px;
 }
 
-/* styling for asking user to enter destination */
-#noDestination {
+/* styling for Navbar Buttons */
+.NavbarButton {
   padding: 15px 20px;
   position: relative;
   display: block;
@@ -66,6 +66,7 @@
   text-decoration: none;
   background-color: transparent;
   box-sizing: border-box;
+  border: none;
 }
 
 /*styling weather*/
