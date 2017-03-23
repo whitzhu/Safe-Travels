@@ -37,9 +37,8 @@ export default class Weather extends React.Component {
 
   render() {
     return this.state.temperatureLoaded ? (
-      <div className="container">
+      <div>
         <h2>{this.state.name}</h2>
-        <div className="row">
           {this.state.sevenDayForecast.map((forecast, counter) => {
             const date = new Date();
             const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -53,7 +52,6 @@ export default class Weather extends React.Component {
               </div>
             );
           })}
-        </div>
       </div>
     ) : (<div />);
   }
