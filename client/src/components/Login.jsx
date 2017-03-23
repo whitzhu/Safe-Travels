@@ -8,7 +8,7 @@ const Login = () => (
     </header>
     <div>
       <form action="/login/facebook" method="GET">
-        <button>This is the button Login with facebook</button>
+        <button>Login with facebook</button>
       </form>
     </div>
     <div>
@@ -17,9 +17,6 @@ const Login = () => (
     <div>
       <Link to="/main">main</Link>
     </div>
-    <footer>
-      Be Safe!!
-    </footer>
   </div>
 );
 

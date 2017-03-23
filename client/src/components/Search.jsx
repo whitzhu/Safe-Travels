@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import { Redirect } from 'react-router';
 
 const propTypes = {
   setLocationFromSearch: PropTypes.func.isRequired,
@@ -51,29 +50,26 @@ class SearchBar extends React.Component {
   render() {
     return (
       <div>
-        { this.props.isSent ?
-          <Redirect to="/main" /> :
-          <form
-            id="pac-container"
-            onSubmit={event =>
-              this.handleSubmit(event)
-            }
-          >
-            <input
-              className="search-location"
-              id="pac-input"
-              type="text"
-              placeholder="Enter a destination"
-              ref={(input) => { this.textInput = input; }}
-              /* onChange={this.handleChange} */
-            />
-            <input
-              id="search-input"
-              className="btn btn-info"
-              type="submit"
-            />
-          </form>
-        }
+        <form
+          id="pac-container"
+          onSubmit={event =>
+            this.handleSubmit(event)
+          }
+        >
+          <input
+            className="search-location"
+            id="pac-input"
+            type="text"
+            placeholder="Enter a destination"
+            ref={(input) => { this.textInput = input; }}
+            /* onChange={this.handleChange} */
+          />
+          <input
+            id="search-input"
+            className="btn btn-info"
+            type="submit"
+          />
+        </form>
       </div>
     );
   }

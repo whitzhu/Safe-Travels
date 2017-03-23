@@ -6,7 +6,7 @@ const Navbar = (props) => (
     <nav className="navbar navbar-default navbar-static-top">
       <div className="container">
         <div className="navbar-header">
-          <Link to="/" className="navbar-brand">Safe Travel</Link>
+          <Link to="/" className="navbar-brand" onClick={props.handleIsSentFalse}>Safe Travel</Link>
         </div>
         <div id="navbar" className="navbar-collapse collapse">
           <ul className="nav navbar-nav">

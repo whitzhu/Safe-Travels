@@ -37,6 +37,7 @@ class App extends React.Component {
     this.handleIsSent = this.handleIsSent.bind(this);
     this.getSavedTrips = this.getSavedTrips.bind(this);
     this.selectDestination = this.selectDestination.bind(this);
+    this.handleIsSentFalse = this.handleIsSentFalse.bind(this);
   }
 
   shouldComponentUpdate() {
@@ -79,6 +80,11 @@ class App extends React.Component {
 
   handleIsSent() {
     this.setState({ isSent: true });
+    this.forceUpdate();
+  }
+
+  handleIsSentFalse() {
+    this.setState({ isSent: false });
     this.forceUpdate();
   }
 
@@ -140,7 +146,12 @@ class App extends React.Component {
     return (
       <Router>
         <div>
-          <Navbar geoLocation={this.state.geoLocation} location={this.state.location} getSavedTrips={this.getSavedTrips} />
+          <Navbar
+            location={this.state.location}
+            getSavedTrips={this.getSavedTrips}
+            geoLocation={this.state.geoLocation}
+            handleIsSentFalse={this.handleIsSentFalse}
+          />
           <Route
             exact path="/" component={() =>
             (<Entrance
@@ -170,6 +181,7 @@ class App extends React.Component {
                 yelpPrice={this.state.yelpPrice}
                 yelpStyle={this.state.yelpStyle}
                 selectDestination={this.selectDestination}
+                handleIsSentFalse={this.handleIsSentFalse}
               />)}
           />
           <Route path="/login" component={Login} />
