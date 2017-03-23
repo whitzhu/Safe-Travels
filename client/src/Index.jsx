@@ -96,23 +96,22 @@ class App extends React.Component {
       price: search.price ? search.price : '',
     };
 
-    Axios.post('/yelp', yelpQuery)
+    return Axios.post('/yelp', yelpQuery)
       .then((restaurants) => {
         console.log('success fetching restaurants from server', restaurants.data);
         // must query attractions to get attractions
         // reset price prior to attractions query
+        yelpQuery.price = '';
         yelpQuery.query = 'tourist attractions';
-        yelpQuery.price ='';
         return Axios.post('/yelp', yelpQuery)
-        .then((attractions) => {
-          console.log('success fetching attractions from server', attractions.data);
-          this.setState({
-            attractionResults: attractions.data,
-            restaurantResults: restaurants.data,
-          });
-          this.forceUpdate();
-        })
-        .catch(error => console.log(error));
+          .then((attractions) => {
+            console.log('success fetching attractions from server', attractions.data);
+            this.setState({
+              attractionResults: attractions.data,
+              restaurantResults: restaurants.data,
+            });
+          })
+          .catch(error => console.log(error));
       })
       .catch(error => console.log(error));
   }
