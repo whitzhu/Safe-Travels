@@ -36,9 +36,9 @@ class App extends React.Component {
     this.getSavedTrips = this.getSavedTrips.bind(this);
   }
 
-  // shouldComponentUpdate() {
-  //   return false;
-  // }
+  shouldComponentUpdate() {
+    return false;
+  }
 
   getSavedTrips() {
     Axios.get('/savedTrips')
