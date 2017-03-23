@@ -24,8 +24,8 @@ class App extends React.Component {
       endDate: null,
       isSent: false,
       savedTrips: [],
-      yelpPrice: null,
-      yelpStyle: null,
+      yelpPrice: '3',
+      yelpStyle: 'casual',
     };
     this.setLocationFromSearch = this.setLocationFromSearch.bind(this);
     this.setGeoLocationFromSearch = this.setGeoLocationFromSearch.bind(this);
@@ -89,15 +89,16 @@ class App extends React.Component {
   }
 
   queryYelp(search) {
+    const statePrice = search.price ? search.price : '3';
+    const stateStyle = search.style ? search.style : 'casual';
     const yelpRestaurantQuery = {
       // change when correct
       location: search.destination || this.state.location || 'san francisco',
       // default query -- add on based on user input after initial list.
       // default blank for first search
-      query: search.style ? search.style : 'casual',
-      price: search.price ? search.price : '',
+      query: search.style ? search.style : this.state.yelpStyle,
+      price: search.price ? search.price : this.state.yelpPrice,
     };
-
     return Axios.post('/yelp', yelpRestaurantQuery)
       .then((restaurants) => {
         console.log('success fetching restaurants from server', restaurants.data);
@@ -111,11 +112,12 @@ class App extends React.Component {
         return Axios.post('/yelp', yelpAttractionQuery)
           .then((attractions) => {
             console.log('success fetching attractions from server', attractions.data);
+            console.log('state price and style', statePrice, stateStyle)
             this.setState({
               attractionResults: attractions.data,
               restaurantResults: restaurants.data,
-              yelpPrice: yelpRestaurantQuery.price,
-              yelpStyle: yelpRestaurantQuery.query,
+              yelpPrice: statePrice,
+              yelpStyle: stateStyle,
             });
           })
           .catch(error => console.log(error));

@@ -5,7 +5,6 @@ import RestaurantListEntry from './RestaurantListEntry';
 class RestaurantList extends React.Component {
   constructor(props) {
     super(props);
-    this.onChange = this.onChange.bind(this);
   }
 
   render() {
@@ -14,7 +13,6 @@ class RestaurantList extends React.Component {
         <select className="yelp-select-price" value={this.props.price} onChange={(event) => {
           this.props.queryYelp({
             price: event.target.value,
-            stlye: this.state.style,
           });
         }}>
           <option value="1">*</option>
@@ -24,15 +22,14 @@ class RestaurantList extends React.Component {
         </select>
         <select className="yelp-select-style" value={this.props.style} onChange={(event) => {
           this.props.queryYelp({
-            price: this.state.price,
             style: event.target.value,
           })
         }}>
           <option value="bars">Bars</option>
-          <option value="Cafe">Cafe</option>
-          <option value="Casual">Casual</option>
-          <option value="Clubs">Clubs</option>
-          <option value="Restaurant">Restaurant</option>
+          <option value="cafe">Cafe</option>
+          <option value="casual">Casual</option>
+          <option value="clubs">Clubs</option>
+          <option value="restaurant">Restaurant</option>
         </select>
         <ol>
           {this.props.restaurants.map(value =>
