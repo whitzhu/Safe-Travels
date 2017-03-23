@@ -19,7 +19,7 @@ class Main extends React.Component {
   }
 
   saveDestination(destination) {
-    Axios.post('/saveTrip', {
+    return Axios.post('/saveTrip', {
       destination: destination,
       startDate: this.props.startDate,
       endDate: this.props.endDate,

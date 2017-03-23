@@ -10,11 +10,13 @@ class SelectDestinationButton extends React.Component {
   }
 
   onClick() {
-    this.props.saveDestination(this.props.destination);
-    this.props.selectDestination(this.props.destination);
-    this.setState({
-      addToList: true,
-    });
+    if (!this.state.addToList) {
+      this.props.saveDestination(this.props.destination);
+      this.props.selectDestination(this.props.destination);
+      this.setState({
+        addToList: true,
+      });
+    }
   }
 
   render() {
