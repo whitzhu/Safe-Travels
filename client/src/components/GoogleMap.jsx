@@ -1,4 +1,5 @@
 import React from 'react';
+import crimeImg from '../img/security.png';
 
 class GoogleMap extends React.Component {
   constructor(props) {
@@ -106,7 +107,7 @@ class GoogleMap extends React.Component {
   // }
   createMarkers(map) {
     const pinIcon = new google.maps.MarkerImage(
-        'https://www.shareicon.net/download/128x128/2016/08/18/810246_security_512x512.png',
+        crimeImg,
         null, /* size is determined at runtime */
         null, /* origin is 0,0 */
         null, /* anchor is bottom center of the scaled image */
