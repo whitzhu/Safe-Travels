@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Link } from 'react-router-dom';
 
-const Navbar = (props) => (
+const propTypes = {
+  handleIsSentFalse: PropTypes.bool.isRequired,
+  location: PropTypes.string.isRequired,
+  getSavedTrips: PropTypes.func.isRequired,
+};
+
+const Navbar = props => (
   <div>
     <nav className="navbar navbar-default navbar-static-top">
       <div className="container">
@@ -12,7 +18,7 @@ const Navbar = (props) => (
           <ul className="nav navbar-nav">
             <li>
               <form action="/login/facebook" method="GET">
-                <input type="submit" value="Log In with facebook" className="NavbarButton"></input>
+                <input type="submit" value="Log In with facebook" className="NavbarButton" />
               </form>
             </li>
             { props.location ?
@@ -20,7 +26,7 @@ const Navbar = (props) => (
               <li><span className="NavbarButton">Please enter your destination</span></li>
             }
             <li onClick={props.getSavedTrips}><Link to="/profile">Profile</Link></li>
-            { props.location ? <li><Link to="/map">Map</Link></li> : null }   
+            { props.location ? <li><Link to="/map">Map</Link></li> : null }
           </ul>
           <ul className="nav navbar-nav navbar-right">
             <li><Link to="/">Contact Us</Link></li>
@@ -31,4 +37,5 @@ const Navbar = (props) => (
   </div>
 );
 
+Navbar.propTypes = propTypes;
 export default Navbar;
