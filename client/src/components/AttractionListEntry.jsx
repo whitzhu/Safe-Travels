@@ -1,10 +1,20 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import SelectDestinationButton from './SelectDestinationButton';
 
-const AttractionListEntry = (props) => (
+const propTypes = {
+  attraction: PropTypes.object.isRequired,
+  selectDestination: PropTypes.func.isRequired,
+  saveDestination: PropTypes.func.isRequired,
+};
+
+const AttractionListEntry = props => (
   <div className="restaurant-list-entry col-md-4">
     <div className="card card-block">
-      <img className="rounded card-img-top yelp-img" src={props.attraction.image_url} alt="picture of a restaurant" />
+      <img
+        className="rounded card-img-top yelp-img"
+        src={props.attraction.image_url}
+        alt="restaurant"
+      />
       <div>
         <h4 className="card-title restaurant-li">
           <a href={props.attraction.url} >{props.attraction.name}</a>
@@ -22,4 +32,5 @@ const AttractionListEntry = (props) => (
   </div>
 );
 
+AttractionListEntry.propTypes = propTypes;
 export default AttractionListEntry;
