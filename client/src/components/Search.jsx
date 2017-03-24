@@ -31,7 +31,7 @@ class SearchBar extends React.Component {
     // can refactor these two calls to use lat/lng
     Promise.all([
       this.props.setLocationFromSearch(destination),
-      this.props.queryYelp({ destination: destination }),
+      this.props.queryYelp({ destination }),
       geocoder.geocode({ address: destination }, (results, status) => {
         if (status === 'OK') {
           this.props.queryCrime(results[0].geometry.location);
