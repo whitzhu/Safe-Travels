@@ -1,10 +1,24 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Link } from 'react-router-dom';
 import Axios from 'axios';
 import Weather from './Weather';
 import AttractionList from './AttractionList';
 import RestaurantList from './RestaurantList';
 import GoogleMap from './GoogleMap';
+
+const propTypes = {
+  startDate: PropTypes.string.isRequired,
+  endDate: PropTypes.string.isRequired,
+  location: PropTypes.string.isRequired,
+  restaurantResults: PropTypes.object.isRequired,
+  selectDestination: PropTypes.func.isRequired,
+  queryYelp: PropTypes.func.isRequired,
+  yelpPrice: PropTypes.string.isRequired,
+  yelpStyle: PropTypes.string.isRequired,
+  attractionResults: PropTypes.object.isRequired,
+  crimeData: PropTypes.array.isRequired,
+  geoLocation: PropTypes.object.isRequired,
+};
 
 class Main extends React.Component {
   constructor(props) {
@@ -20,7 +34,7 @@ class Main extends React.Component {
 
   saveDestination(destination) {
     return Axios.post('/saveTrip', {
-      destination: destination,
+      destination,
       startDate: this.props.startDate,
       endDate: this.props.endDate,
     })
@@ -72,27 +86,30 @@ class Main extends React.Component {
               selectDestination={this.props.selectDestination}
             />
           </div>
-          <button href="#" className="btn btn-primary"
-            onClick={this.handleShowMap}>Map Destinations
-          </button>
+          <button
+            href="#"
+            className="btn btn-primary"
+            onClick={this.handleShowMap}
+          >Map Destinations</button>
           <div className="row seven-cols">
             <Weather
               location={this.props.location}
             />
           </div>
         </div>
-      }
-      {this.state.showMap &&
-        <GoogleMap
-          crimeData={this.props.crimeData}
-          handleShowMap={this.handleShowMap}
-          geoLocation={this.props.geoLocation}
-          mapDestinations={this.state.mapDestinations}
-        />
-      }
+        }
+        {this.state.showMap &&
+          <GoogleMap
+            crimeData={this.props.crimeData}
+            handleShowMap={this.handleShowMap}
+            geoLocation={this.props.geoLocation}
+            mapDestinations={this.state.mapDestinations}
+          />
+        }
       </div>
     );
   }
 }
 
+Main.propTypes = propTypes;
 export default Main;
