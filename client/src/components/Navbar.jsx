@@ -29,6 +29,15 @@ const Navbar = props => (
             { props.location ? <li><Link to="/map">Map</Link></li> : null }
           </ul>
           <ul className="nav navbar-nav navbar-right">
+            { document.cookie.replace(/(?:(?:^|.*;\s*)isLoggedIn\s*\=\s*([^;]*).*$)|^.*$/, '$1') === 'true' ?
+              <div><span> Hello User! </span>
+                <form action="/logout" method="GET">
+                  <input type="submit" value="Log Out" className="NavbarButton"></input>
+                </form>
+              </div>
+               :
+              <span> sorry </span>
+            }
             <li><Link to="/">Contact Us</Link></li>
           </ul>
         </div>
