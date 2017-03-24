@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 
 const propTypes = {
-  destination: PropTypes.string.isRequired,
+  destination: PropTypes.object.isRequired,
   saveDestination: PropTypes.func.isRequired,
   selectDestination: PropTypes.func.isRequired,
 };
