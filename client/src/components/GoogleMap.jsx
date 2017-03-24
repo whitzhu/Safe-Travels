@@ -1,5 +1,15 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import crimeImg from '../img/security.png';
+
+const propTypes = {
+  geoLocation: PropTypes.object.isRequired,
+  crimeData: PropTypes.array.isRequired,
+  mapDestinations: PropTypes.array.isRequired,
+};
+
+const defaultProps = {
+  mapDestinations: [],
+};
 
 class GoogleMap extends React.Component {
   constructor(props) {
@@ -15,7 +25,6 @@ class GoogleMap extends React.Component {
     const directionsService = new google.maps.DirectionsService;
     this.map = this.createMap();
     directionsDisplay.setMap(this.map);
-    console.log(this.map);
 
     this.createMarkers(this.map);
     this.calcRoute(directionsService, directionsDisplay);
@@ -48,6 +57,12 @@ class GoogleMap extends React.Component {
     // heatmap.set('gradient', heatmap.get('gradient') ? null : gradient);
   }
 
+  onChange(event) {
+    this.setState({
+      travelMode: event.target.value,
+    });
+  }
+
   createMap() {
     // LatLng data should be passed in as properties
     const geoLocation = new google.maps.LatLng(this.props.geoLocation.lat, this.props.geoLocation.lng);
@@ -59,7 +74,7 @@ class GoogleMap extends React.Component {
   }
 
   calcRoute(directionsService, directionsDisplay) {
-    if (this.props.mapDestinations.length > 1) {
+    if (this.props.mapDestinations && this.props.mapDestinations.length > 1) {
       const destinations = [];
       this.props.mapDestinations.forEach((value) => {
         destinations.push({
@@ -114,41 +129,32 @@ class GoogleMap extends React.Component {
         new google.maps.Size(40, 40),
     );
     if (this.props.crimeData.length) {
-      this.props.crimeData.forEach(value => {
-        let infowindow = new google.maps.InfoWindow({
-          content: '<div>' + value.type +'</div>',
+      this.props.crimeData.forEach((value) => {
+        const infowindow = new google.maps.InfoWindow({
+          content: `<div>${value.type}</div>`,
         });
         const marker = new google.maps.Marker({
           animation: google.maps.Animation.DROP,
           position: new google.maps.LatLng(value.lat, value.lon),
-          map: map,
+          map,
           icon: pinIcon,
         });
-        google.maps.event.addListener(marker, 'mouseover', () =>
-        {
+        google.maps.event.addListener(marker, 'mouseover', () => {
           infowindow.open(map, marker);
-          setTimeout(() => { infowindow.close()}, '1500');
+          setTimeout(() => { infowindow.close(); }, '1500');
         });
       });
     }
   }
 
-  onChange(event) {
-    this.setState({
-      travelMode: event.target.value,
-    });
-  }
-
   render() {
     return (
       <div className="google-map">
-        <div ref="map" className="map">
-        </div>
+        <div ref="map" className="map" />
       </div>);
   }
 }
 
-//<button href="#" className="btn btn-primary"
-//  onClick={this.props.handleShowMap}>Return to Search Results
-//</button>
+GoogleMap.propTypes = propTypes;
+GoogleMap.defaultProps = defaultProps;
 export default GoogleMap;
