@@ -5,6 +5,7 @@ const propTypes = {
   setGeoLocationFromSearch: PropTypes.func.isRequired,
   queryYelp: PropTypes.func.isRequired,
   queryCrime: PropTypes.func.isRequired,
+  handleIsSent: PropTypes.func.isRequired,
 };
 
 class SearchBar extends React.Component {
@@ -28,6 +29,7 @@ class SearchBar extends React.Component {
     event.preventDefault();
     const destination = this.textInput.value;
     const geocoder = new google.maps.Geocoder();
+
     // can refactor these two calls to use lat/lng
     Promise.all([
       this.props.setLocationFromSearch(destination),
@@ -37,7 +39,7 @@ class SearchBar extends React.Component {
           this.props.queryCrime(results[0].geometry.location);
           this.props.setGeoLocationFromSearch(results[0].geometry.location);
         } else {
-          alert('Geocode was not successful for the following reason: ' + status);
+          console.error(`Geocode was not successful for the following reason: ${status}`);
         }
       }),
     ]).then(() => {
