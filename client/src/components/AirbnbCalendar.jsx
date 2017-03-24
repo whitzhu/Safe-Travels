@@ -1,5 +1,9 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { DateRangePicker } from 'react-dates';
+
+const propTypes = {
+  setSelectedDate: PropTypes.func.isRequired,
+};
 
 export default class AirbnbCalendar extends React.Component {
   constructor(props) {
@@ -42,3 +46,5 @@ export default class AirbnbCalendar extends React.Component {
     );
   }
 }
+
+AirbnbCalendar.propTypes = propTypes;
