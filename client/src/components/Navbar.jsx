@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { Link } from 'react-router-dom';
 
 const propTypes = {
-  handleIsSentFalse: PropTypes.bool.isRequired,
+  handleIsSentFalse: PropTypes.func.isRequired,
   location: PropTypes.string.isRequired,
   getSavedTrips: PropTypes.func.isRequired,
 };
