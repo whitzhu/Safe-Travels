@@ -43,7 +43,7 @@ class SearchBar extends React.Component {
     ]).then(() => {
       this.props.handleIsSent();
     }).catch((err) => {
-      console.log("===== this is the error", err);
+      console.log('===== this is the error', err);
     });
   }
 
