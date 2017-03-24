@@ -1,4 +1,10 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
+
+const propTypes = {
+  destination: PropTypes.string.isRequired,
+  saveDestination: PropTypes.func.isRequired,
+  selectDestination: PropTypes.func.isRequired,
+};
 
 class SelectDestinationButton extends React.Component {
   constructor(props) {
@@ -29,4 +35,5 @@ class SelectDestinationButton extends React.Component {
   }
 }
 
+SelectDestinationButton.propTypes = propTypes;
 export default SelectDestinationButton;
