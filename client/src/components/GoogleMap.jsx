@@ -4,7 +4,7 @@ import crimeImg from '../img/security.png';
 class GoogleMap extends React.Component {
   constructor(props) {
     super(props);
-    this.state={
+    this.state = {
       travelMode: 'DRIVING',
     };
     this.onChange = this.onChange.bind(this);
@@ -67,7 +67,7 @@ class GoogleMap extends React.Component {
           stopover: true,
         });
       });
-      
+
       const directionsRequest = {
         origin: destinations[0].location,
         destination: destinations[destinations.length - 1].location,
@@ -83,7 +83,7 @@ class GoogleMap extends React.Component {
         unitSystem: google.maps.UnitSystem.IMPERIAL,
       };
 
-      // request is literally the route directions you want 
+      // request is literally the route directions you want
       directionsService.route(directionsRequest, (result, status) => {
         if (status == 'OK') {
           directionsDisplay.setDirections(result);
@@ -99,7 +99,7 @@ class GoogleMap extends React.Component {
   //   // converts into google.maps with latitudes and longitudes
   //   const mapCrimeData = [];
   //   if (this.props.crimeData.length) {
-  //     this.props.crimeData.forEach(value => 
+  //     this.props.crimeData.forEach(value =>
   //       mapCrimeData.push(new google.maps.LatLng(value.lat, value.lon)),
   //     );
   //   }
@@ -114,7 +114,7 @@ class GoogleMap extends React.Component {
         new google.maps.Size(40, 40),
     );
     if (this.props.crimeData.length) {
-      this.props.crimeData.forEach(value => {        
+      this.props.crimeData.forEach(value => {
         let infowindow = new google.maps.InfoWindow({
           content: '<div>' + value.type +'</div>',
         });
@@ -124,8 +124,8 @@ class GoogleMap extends React.Component {
           map: map,
           icon: pinIcon,
         });
-        google.maps.event.addListener(marker, 'mouseover', () => 
-        { 
+        google.maps.event.addListener(marker, 'mouseover', () =>
+        {
           infowindow.open(map, marker);
           setTimeout(() => { infowindow.close()}, '1500');
         });
@@ -150,5 +150,5 @@ class GoogleMap extends React.Component {
 
 //<button href="#" className="btn btn-primary"
 //  onClick={this.props.handleShowMap}>Return to Search Results
-//</button>      
+//</button>
 export default GoogleMap;
