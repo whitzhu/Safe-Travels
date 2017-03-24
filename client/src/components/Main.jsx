@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import { Link } from 'react-router-dom';
 import Axios from 'axios';
 import Weather from './Weather';
 import AttractionList from './AttractionList';
@@ -7,8 +6,8 @@ import RestaurantList from './RestaurantList';
 import GoogleMap from './GoogleMap';
 
 const propTypes = {
-  startDate: PropTypes.string.isRequired,
-  endDate: PropTypes.string.isRequired,
+  startDate: PropTypes.string,
+  endDate: PropTypes.string,
   location: PropTypes.string.isRequired,
   restaurantResults: PropTypes.object.isRequired,
   selectDestination: PropTypes.func.isRequired,
@@ -18,6 +17,11 @@ const propTypes = {
   attractionResults: PropTypes.object.isRequired,
   crimeData: PropTypes.array.isRequired,
   geoLocation: PropTypes.object.isRequired,
+};
+
+const defaultProps = {
+  startDate: null,
+  endDate: null,
 };
 
 class Main extends React.Component {
@@ -112,4 +116,5 @@ class Main extends React.Component {
 }
 
 Main.propTypes = propTypes;
+Main.defaultProps = defaultProps;
 export default Main;
