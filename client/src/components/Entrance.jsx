@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Redirect } from 'react-router';
 import SearchBar from './Search';
 import AirbnbCalendar from './AirbnbCalendar';
 
+const propTypes = {
+  isSent: PropTypes.bool.isRequired,
+  queryYelp: PropTypes.func.isRequired,
+  queryCrime: PropTypes.func.isRequired,
+  setLocationFromSearch: PropTypes.func.isRequired,
+  setGeoLocationFromSearch: PropTypes.func.isRequired,
+};
+
 class Entrance extends React.Component {
   constructor(props) {
     super(props);
+    console.log('props', props);
   }
 
   // location is passed in as a property
@@ -19,7 +28,8 @@ class Entrance extends React.Component {
               <h1>Plan Your Trip and Safe Travel</h1>
               <div className="row">
                 <div className="form-group col-xs-6">
-                  <SearchBar queryYelp={this.props.queryYelp}
+                  <SearchBar
+                    queryYelp={this.props.queryYelp}
                     queryCrime={this.props.queryCrime}
                     setDestination={this.setDestination}
                     setLocationFromSearch={this.props.setLocationFromSearch}
@@ -40,5 +50,6 @@ class Entrance extends React.Component {
   }
 }
 
+Entrance.propTypes = propTypes;
 export default Entrance;
 
