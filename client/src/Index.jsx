@@ -59,13 +59,6 @@ class App extends React.Component {
     this.forceUpdate();
   }
 
-  selectDestination(yelpLocation) {
-    // this is an object
-    this.setState({
-      mapDestinations: this.state.mapDestinations.concat(yelpLocation),
-    });
-  }
-
   setGeoLocationFromSearch(geoLocationFromSearch) {
     console.log('setting geolocation state in index.jsx', geoLocationFromSearch);
     this.setState({ geoLocation: {
@@ -76,6 +69,13 @@ class App extends React.Component {
 
   setSelectedDate({ startDate, endDate }) {
     this.setState({ startDate, endDate });
+  }
+
+  selectDestination(yelpLocation) {
+    // this is an object
+    this.setState({
+      mapDestinations: this.state.mapDestinations.concat(yelpLocation),
+    });
   }
 
   handleIsSent() {
@@ -111,6 +111,7 @@ class App extends React.Component {
     const yelpRestaurantQuery = {
       // change when correct
       location: search.destination || this.state.location || 'san francisco',
+
       // default query -- add on based on user input after initial list.
       // default blank for first search
       query: search.style ? search.style : this.state.yelpStyle,
@@ -118,14 +119,13 @@ class App extends React.Component {
     };
     return Axios.post('/yelp', yelpRestaurantQuery)
       .then((restaurants) => {
-        console.log('success fetching restaurants from server', restaurants.data);
         // must query attractions to get attractions
         // reset price prior to attractions query
         const yelpAttractionQuery = {
           location: yelpRestaurantQuery.location,
           query: 'tourist attractions',
           price: '',
-        }
+        };
         return Axios.post('/yelp', yelpAttractionQuery)
           .then((attractions) => {
             console.log('success fetching attractions from server', attractions.data);
@@ -192,7 +192,16 @@ class App extends React.Component {
                 savedTrips={this.state.savedTrips}
               />)}
           />
-          <Route path="/map" component={() => (<GoogleMap geoLocation={this.state.geoLocation} crimeData={this.state.crimeData} mapDestinations={this.state.mapDestinations} />)} />
+          <Route
+            path="/map"
+            component={() =>
+              (<GoogleMap
+                geoLocation={this.state.geoLocation}
+                crimeData={this.state.crimeData}
+                mapDestinations={this.state.mapDestinations}
+              />)
+            }
+          />
         </div>
       </Router>
     );
