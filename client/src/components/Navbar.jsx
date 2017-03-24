@@ -17,9 +17,15 @@ const Navbar = props => (
         <div id="navbar" className="navbar-collapse collapse">
           <ul className="nav navbar-nav">
             <li>
-              <form action="/login/facebook" method="GET">
-                <input type="submit" value="Log In with facebook" className="NavbarButton" />
-              </form>
+              { document.cookie.replace(/(?:(?:^|.*;\s*)isLoggedIn\s*\=\s*([^;]*).*$)|^.*$/, '$1') === 'true' ?
+                <form action="/logout" method="GET">
+                  <input type="submit" value="Log Out" className="NavbarButton"></input>
+                </form>
+                :
+                <form action="/login/facebook" method="GET">
+                  <input type="submit" value="Log In with facebook" className="NavbarButton"></input>
+                </form>
+              }
             </li>
             { props.location ?
               <li><Link to="/main">Main</Link></li> :
@@ -29,15 +35,7 @@ const Navbar = props => (
             { props.location ? <li><Link to="/map">Map</Link></li> : null }
           </ul>
           <ul className="nav navbar-nav navbar-right">
-            { document.cookie.replace(/(?:(?:^|.*;\s*)isLoggedIn\s*\=\s*([^;]*).*$)|^.*$/, '$1') === 'true' ?
-              <div><span> Hello User! </span>
-                <form action="/logout" method="GET">
-                  <input type="submit" value="Log Out" className="NavbarButton"></input>
-                </form>
-              </div>
-               :
-              <span> sorry </span>
-            }
+            
             <li><Link to="/">Contact Us</Link></li>
           </ul>
         </div>

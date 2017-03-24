@@ -33,7 +33,7 @@ class Main extends React.Component {
     };
     this.saveDestination = this.saveDestination.bind(this);
     this.handleShowMap = this.handleShowMap.bind(this);
-    //this.selectDestination = this.selectDestination.bind(this);
+    // this.selectDestination = this.selectDestination.bind(this);
   }
 
   saveDestination(destination) {

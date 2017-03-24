@@ -64,7 +64,6 @@ passport.use(new Strategy({
   }));
 
 // app.get('/', (req, res) => {
-  
 //   // if (!req.user) {
 //   //   res.render('index.ejs', { isLoggedIn: false });
 //   // } else {
