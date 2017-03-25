@@ -208,6 +208,30 @@ app.post('/saveTrip', (req, res) => {
   }
 });
 
+app.post('/removeSavedTrip', (req, res) => {
+  const body = req.body;
+  const user = req.user;
+  console.log('we are in removeSavedTrip');
+  console.log('user', user);
+  console.log('body', body);
+  if (user) {
+    User.findByIdAndUpdate(
+      user._id,
+      { $pull: { trips: body } }, 
+      (error, result) => {
+        if(error) {
+          console.log(error);
+        } else {
+          res.sendStatus(201);
+          console.log(result);
+        }
+      });
+  } else {
+    res.sendStatus(400);
+    console.log('user was not signed in');
+  }
+});
+
 app.get('/*', (req, res) => {
   res.redirect('/');
 });

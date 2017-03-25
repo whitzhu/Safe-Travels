@@ -18,7 +18,7 @@ const SavedTrip = (props) => {
             <h5>Address: {trip.address}</h5>
             <h5>{trip.city}, {trip.state} {trip.zipCode}</h5>
             <button href="#" className="btn btn-primary" 
-              onClick={() => props.removeSavedTrips(trip)}
+              onClick={() => props.removeSavedTrip(trip)}
             >
               Remove trip?
             </button>
