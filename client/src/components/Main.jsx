@@ -72,7 +72,7 @@ class Main extends React.Component {
             </h3>
           </div>
           <div className="row">
-            <h2>Hungry?</h2>
+            <h3 className="restaurant-title">Pick your favorite restaurants</h3>
             <RestaurantList
               saveDestination={this.saveDestination}
               restaurants={this.props.restaurantResults.businesses || []}
@@ -82,14 +82,16 @@ class Main extends React.Component {
               style={this.props.yelpStyle}
             />
           </div>
+          <hr className="hr-style" />
           <div className="row">
-            <h2>Check out some of these attractions!</h2>
+            <h3 className="attraction-title">Check out some of these attractions!</h3>
             <AttractionList
               saveDestination={this.saveDestination}
               attractions={this.props.attractionResults.businesses || []}
               selectDestination={this.props.selectDestination}
             />
           </div>
+          <hr className="hr-style" />
           {/* <button
             href="#"
             className="btn btn-primary"

@@ -79,6 +79,20 @@
   height: 200px;
 }
 
+.yelp-select-style {
+
+}
+
+.restaurant-title {
+  padding-left: 45px;
+  margin-bottom: 20px;
+}
+
+.attraction-title {
+  padding-left: 45px;
+  margin-bottom: 20px;
+}
+
 /* styling for Navbar Buttons */
 .NavbarButton {
   padding: 15px 20px;
@@ -124,8 +138,23 @@
   text-align: center;
 }
 
+.main {
+  background-color: #f5f5f5;
+}
+
 .weather {
   margin-bottom: 30px;
+  margin-left: 20px;
+}
+
+.weather-title {
+  margin-left: 18px;
+}
+
+.hr-style {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
 }
 
 
