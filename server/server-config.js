@@ -72,10 +72,10 @@ passport.use(new Strategy({
 // });
 
 app.get('/login/facebook',
-  passport.authenticate('facebook', { scope: 'email' }));
+  passport.authenticate('facebook', { authType: 'reauthenticate', scope: 'email' }));
 
-app.get('/login/facebook/return/',
-  passport.authenticate('facebook', { failureRedirect: '/login' }),
+app.get('/login/facebook/return',
+  passport.authenticate('facebook', { authType: 'reauthenticate', failureRedirect: '/login' }),
   (req, res) => {
     res.cookie('isLoggedIn', true, { maxAge: 900000, httpOnly: false });
     res.redirect('/');
