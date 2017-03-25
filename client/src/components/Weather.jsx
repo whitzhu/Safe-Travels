@@ -41,7 +41,7 @@ export default class Weather extends React.Component {
 
   render() {
     return this.state.temperatureLoaded ? (
-      <div>
+      <div className="weather">
         <h2>{this.state.name}</h2>
         {this.state.sevenDayForecast.map((forecast, counter) => {
           const date = new Date();
