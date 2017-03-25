@@ -212,8 +212,6 @@ app.post('/removeSavedTrip', (req, res) => {
   const body = req.body;
   const user = req.user;
   console.log('we are in removeSavedTrip');
-  console.log('user', user);
-  console.log('body', body);
   if (user) {
     User.findByIdAndUpdate(
       user._id,
