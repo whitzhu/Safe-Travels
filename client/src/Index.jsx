@@ -38,6 +38,7 @@ class App extends React.Component {
     this.getSavedTrips = this.getSavedTrips.bind(this);
     this.selectDestination = this.selectDestination.bind(this);
     this.handleIsSentFalse = this.handleIsSentFalse.bind(this);
+    this.removeTrip = this.removeTrip.bind(this);
   }
 
   shouldComponentUpdate() {
@@ -190,6 +191,7 @@ class App extends React.Component {
             component={() => (
               <Profile
                 savedTrips={this.state.savedTrips}
+                removeTrip={this.removeTrip}
               />)}
           />
           <Route

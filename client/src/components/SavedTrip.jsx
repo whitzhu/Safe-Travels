@@ -19,6 +19,9 @@ const SavedTrip = (props) => {
               <h5>Address: {trip.address}</h5>
               <h5>{trip.city}, {trip.state} {trip.zipCode}</h5>
             </p>
+            <button href="#" className="btn btn-primary" onClick={this.onClick}>
+              
+            </button>
           </div>
           <br />
         </div>
