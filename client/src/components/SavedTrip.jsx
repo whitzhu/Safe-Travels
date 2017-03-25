@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import RemoveSavedTripButton from './RemoveSavedTripButton';
 
 const propTypes = {
   trip: PropTypes.object.isRequired,
@@ -17,11 +18,10 @@ const SavedTrip = (props) => {
             </h4>
             <h5>Address: {trip.address}</h5>
             <h5>{trip.city}, {trip.state} {trip.zipCode}</h5>
-            <button href="#" className="btn btn-primary" 
-              onClick={() => props.removeSavedTrip(trip)}
-            >
-              Remove trip?
-            </button>
+            <RemoveSavedTripButton 
+              removeSavedTrip={props.removeSavedTrip}
+              trip={trip}
+            />
           </div>
           <br />
         </div>
