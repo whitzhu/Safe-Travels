@@ -38,11 +38,19 @@ class App extends React.Component {
     this.getSavedTrips = this.getSavedTrips.bind(this);
     this.selectDestination = this.selectDestination.bind(this);
     this.handleIsSentFalse = this.handleIsSentFalse.bind(this);
-    this.removeTrip = this.removeTrip.bind(this);
+    this.removeSavedTrip = this.removeSavedTrip.bind(this);
   }
 
   shouldComponentUpdate() {
     return false;
+  }
+
+  removeSavedTrip() {
+    Axios.post('/removeSavedTrip')
+      .then((res) => {
+        console.log('Correctly removed trip')
+      })
+      .error(error => console.log(error));
   }
 
   getSavedTrips() {
@@ -191,7 +199,7 @@ class App extends React.Component {
             component={() => (
               <Profile
                 savedTrips={this.state.savedTrips}
-                removeTrip={this.removeTrip}
+                removeSavedTrip={this.removeSavedTrip}
               />)}
           />
           <Route
