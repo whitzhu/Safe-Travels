@@ -29,9 +29,9 @@ const Navbar = props => (
             </li>
             { props.location ?
               <li><Link to="/main">Main</Link></li> :
-              <li><span className="NavbarButton">Please enter your destination</span></li>
+              <li className='main-nav'>Please Enter Destination</li>
             }
-            <li onClick={props.getSavedTrips}><Link to="/profile">Profile</Link></li>
+            <li className='profile-nav' onClick={props.getSavedTrips}><Link to="/profile">Profile</Link></li>
             { props.location ? <li><Link to="/map">Map</Link></li> : null }
           </ul>
           <ul className="nav navbar-nav navbar-right">

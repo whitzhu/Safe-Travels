@@ -63,13 +63,13 @@ class Main extends React.Component {
   render() {
     console.log('queried location, ', this.props.location);
     return (
-      <div>
+      <div className="main">
         {!this.state.showMap &&
         <div className="container">
           <div className="row">
-            <h2>
-              Welcome to Your Destination {this.props.location}. Safe Travel!
-            </h2>
+            <h3 className="main-title">
+              Welcome to {this.props.location}. Safe Travel!
+            </h3>
           </div>
           <div className="row">
             <h2>Hungry?</h2>

@@ -17,16 +17,28 @@
 
 .navbar .container {
   height: 50px;
+  margin-top: 5px;
 }
 
 .navbar {
   margin-bottom: 0px;
+  font-size: 18px;
+}
+
+.navbar-brand {
+  font-size: 18px;
+}
+
+.main-nav {
+  padding: 15px;
+  line-height: 20px;
 }
 
 /*jumbotron in Entrance styling*/
 .jumbotron h1 {
   font-size: 36px;
   margin-bottom: 36px;
+  margin-left: 100px;
 }
 
 .jumbotron {
@@ -34,6 +46,11 @@
   height: 600px;
   width: 1100px;
   margin: 0 auto;
+  padding-left: 50px;
+}
+
+.entrance {
+  margin-top: 30px;
 }
 
 /*google location search bar styling*/
@@ -44,6 +61,7 @@
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
   font-weight: 300;
   text-align: center;
+  margin-left: 100px;
 }
 
 #pac-container {
@@ -71,6 +89,7 @@
   background-color: transparent;
   box-sizing: border-box;
   border: none;
+  line-height: 20px;
 }
 
 /*styling weather*/
@@ -100,5 +119,10 @@
     *width: 14.285714285714285714285714285714%;
   }
 }
+
+.main-title {
+  text-align: center;
+}
+
 
 

@@ -23,7 +23,7 @@ class Entrance extends React.Component {
       <div>
         { this.props.isSent ?
           <Redirect to="/main" /> :
-          <div className="container">
+          <div className="container entrance">
             <div className="jumbotron">
               <h1>Plan Your Trip and Safe Travel</h1>
               <div className="row">
