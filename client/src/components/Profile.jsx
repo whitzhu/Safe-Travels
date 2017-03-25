@@ -9,7 +9,10 @@ const Profile = props => (
   <div>
     <h1>Saved Trips!</h1>
     {props.savedTrips.map(trip => (
-      <SavedTrip trip={trip} />
+      <SavedTrip
+        trip={trip}
+        removeSavedTrip={props.removeSavedTrip}
+      />
     ))}
   </div>
 );

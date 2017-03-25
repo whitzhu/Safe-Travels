@@ -15,12 +15,12 @@ const SavedTrip = (props) => {
             <h4 className="card-title restaurant-li">
               <a href={trip.informationUrl} >{trip.name}</a>
             </h4>
-            <p>
-              <h5>Address: {trip.address}</h5>
-              <h5>{trip.city}, {trip.state} {trip.zipCode}</h5>
-            </p>
-            <button href="#" className="btn btn-primary" onClick={this.onClick}>
-              
+            <h5>Address: {trip.address}</h5>
+            <h5>{trip.city}, {trip.state} {trip.zipCode}</h5>
+            <button href="#" className="btn btn-primary" 
+              onClick={() => props.removeSavedTrips(trip)}
+            >
+              Remove trip?
             </button>
           </div>
           <br />

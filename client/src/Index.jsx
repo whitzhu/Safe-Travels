@@ -45,7 +45,9 @@ class App extends React.Component {
     return false;
   }
 
-  removeSavedTrip() {
+  removeSavedTrip(trip) {
+    console.log('we are trying to remove the trip');
+    console.log(trip)
     Axios.post('/removeSavedTrip')
       .then((res) => {
         console.log('Correctly removed trip')
