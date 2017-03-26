@@ -68,7 +68,7 @@ class Main extends React.Component {
         <div className="container">
           <div className="row">
             <h3 className="main-title">
-              Welcome to {this.props.location}. Safe Travel!
+              Welcome to {this.props.location}. Travel Safely!
             </h3>
           </div>
           <div className="row">

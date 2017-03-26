@@ -25,7 +25,7 @@ class Entrance extends React.Component {
           <Redirect to="/main" /> :
           <div className="container entrance">
             <div className="jumbotron">
-              <h1>Plan Your Trip and Safe Travel</h1>
+              <h1>Plan Your Trip and Travel Safely</h1>
               <div className="row">
                 <div className="form-group col-xs-6">
                   <SearchBar
