@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router-dom';
+import Mailto from 'react-mailto';
 
 const propTypes = {
   handleIsSentFalse: PropTypes.func.isRequired,
@@ -35,8 +36,9 @@ const Navbar = props => (
             { props.location ? <li><Link to="/map">Map</Link></li> : null }
           </ul>
           <ul className="nav navbar-nav navbar-right">
-
-            <li><Link to="/">Contact Us</Link></li>
+            <li><Mailto email="hrsf72.safetravel@gmail.com">
+              Contact Us
+            </Mailto></li>
           </ul>
         </div>
       </div>

@@ -10,7 +10,6 @@ const passport = require('passport');
 const Strategy = require('passport-facebook').Strategy;
 const cookie = require('cookie-parser');
 const session = require('express-session');
-const ejs = require('ejs');
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
@@ -24,8 +23,6 @@ passport.deserializeUser((id, done) => {
 
 const app = express();
 
-app.set('views', `${__dirname}/../client/dist`);
-app.set('view engine', 'ejs');
 app.use(cookie('delicious cookie'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -62,14 +59,6 @@ passport.use(new Strategy({
       }
     });
   }));
-
-// app.get('/', (req, res) => {
-//   // if (!req.user) {
-//   //   res.render('index.ejs', { isLoggedIn: false });
-//   // } else {
-//   //   res.render('index.ejs', { isLoggedIn: true });
-//   // }
-// });
 
 app.get('/login/facebook',
   passport.authenticate('facebook', { authType: 'reauthenticate', scope: 'email' }));

@@ -99,6 +99,18 @@ class App extends React.Component {
     this.forceUpdate();
   }
 
+  // handleEmailSend() {
+  //   url: '/contactus',
+  //   dataType: 'json',
+  //   cache: false,
+  //   success: function(data) {
+  //       // Success..
+  //   }.bind(this),
+  //   error: function(xhr, status, err) {
+  //       console.error(status, err.toString());
+  //   }.bind(this)
+  // }
+
   queryCrime(geoLocation) {
     console.log('requesting crime data with', geoLocation);
     return Axios.get('/crime', {
