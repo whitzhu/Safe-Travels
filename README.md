@@ -1,6 +1,6 @@
-# Project Name
+# Safe Travels
 
-> Pithy project description
+> Ensure safe routes to destinations while on a vacation.
 
 ## Team
 
