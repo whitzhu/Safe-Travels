@@ -7,13 +7,15 @@ const propTypes = {
 
 const Profile = props => (
   <div>
-    <h1>Saved Trips!</h1>
-    {props.savedTrips.map(trip => (
-      <SavedTrip
-        trip={trip}
-        removeSavedTrip={props.removeSavedTrip}
-      />
-    ))}
+    <div className="container">
+      <h1>Saved Trips!</h1>
+      {props.savedTrips.map(trip => (
+        <SavedTrip
+          trip={trip}
+          removeSavedTrip={props.removeSavedTrip}
+        />
+      ))}
+    </div>
   </div>
 );
 
