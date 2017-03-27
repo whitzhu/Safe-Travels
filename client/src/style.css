@@ -79,8 +79,19 @@
   height: 200px;
 }
 
-.yelp-select-style {
+.yelp-select-price {
+  width: 60px;
+  height: 35px;
+  margin: 10px 60px;
+  font-size: 18px;
+}
 
+.yelp-select-style {
+  width: 100px;
+  height: 35px;
+  margin: 10px 60px;
+  margin-left: 0px;
+  font-size: 18px;
 }
 
 .restaurant-title {
