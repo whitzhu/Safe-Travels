@@ -46,7 +46,7 @@ export default class Weather extends React.Component {
         {this.state.sevenDayForecast.map((forecast, counter) => {
           const date = new Date();
           const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-          const day = weekdays[(date.getDay() + counter) % 6];
+          const day = weekdays[(date.getDay() + counter) % 7];
           let icon;
           if (forecast.weather[0].main === 'Rain') {
             icon = 'wi wi-rain';
