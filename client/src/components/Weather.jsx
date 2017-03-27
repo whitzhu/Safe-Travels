@@ -61,7 +61,7 @@ export default class Weather extends React.Component {
             <div className="col-md-1">
               <h4>{day}</h4>
               <h3>{forecast.temp.day}&deg;F</h3>
-              <i className={icon}></i>
+              <i className={icon} />
               <h4>{forecast.weather[0].description}</h4>
             </div>
           );
