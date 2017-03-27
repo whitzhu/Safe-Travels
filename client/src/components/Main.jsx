@@ -61,7 +61,7 @@ class Main extends React.Component {
             </h3>
           </div>
           <div className="row">
-            <h3 className="restaurant-title">Pick your favorite restaurants</h3>
+            <h3 className="restaurant-title">Pick your favorite places!</h3>
             <RestaurantList
               saveDestination={this.saveDestination}
               restaurants={this.props.restaurantResults.businesses || []}
