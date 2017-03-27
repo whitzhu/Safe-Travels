@@ -17,7 +17,6 @@ class Entrance extends React.Component {
     console.log('props', props);
   }
 
-  // location is passed in as a property
   render() {
     return (
       <div>
