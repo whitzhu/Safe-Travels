@@ -4,7 +4,7 @@ import SelectDestinationButton from './SelectDestinationButton';
 const RestaurantListEntry = (props) => (
   <div className="restaurant-list-entry col-md-4">
     <div className="card card-block">
-      <img className="rounded card-img-top yelp-img" src={props.restaurant.image_url} alt="picture of a restaurant" />
+      <img className="img-rounded card-img-top yelp-img" src={props.restaurant.image_url} alt="picture of a restaurant" />
       <div>
         <h4 className="card-title restaurant-li">
           <a href={props.restaurant.url}>{props.restaurant.name}</a>
