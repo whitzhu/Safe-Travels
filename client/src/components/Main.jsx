@@ -28,12 +28,10 @@ class Main extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-     // mapDestinations: [],
       showMap: false,
     };
     this.saveDestination = this.saveDestination.bind(this);
     this.handleShowMap = this.handleShowMap.bind(this);
-    // this.selectDestination = this.selectDestination.bind(this);
   }
 
   saveDestination(destination) {
@@ -45,13 +43,6 @@ class Main extends React.Component {
     .then(response => console.log(response))
     .catch(error => console.log(error));
   }
-
-  // selectDestination(yelpLocation) {
-  //   // this is an object
-  //   this.setState({
-  //     mapDestinations: this.state.mapDestinations.concat(yelpLocation),
-  //   });
-  // }
 
   handleShowMap() {
     console.log(this.state.mapDestinations);
@@ -92,11 +83,6 @@ class Main extends React.Component {
             />
           </div>
           <hr className="hr-style" />
-          {/* <button
-            href="#"
-            className="btn btn-primary"
-            onClick={this.handleShowMap}
-          >Map Destinations</button>*/}
           <div className="row seven-cols weather">
             <Weather
               location={this.props.location}
@@ -105,12 +91,12 @@ class Main extends React.Component {
         </div>
         }
         {this.state.showMap &&
-          <GoogleMap
-            crimeData={this.props.crimeData}
-            handleShowMap={this.handleShowMap}
-            geoLocation={this.props.geoLocation}
-            mapDestinations={this.state.mapDestinations}
-          />
+        <GoogleMap
+          crimeData={this.props.crimeData}
+          handleShowMap={this.handleShowMap}
+          geoLocation={this.props.geoLocation}
+          mapDestinations={this.state.mapDestinations}
+        />
         }
       </div>
     );
