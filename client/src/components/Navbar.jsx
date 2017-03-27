@@ -6,6 +6,7 @@ const propTypes = {
   handleIsSentFalse: PropTypes.func.isRequired,
   location: PropTypes.string.isRequired,
   getSavedTrips: PropTypes.func.isRequired,
+  setMapDestinations: PropTypes.func.isRequired,
 };
 
 const Navbar = props => (
@@ -25,7 +26,7 @@ const Navbar = props => (
               <li><Link to="/main">Recommendations</Link></li> :
               <li className="main-nav">Please Enter Destination</li>
             }
-            { props.location ? <li><Link to="/map">Map</Link></li> : null }
+            { props.location ? <li onClick={props.setMapDestinations}><Link to="/map">Map</Link></li> : null }
           </ul>
           <ul className="nav navbar-nav navbar-right">
             <li>

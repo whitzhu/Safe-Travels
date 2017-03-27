@@ -21,14 +21,15 @@ class App extends React.Component {
       attractionResults: [],
       restaurantResults: [],
       crimeData: {},
-      startDate: null,
-      endDate: null,
       isSent: false,
       savedTrips: [],
       yelpPrice: '3',
       yelpStyle: 'casual',
       mapDestinations: [],
     };
+    this.startDate = null;
+    this.endDate = null;
+    this.mapDestinations = [];
     this.setLocationFromSearch = this.setLocationFromSearch.bind(this);
     this.setGeoLocationFromSearch = this.setGeoLocationFromSearch.bind(this);
     this.queryYelp = this.queryYelp.bind(this);
@@ -39,10 +40,7 @@ class App extends React.Component {
     this.selectDestination = this.selectDestination.bind(this);
     this.handleIsSentFalse = this.handleIsSentFalse.bind(this);
     this.removeSavedTrip = this.removeSavedTrip.bind(this);
-  }
-
-  shouldComponentUpdate() {
-    return false;
+    this.setMapDestinations = this.setMapDestinations.bind(this);
   }
 
   removeSavedTrip(trip) {
@@ -57,7 +55,6 @@ class App extends React.Component {
     Axios.get('/savedTrips')
     .then((res) => {
       this.setState({ savedTrips: res.data });
-      this.forceUpdate();
     });
   }
 
@@ -65,7 +62,6 @@ class App extends React.Component {
     this.setState({
       location: locationFromSearch,
     });
-    this.forceUpdate();
   }
 
   setGeoLocationFromSearch(geoLocationFromSearch) {
@@ -75,24 +71,27 @@ class App extends React.Component {
     } });
   }
 
+  setMapDestinations() {
+    this.setState({
+      mapDestinations: this.mapDestinations,
+    });
+  }
+
   setSelectedDate({ startDate, endDate }) {
-    this.setState({ startDate, endDate });
+    this.startDate = startDate === null ? this.startDate : startDate;
+    this.endDate = endDate === null ? this.endDate : endDate;
   }
 
   selectDestination(yelpLocation) {
-    this.setState({
-      mapDestinations: this.state.mapDestinations.concat(yelpLocation),
-    });
+    this.mapDestinations = this.mapDestinations.concat(yelpLocation);
   }
 
   handleIsSent() {
     this.setState({ isSent: true });
-    this.forceUpdate();
   }
 
   handleIsSentFalse() {
     this.setState({ isSent: false });
-    this.forceUpdate();
   }
 
   queryCrime(geoLocation) {
@@ -140,7 +139,6 @@ class App extends React.Component {
               yelpPrice: statePrice,
               yelpStyle: stateStyle,
             });
-            this.forceUpdate();
           })
           .catch(error => console.log(error));
       })
@@ -156,6 +154,7 @@ class App extends React.Component {
             getSavedTrips={this.getSavedTrips}
             geoLocation={this.state.geoLocation}
             handleIsSentFalse={this.handleIsSentFalse}
+            setMapDestinations={this.setMapDestinations}
           />
           <Route
             exact path="/" component={() =>
@@ -181,8 +180,8 @@ class App extends React.Component {
                 crimeData={this.state.crimeData}
                 location={this.state.location}
                 queryYelp={this.queryYelp}
-                startDate={this.state.startDate}
-                endDate={this.state.endDate}
+                startDate={this.startDate}
+                endDate={this.endDate}
                 yelpPrice={this.state.yelpPrice}
                 yelpStyle={this.state.yelpStyle}
                 selectDestination={this.selectDestination}
