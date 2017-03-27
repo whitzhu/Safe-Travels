@@ -26,6 +26,9 @@ class Entrance extends React.Component {
               <h1>Plan Your Trip and Travel Safely</h1>
               <div className="row">
                 <div className="form-group col-xs-6">
+                  <AirbnbCalendar setSelectedDate={this.props.setSelectedDate} />
+                </div>
+                <div className="form-group col-xs-6">
                   <SearchBar
                     queryYelp={this.props.queryYelp}
                     queryCrime={this.props.queryCrime}
@@ -35,9 +38,6 @@ class Entrance extends React.Component {
                     geolocation={this.props.geolocation}
                     handleIsSent={this.props.handleIsSent}
                   />
-                </div>
-                <div className="form-group col-xs-6">
-                  <AirbnbCalendar setSelectedDate={this.props.setSelectedDate} />
                 </div>
               </div>
             </div>
