@@ -83,7 +83,6 @@ class App extends React.Component {
   }
 
   selectDestination(yelpLocation) {
-    // this is an object
     this.setState({
       mapDestinations: this.state.mapDestinations.concat(yelpLocation),
     });
@@ -98,18 +97,6 @@ class App extends React.Component {
     this.setState({ isSent: false });
     this.forceUpdate();
   }
-
-  // handleEmailSend() {
-  //   url: '/contactus',
-  //   dataType: 'json',
-  //   cache: false,
-  //   success: function(data) {
-  //       // Success..
-  //   }.bind(this),
-  //   error: function(xhr, status, err) {
-  //       console.error(status, err.toString());
-  //   }.bind(this)
-  // }
 
   queryCrime(geoLocation) {
     console.log('requesting crime data with', geoLocation);
@@ -132,11 +119,10 @@ class App extends React.Component {
     const statePrice = search.price ? search.price : '3';
     const stateStyle = search.style ? search.style : 'casual';
     const yelpRestaurantQuery = {
-      // change when correct
       location: search.destination || this.state.location || 'san francisco',
 
       // default query -- add on based on user input after initial list.
-      // default blank for first search
+      // default to blank price for first search
       query: search.style ? search.style : this.state.yelpStyle,
       price: search.price ? search.price : '',
     };
