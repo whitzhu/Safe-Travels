@@ -17,6 +17,17 @@ const Navbar = props => (
         </div>
         <div id="navbar" className="navbar-collapse collapse">
           <ul className="nav navbar-nav">
+            { document.cookie.replace(/(?:(?:^|.*;\s*)isLoggedIn\s*\=\s*([^;]*).*$)|^.*$/, '$1') === 'true' ?
+              <li className="profile-nav" onClick={props.getSavedTrips}><Link to="/profile">Profile</Link></li> :
+              null
+            }
+            { props.location ?
+              <li><Link to="/main">Recommendations</Link></li> :
+              <li className="main-nav">Please Enter Destination</li>
+            }
+            { props.location ? <li><Link to="/map">Map</Link></li> : null }
+          </ul>
+          <ul className="nav navbar-nav navbar-right">
             <li>
               { document.cookie.replace(/(?:(?:^|.*;\s*)isLoggedIn\s*\=\s*([^;]*).*$)|^.*$/, '$1') === 'true' ?
                 <form action="/logout" method="GET">
@@ -24,18 +35,10 @@ const Navbar = props => (
                 </form>
                 :
                 <form action="/login/facebook" method="GET">
-                  <input type="submit" value="Log In with facebook" className="NavbarButton"></input>
+                  <input type="submit" value="Login" className="NavbarButton"></input>
                 </form>
               }
             </li>
-            { props.location ?
-              <li><Link to="/main">Main</Link></li> :
-              <li className='main-nav'>Please Enter Destination</li>
-            }
-            <li className='profile-nav' onClick={props.getSavedTrips}><Link to="/profile">Profile</Link></li>
-            { props.location ? <li><Link to="/map">Map</Link></li> : null }
-          </ul>
-          <ul className="nav navbar-nav navbar-right">
             <li><Mailto email="hrsf72.safetravel@gmail.com">
               Contact Us
             </Mailto></li>
