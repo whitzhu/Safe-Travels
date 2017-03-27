@@ -25,10 +25,10 @@ class Entrance extends React.Component {
             <div className="jumbotron">
               <h1>Plan Your Trip and Travel Safely</h1>
               <div className="row">
-                <div className="form-group col-xs-6">
+                <div className="form-group col-xs-6 calendar">
                   <AirbnbCalendar setSelectedDate={this.props.setSelectedDate} />
                 </div>
-                <div className="form-group col-xs-6">
+                <div className="form-group col-xs-6 search-bar">
                   <SearchBar
                     queryYelp={this.props.queryYelp}
                     queryCrime={this.props.queryCrime}
