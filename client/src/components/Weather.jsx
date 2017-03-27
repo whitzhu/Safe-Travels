@@ -21,7 +21,7 @@ export default class Weather extends React.Component {
   }
 
   getWeather() {
-    Axios.get('/weather', {
+    return Axios.get('/weather', {
       params: {
         location: this.props.location,
       },
