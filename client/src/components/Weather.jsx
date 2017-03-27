@@ -27,7 +27,7 @@ export default class Weather extends React.Component {
       },
     })
       .then((response) => {
-        console.log('weather======', response);
+        console.log('successful weather response', response);
         this.setState({
           name: `${response.data.city.name}, ${response.data.city.country}`,
           sevenDayForecast: response.data.list,
@@ -35,7 +35,7 @@ export default class Weather extends React.Component {
         });
       })
       .catch((error) => {
-        console.log('error', error);
+        console.log('error in weather query', error);
       });
   }
 

@@ -46,8 +46,6 @@ class App extends React.Component {
   }
 
   removeSavedTrip(trip) {
-    console.log('we are trying to remove the trip');
-    console.log(trip)
     return Axios.post('/removeSavedTrip', trip)
       .then((res) => {
         console.log('Correctly removed trip');
@@ -71,7 +69,6 @@ class App extends React.Component {
   }
 
   setGeoLocationFromSearch(geoLocationFromSearch) {
-    console.log('setting geolocation state in index.jsx', geoLocationFromSearch);
     this.setState({ geoLocation: {
       lat: geoLocationFromSearch.lat(),
       lng: geoLocationFromSearch.lng(),
@@ -99,7 +96,6 @@ class App extends React.Component {
   }
 
   queryCrime(geoLocation) {
-    console.log('requesting crime data with', geoLocation);
     return Axios.get('/crime', {
       params: {
         lat: geoLocation.lat(),

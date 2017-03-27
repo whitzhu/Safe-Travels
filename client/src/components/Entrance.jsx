@@ -14,7 +14,6 @@ const propTypes = {
 class Entrance extends React.Component {
   constructor(props) {
     super(props);
-    console.log('props', props);
   }
 
   render() {

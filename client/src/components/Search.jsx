@@ -44,7 +44,7 @@ class SearchBar extends React.Component {
     ]).then(() => {
       this.props.handleIsSent();
     }).catch((err) => {
-      console.log('===== this is the error', err);
+      console.log('Error in searching', err);
     });
   }
 
@@ -63,7 +63,6 @@ class SearchBar extends React.Component {
             type="text"
             placeholder="Enter a destination"
             ref={(input) => { this.textInput = input; }}
-            /* onChange={this.handleChange} */
           />
           <input
             id="search-input"

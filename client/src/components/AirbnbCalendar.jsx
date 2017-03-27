@@ -28,7 +28,6 @@ export default class AirbnbCalendar extends React.Component {
 
   render() {
     const { focusedInput, startDate, endDate } = this.state;
-    console.log('state from calendar', this.state);
     return (
       <div>
         <DateRangePicker

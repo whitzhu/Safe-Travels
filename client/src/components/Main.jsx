@@ -45,14 +45,12 @@ class Main extends React.Component {
   }
 
   handleShowMap() {
-    console.log(this.state.mapDestinations);
     this.setState({
       showMap: !this.state.showMap,
     });
   }
 
   render() {
-    console.log('queried location, ', this.props.location);
     return (
       <div className="main">
         {!this.state.showMap &&
