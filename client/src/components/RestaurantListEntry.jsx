@@ -23,11 +23,6 @@ const RestaurantListEntry = (props) => (
       <br />
     </div>
   </div>
-    // <img className="rounded yelp-img" src={props.restaurant.image_url} alt="" />
-    // <li className="restaurant-li">{props.restaurant.name}</li>
-    // <button value="add to trip" onClick={ () =>
-    //   props.selectDestination(props.restaurant)
-    // }>Add to Trip!</button>
 );
 
 export default RestaurantListEntry;
