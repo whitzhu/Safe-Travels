@@ -4,7 +4,6 @@ const https = require('https');
 const request = require('request');
 const database = require('./../database/index');
 const User = require('./../database/models/user');
-const handler = require('./../lib/utility');
 const ApiKeys = require('../config/api-config');
 const passport = require('passport');
 const Strategy = require('passport-facebook').Strategy;
