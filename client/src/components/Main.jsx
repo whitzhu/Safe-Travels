@@ -6,8 +6,8 @@ import RestaurantList from './RestaurantList';
 import GoogleMap from './GoogleMap';
 
 const propTypes = {
-  startDate: PropTypes.string,
-  endDate: PropTypes.string,
+  startDate: PropTypes.object,
+  endDate: PropTypes.object,
   location: PropTypes.string.isRequired,
   restaurantResults: PropTypes.object.isRequired,
   selectDestination: PropTypes.func.isRequired,

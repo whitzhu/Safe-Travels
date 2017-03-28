@@ -3,7 +3,7 @@ import crimeImg from '../img/security.png';
 
 const propTypes = {
   geoLocation: PropTypes.object.isRequired,
-  crimeData: PropTypes.array.isRequired,
+  crimeData: PropTypes.string.isRequired,
   mapDestinations: PropTypes.array.isRequired,
 };
 
@@ -64,7 +64,7 @@ class GoogleMap extends React.Component {
         provideRouteAlternatives: false,
         travelMode: this.state.travelMode,
         drivingOptions: {
-          departureTime: new Date, 
+          departureTime: new Date,
           trafficModel: 'pessimistic',
         },
         unitSystem: google.maps.UnitSystem.IMPERIAL,
