@@ -10,7 +10,7 @@
   "scripts": {
     "start": "node server/server.js",
     "react-dev": "webpack -d --watch",
-    "server-dev": "concurrently \"nodemon server/index.js\" \"open http://localhost:8000\""
+    "server-dev": "concurrently \"nodemon server/index.js\" \"open http://localhost:5000\""
   },
   "dependencies": {
     "axios": "^0.15.3",

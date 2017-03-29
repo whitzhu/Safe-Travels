@@ -9,8 +9,9 @@ const propTypes = {
 const AttractionList = props => (
   <div className="yelp-results-attractions">
     <ol>
-      {props.attractions.map(value =>
+      {props.attractions.map( (value, index) =>
         <AttractionListEntry
+          key={index}
           attraction={value}
           selectDestination={props.selectDestination}
           saveDestination={props.saveDestination}
