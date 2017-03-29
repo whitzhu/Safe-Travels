@@ -127,7 +127,7 @@ app.post('/yelp', (req, res) => {
       console.error('Yelp GET request error');
     } else {
       console.log('Yelp GET request successful');
-      res.status(200).send(body);
+      res.status(200).send('hellooooooo');
     }
   });
 });
@@ -203,7 +203,7 @@ app.post('/removeSavedTrip', (req, res) => {
   if (user) {
     User.findByIdAndUpdate(
       user._id,
-      { $pull: { trips: body } }, 
+      { $pull: { trips: body } },
       (error, result) => {
         if(error) {
           console.log(error);

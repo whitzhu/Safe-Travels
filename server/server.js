@@ -1,6 +1,6 @@
 const app = require('./server-config');
 
-const port = 8000;
+const port = 5000;
 
 app.listen(process.env.PORT || port, () => {
   /* eslint-disable no-console */

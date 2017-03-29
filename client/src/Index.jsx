@@ -10,6 +10,7 @@ import Login from './components/Login';
 import Navbar from './components/Navbar';
 import Profile from './components/Profile';
 import GoogleMap from './components/GoogleMap';
+import Plan from './components/Plan';
 
 class App extends React.Component {
   constructor(props) {
@@ -54,6 +55,7 @@ class App extends React.Component {
   getSavedTrips() {
     Axios.get('/savedTrips')
     .then((res) => {
+      console.log('=======data of res before saving into savedTrips', res);
       this.setState({ savedTrips: res.data });
     });
   }
@@ -206,6 +208,14 @@ class App extends React.Component {
                 mapDestinations={this.state.mapDestinations}
               />)
             }
+          />
+          <Route
+            path="/plan"
+            component={() => (
+              <Plan
+                savedTrips={this.state.savedTrips}
+                removeSavedTrip={this.removeSavedTrip}
+              />)}
           />
         </div>
       </Router>
