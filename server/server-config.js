@@ -9,6 +9,10 @@ const passport = require('passport');
 const Strategy = require('passport-facebook').Strategy;
 const cookie = require('cookie-parser');
 const session = require('express-session');
+const util = require('./util.js');
+const rp = require('request-promise');
+
+const Promise = require('bluebird');
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
@@ -112,24 +116,35 @@ app.post('/yelp', (req, res) => {
   console.log(req.body);
   const location = encodeURIComponent(req.body.location);
   const query = encodeURIComponent(req.body.query);
-  // only search price if provided
   const price = req.body.price.length ? `&price=${encodeURIComponent(req.body.price)}` : '';
-  // default sort by rating
-  const url = `https://api.yelp.com/v3/businesses/search?term=${query}&location=${location}${price}&sort_by=rating&limit=9`;
-  request({
-    uri: url,
-    headers: {
-      Authorization: `Bearer ${ApiKeys.yelpApiToken.token}`,
-    },
-    method: 'GET',
-  }, (error, response, body) => {
-    if (error) {
-      console.error('Yelp GET request error');
-    } else {
-      console.log('Yelp GET request successful');
-      res.status(200).send(body);
-    }
-  });
+
+  let finalResult;
+
+   util.yelpSearch(location, query, price)
+     .then( results => {
+        finalResult = JSON.parse(results);
+        let businesses = finalResult.businesses;
+        return businesses;
+     })
+     .then( businesses => {
+        Promise.map(businesses, (business, index) => {
+          return util.yelpHours(business.id)
+          .then( (businessInfo) => {
+            if ( businessInfo.indexOf('html') > 0) {
+              return null;
+            } else {
+              let parseBody = JSON.parse(businessInfo);
+              let hours = parseBody.hours;
+              business.hours = hours
+              console.log('business hours', business.hours);
+            }
+          })
+        })
+        .then( () => {
+          res.status(200).send(finalResult);
+        })
+     })
+    .catch(err => console.error('Promise map business hours error', err.message));
 });
 
 app.get('/weather', (req, res) => {
@@ -186,6 +201,9 @@ app.post('/saveTrip', (req, res) => {
   const informationUrl = body.destination.url;
   const trip = { yelpID, name, longitude, latitude, displayAddress, address, city, state, zipCode, dateStart, dateEnd, imageUrl, informationUrl };
   const user = req.user;
+
+
+
   if (user) {
     const email = user.email;
     User.findByIdAndUpdate(

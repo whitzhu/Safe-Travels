@@ -141,7 +141,6 @@ class App extends React.Component {
               yelpStyle: stateStyle,
             });
           })
-          .catch(error => console.log(error));
       })
       .catch(error => console.log(error));
   }
