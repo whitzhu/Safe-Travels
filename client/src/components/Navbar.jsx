@@ -19,7 +19,10 @@ const Navbar = props => (
         <div id="navbar" className="navbar-collapse collapse">
           <ul className="nav navbar-nav">
             { document.cookie.replace(/(?:(?:^|.*;\s*)isLoggedIn\s*\=\s*([^;]*).*$)|^.*$/, '$1') === 'true' ?
-              <li className="profile-nav" onClick={props.getSavedTrips}><Link to="/profile">Profile</Link></li> :
+              <li className="profile-nav" onClick={props.getSavedTrips}>
+                <Link to="/profile">Profile</Link>
+                <Link to="/plan-trip">Plan Trip</Link>
+              </li> :
               null
             }
             { props.location ?
