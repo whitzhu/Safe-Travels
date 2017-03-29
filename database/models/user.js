@@ -6,7 +6,11 @@ const userSchema = mongoose.Schema({
   email: String,
   trips: [{
     _id: false,
+    yelpID: String,
     name: String,
+    longitude: Number,
+    latitude: Number,
+    displayAddress: String,
     address: String,
     city: String,
     state: String,

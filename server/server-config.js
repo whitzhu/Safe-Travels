@@ -171,7 +171,11 @@ app.get('/savedTrips', (req, res) => {
 
 app.post('/saveTrip', (req, res) => {
   const body = req.body;
+  const yelpID = body.destination.id;
   const name = body.destination.name;
+  const longitude = body.destination.coordinates.longitude;
+  const latitude = body.destination.coordinates.latitude;
+  const displayAddress = body.destination.location.display_address;
   const address = body.destination.location.address1;
   const city = body.destination.location.city;
   const state = body.destination.location.state;
@@ -180,7 +184,7 @@ app.post('/saveTrip', (req, res) => {
   const dateEnd = body.endDate || null;
   const imageUrl = body.destination.image_url;
   const informationUrl = body.destination.url;
-  const trip = { name, address, city, state, zipCode, dateStart, dateEnd, imageUrl, informationUrl };
+  const trip = { yelpID, name, longitude, latitude, displayAddress, address, city, state, zipCode, dateStart, dateEnd, imageUrl, informationUrl };
   const user = req.user;
   if (user) {
     const email = user.email;
@@ -203,7 +207,7 @@ app.post('/removeSavedTrip', (req, res) => {
   if (user) {
     User.findByIdAndUpdate(
       user._id,
-      { $pull: { trips: body } }, 
+      { $pull: { trips: body } },
       (error, result) => {
         if(error) {
           console.log(error);
