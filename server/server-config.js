@@ -22,7 +22,7 @@ passport.deserializeUser((id, done) => {
 
 const app = express();
 
-app.use(cookie('delicious cookie'));
+app.use(cookie('deserializeUsercious cookie'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({
@@ -133,9 +133,13 @@ app.post('/yelp', (req, res) => {
 });
 
 app.get('/weather', (req, res) => {
-  const location = encodeURIComponent(req.query.location);
+  // const location = encodeURIComponent(req.query.location);
+  const location = req.query.location;
+  // const location = 'San Francisco'
+  console.log('location', location);
   const openWeatherApiKey = ApiKeys.openWeatherApiKey;
   const apiUrl = 'http://api.openweathermap.org/data/2.5/forecast/daily';
+  // const test = 'api.openweathermap.org/data/2.5/weather?zip=94040,us'
 
   request({
     uri: apiUrl,
