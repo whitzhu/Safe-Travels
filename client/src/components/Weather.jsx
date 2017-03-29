@@ -58,7 +58,7 @@ export default class Weather extends React.Component {
             icon = 'wi wi-snow';
           }
           return (
-            <div className="col-md-1">
+            <div className="col-md-1" key={counter}>
               <h4>{day}</h4>
               <h3>{forecast.temp.day}&deg;F</h3>
               <i className={icon} />
