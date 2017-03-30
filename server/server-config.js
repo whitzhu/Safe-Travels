@@ -121,7 +121,7 @@ app.post('/yelp', (req, res) => {
 
   util.yelpSearch(location, query, price)
     .then( (businesses) => {
-      console.error('yelpSearch success')
+      console.log('yelpSearch success')
       res.status(200).send(businesses);
     })
     .catch(err => console.error('yelpSearch Error', err.message));
