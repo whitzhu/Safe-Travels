@@ -1,7 +1,8 @@
 import React, { PropTypes } from 'react';
 import { Redirect } from 'react-router';
-import SearchBar from './Search';
+import SearchBar from './SearchBar';
 import AirbnbCalendar from './AirbnbCalendar';
+import { Jumbotron, Grid, Row, Col } from 'react-bootstrap';
 
 const propTypes = {
   isSent: PropTypes.bool.isRequired,
@@ -20,15 +21,16 @@ class Entrance extends React.Component {
     return (
       <div>
         { this.props.isSent ?
-          <Redirect to="/main" /> :
-          <div className="container entrance">
-            <div className="jumbotron">
-              <h1>Plan Your Trip and Travel Safely</h1>
-              <div className="row">
-                <div className="form-group col-xs-6 calendar">
+          <Redirect to="/main" />
+          :
+          <Jumbotron>
+            <h1>Plan Your Trip and Travel Safely</h1>
+            <Grid>
+              <Row>
+                <Col xs={12} md={6}>
                   <AirbnbCalendar setSelectedDate={this.props.setSelectedDate} />
-                </div>
-                <div className="form-group col-xs-6 search-bar">
+                </Col>
+                <Col xs={12} md={6}>
                   <SearchBar
                     queryYelp={this.props.queryYelp}
                     queryCrime={this.props.queryCrime}
@@ -38,10 +40,10 @@ class Entrance extends React.Component {
                     geolocation={this.props.geolocation}
                     handleIsSent={this.props.handleIsSent}
                   />
-                </div>
-              </div>
-            </div>
-          </div>
+                </Col>
+              </Row>
+            </Grid>
+          </Jumbotron>
         }
       </div>
     );
