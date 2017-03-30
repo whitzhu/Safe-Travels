@@ -1,14 +1,17 @@
 const bodyParser = require('body-parser');
 const express = require('express');
 const https = require('https');
-const request = require('request');
+const Promise = require('bluebird');
+const request = Promise.promisifyAll(require('request'), { multiArgs: true });
 const database = require('./../database/index');
 const User = require('./../database/models/user');
+const twilio = require('twilio');
 const ApiKeys = require('../config/api-config');
 const passport = require('passport');
 const Strategy = require('passport-facebook').Strategy;
 const cookie = require('cookie-parser');
 const session = require('express-session');
+const zip = require('./zip');
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
@@ -220,6 +223,36 @@ app.post('/removeSavedTrip', (req, res) => {
     res.sendStatus(400);
     console.log('user was not signed in');
   }
+});
+
+app.post('/zip', (req, res) => {
+  let twiml = new twilio.TwimlResponse();
+  let zipCode = zip.cleanUserInputAsZipcode(req.body.Body);
+
+  Promise.resolve((zip.getWeatherForecast(zipCode))
+    .then( (results) => {
+      twiml.message(results);
+
+      res.writeHead(200, {'Content-Type': 'text/xml'});
+      res.end(twiml.toString());
+    })
+    .catch( (err) => {
+      console.log('Got an error in getWeatherForecast:', err.code, err.message);
+    })
+  )
+});
+
+app.post('/storePhoneNumber', (req, res) => {
+   const phoneNumber = req.body;
+   const userID = req.body;
+   let targetUser = User.findOne({ userID: userID });
+   if (targetUser) {
+    targetUser.push({ phoneNumber: phoneNumber }, (error, response) => {
+      res.status(200);
+     });  
+   } else {
+    res.sendStatus(400);
+   }
 });
 
 app.get('/*', (req, res) => {
