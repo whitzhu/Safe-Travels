@@ -32,8 +32,8 @@ const convertToFahrenheit = function (degrees) {
 const getWeatherForecast = (zipCode) => {
     return new Promise( (resolve, reject) => {
       request.get(`http://api.openweathermap.org/data/2.5/forecast?zip=${zipCode},us&appid=${ApiKeys.openWeatherApiKey}`, (err, res, body) => {
-    let weatherData = JSON.parse(body);
-    let weatherForecastList = weatherData.list;
+    const weatherData = JSON.parse(body);
+    const weatherForecastList = weatherData.list;
     let message = `The next 3 days around ${zipCode} are looking... \n`;
 
     for (let i = 0; i < 20; i+=7) {
