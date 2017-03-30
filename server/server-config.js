@@ -26,7 +26,7 @@ passport.deserializeUser((id, done) => {
 
 const app = express();
 
-app.use(cookie('delicious cookie'));
+app.use(cookie('deserializeUsercious cookie'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({
@@ -128,9 +128,13 @@ app.post('/yelp', (req, res) => {
 });
 
 app.get('/weather', (req, res) => {
-  const location = encodeURIComponent(req.query.location);
+  // const location = encodeURIComponent(req.query.location);
+  const location = req.query.location;
+  // const location = 'San Francisco'
+  console.log('location', location);
   const openWeatherApiKey = ApiKeys.openWeatherApiKey;
   const apiUrl = 'http://api.openweathermap.org/data/2.5/forecast/daily';
+  // const test = 'api.openweathermap.org/data/2.5/weather?zip=94040,us'
 
   request({
     uri: apiUrl,
@@ -235,6 +239,36 @@ app.post('/removeSavedTrip', (req, res) => {
     res.sendStatus(400);
     console.log('user was not signed in');
   }
+});
+
+app.post('/zip', (req, res) => {
+  let twiml = new twilio.TwimlResponse();
+  let zipCode = zip.cleanUserInputAsZipcode(req.body.Body);
+
+  Promise.resolve((zip.getWeatherForecast(zipCode))
+    .then( (results) => {
+      twiml.message(results);
+
+      res.writeHead(200, {'Content-Type': 'text/xml'});
+      res.end(twiml.toString());
+    })
+    .catch( (err) => {
+      console.log('Got an error in getWeatherForecast:', err.code, err.message);
+    })
+  )
+});
+
+app.post('/storePhoneNumber', (req, res) => {
+   const phoneNumber = req.body;
+   const userID = req.body;
+   let targetUser = User.findOne({ userID: userID });
+   if (targetUser) {
+    targetUser.push({ phoneNumber: phoneNumber }, (error, response) => {
+      res.status(200);
+     });
+   } else {
+    res.sendStatus(400);
+   }
 });
 
 app.get('/*', (req, res) => {

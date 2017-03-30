@@ -7,6 +7,7 @@ import './style.css';
 import Entrance from './components/Entrance';
 import Main from './components/Main';
 import Login from './components/Login';
+import PhoneEntry from './components/PhoneEntry';
 import Navbar from './components/Navbar';
 import Profile from './components/Profile';
 import PlanTrip from './components/PlanTrip';
@@ -42,6 +43,7 @@ class App extends React.Component {
     this.handleIsSentFalse = this.handleIsSentFalse.bind(this);
     this.removeSavedTrip = this.removeSavedTrip.bind(this);
     this.setMapDestinations = this.setMapDestinations.bind(this);
+    this.storePhoneNumber = this.storePhoneNumber.bind(this);
   }
 
   removeSavedTrip(trip) {
@@ -81,6 +83,10 @@ class App extends React.Component {
   setSelectedDate({ startDate, endDate }) {
     this.startDate = startDate === null ? this.startDate : startDate;
     this.endDate = endDate === null ? this.endDate : endDate;
+  }
+
+  storePhoneNumber({ number }) {
+
   }
 
   selectDestination(yelpLocation) {
@@ -204,6 +210,14 @@ class App extends React.Component {
                 savedTrips={this.state.savedTrips}
                 removeSavedTrip={this.removeSavedTrip}
               />)}
+          />
+          <Route
+            path="/entry"
+            component={() => (
+              <PhoneEntry
+                storePhoneNumbers={this.state.storePhoneNumbers}
+              />
+            )}
           />
           <Route
             path="/map"

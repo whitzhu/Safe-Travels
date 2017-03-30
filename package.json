@@ -8,7 +8,7 @@
     "node": ">=6.4.0"
   },
   "scripts": {
-    "start": "node server/server.js",
+    "start": "nodemon server/server.js",
     "react-dev": "webpack -d --watch",
     "server-dev": "concurrently \"nodemon server/index.js\" \"open http://localhost:5000\""
   },
@@ -36,7 +36,8 @@
     "react-router": "^4.0.0",
     "react-router-dom": "^4.0.0",
     "request": "^2.81.0",
-    "request-promise": "^4.2.0"
+    "request-promise": "^4.2.0",
+    "twilio": "^2.11.1"
   },
   "devDependencies": {
     "babel-cli": "^6.7.5",
