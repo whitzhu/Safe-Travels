@@ -9,6 +9,7 @@ import Main from './components/Main';
 import Login from './components/Login';
 import Navbar from './components/Navbar';
 import Profile from './components/Profile';
+import PlanTrip from './components/PlanTrip';
 import GoogleMap from './components/GoogleMap';
 
 class App extends React.Component {
@@ -140,7 +141,6 @@ class App extends React.Component {
               yelpStyle: stateStyle,
             });
           })
-          .catch(error => console.log(error));
       })
       .catch(error => console.log(error));
   }
@@ -193,6 +193,14 @@ class App extends React.Component {
             path="/profile"
             component={() => (
               <Profile
+                savedTrips={this.state.savedTrips}
+                removeSavedTrip={this.removeSavedTrip}
+              />)}
+          />
+          <Route
+            path="/plan-trip"
+            component={() => (
+              <PlanTrip
                 savedTrips={this.state.savedTrips}
                 removeSavedTrip={this.removeSavedTrip}
               />)}

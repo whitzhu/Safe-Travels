@@ -9,6 +9,10 @@ const passport = require('passport');
 const Strategy = require('passport-facebook').Strategy;
 const cookie = require('cookie-parser');
 const session = require('express-session');
+const util = require('./util.js');
+const rp = require('request-promise');
+
+const Promise = require('bluebird');
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
@@ -112,24 +116,15 @@ app.post('/yelp', (req, res) => {
   console.log(req.body);
   const location = encodeURIComponent(req.body.location);
   const query = encodeURIComponent(req.body.query);
-  // only search price if provided
   const price = req.body.price.length ? `&price=${encodeURIComponent(req.body.price)}` : '';
-  // default sort by rating
-  const url = `https://api.yelp.com/v3/businesses/search?term=${query}&location=${location}${price}&sort_by=rating&limit=9`;
-  request({
-    uri: url,
-    headers: {
-      Authorization: `Bearer ${ApiKeys.yelpApiToken.token}`,
-    },
-    method: 'GET',
-  }, (error, response, body) => {
-    if (error) {
-      console.error('Yelp GET request error');
-    } else {
-      console.log('Yelp GET request successful');
-      res.status(200).send(body);
-    }
-  });
+
+
+  util.yelpSearch(location, query, price)
+    .then( (businesses) => {
+      console.log('yelpSearch success')
+      res.status(200).send(businesses);
+    })
+    .catch(err => console.error('yelpSearch Error', err.message));
 });
 
 app.get('/weather', (req, res) => {
@@ -171,7 +166,11 @@ app.get('/savedTrips', (req, res) => {
 
 app.post('/saveTrip', (req, res) => {
   const body = req.body;
+  const yelpID = body.destination.id;
   const name = body.destination.name;
+  const longitude = body.destination.coordinates.longitude;
+  const latitude = body.destination.coordinates.latitude;
+  const displayAddress = body.destination.location.display_address;
   const address = body.destination.location.address1;
   const city = body.destination.location.city;
   const state = body.destination.location.state;
@@ -180,20 +179,40 @@ app.post('/saveTrip', (req, res) => {
   const dateEnd = body.endDate || null;
   const imageUrl = body.destination.image_url;
   const informationUrl = body.destination.url;
-  const trip = { name, address, city, state, zipCode, dateStart, dateEnd, imageUrl, informationUrl };
   const user = req.user;
-  if (user) {
-    const email = user.email;
-    User.findByIdAndUpdate(
-      user._id,
-      { $addToSet: { trips: trip } },
-      { safe: true, new: true, upsert: true },
-      (err, result) => {
-        res.sendStatus(201);
-      });
-  } else {
-    res.sendStatus(400);
-  }
+
+  util.yelpHours(yelpID)
+    .then( (businessInfo) => {
+      let hours;
+      if ( businessInfo.indexOf('hmtl') > 0) {
+        hours = null;
+      } else {
+        const parseBusinessInfo = JSON.parse(businessInfo);
+        hours = parseBusinessInfo.hours;
+        hours[0].open.forEach( (time, index) => {
+          time.day = time.day === undefined ? util.formatDay(index) : util.formatDay(time.day);
+          time.start = util.formatTime(time.start);
+          time.end = util.formatTime(time.end);
+        })
+      }
+      const trip = { yelpID, name, hours, longitude, latitude, displayAddress, address, city, state, zipCode, dateStart, dateEnd, imageUrl, informationUrl };
+      return trip;
+    })
+    .then( (trip) => {
+      if (user) {
+        const email = user.email;
+        User.findByIdAndUpdate(
+          user._id,
+          { $addToSet: { trips: trip } },
+          { safe: true, new: true, upsert: true },
+          (err, result) => {
+            res.sendStatus(201);
+          });
+      } else {
+        res.sendStatus(400);
+      }
+    })
+    .catch(err => console.error('yelpHour Error', err.message));
 });
 
 app.post('/removeSavedTrip', (req, res) => {
@@ -203,7 +222,7 @@ app.post('/removeSavedTrip', (req, res) => {
   if (user) {
     User.findByIdAndUpdate(
       user._id,
-      { $pull: { trips: body } }, 
+      { $pull: { trips: body } },
       (error, result) => {
         if(error) {
           console.log(error);
