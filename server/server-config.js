@@ -1,17 +1,14 @@
 const bodyParser = require('body-parser');
 const express = require('express');
 const https = require('https');
-const Promise = require('bluebird');
-const request = Promise.promisifyAll(require('request'), { multiArgs: true });
+const request = require('request');
 const database = require('./../database/index');
 const User = require('./../database/models/user');
-const twilio = require('twilio');
 const ApiKeys = require('../config/api-config');
 const passport = require('passport');
 const Strategy = require('passport-facebook').Strategy;
 const cookie = require('cookie-parser');
 const session = require('express-session');
-const zip = require('./zip');
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
@@ -220,26 +217,6 @@ app.post('/removeSavedTrip', (req, res) => {
     console.log('user was not signed in');
   }
 });
-
-app.post('/zip', (req, res) => {
-  console.log('this is the SMS bodyyy!!!!!', req.body.Body);
-  const twilio = require('twilio');
-  let twiml = new twilio.TwimlResponse();
-  let zipCode = zip.cleanUserInputAsZipcode(req.body.Body);
-
-  Promise.resolve((zip.getWeatherForecast(zipCode))
-    .then( (results) => {
-      console.log('---11111-----', results);
-      twiml.message(results);
-
-      res.writeHead(200, {'Content-Type': 'text/xml'});
-      res.end(twiml.toString());
-    })
-    .catch( (err) => {
-      console.log('err', err);
-    })
-  )
-})
 
 app.get('/*', (req, res) => {
   res.redirect('/');
