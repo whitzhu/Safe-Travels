@@ -12,6 +12,7 @@ const Strategy = require('passport-facebook').Strategy;
 const cookie = require('cookie-parser');
 const session = require('express-session');
 const zip = require('./zip');
+const util = require('./util.js');
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
