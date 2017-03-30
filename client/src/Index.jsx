@@ -7,7 +7,7 @@ import './style.css';
 import Entrance from './components/Entrance';
 import Main from './components/Main';
 import Login from './components/Login';
-import Navbar from './components/Navbar';
+import NavbarInstance from './components/NavbarInstance';
 import Profile from './components/Profile';
 import PlanTrip from './components/PlanTrip';
 import GoogleMap from './components/GoogleMap';
@@ -33,6 +33,8 @@ class App extends React.Component {
     this.mapDestinations = [];
     this.setLocationFromSearch = this.setLocationFromSearch.bind(this);
     this.setGeoLocationFromSearch = this.setGeoLocationFromSearch.bind(this);
+    this.login = this.login.bind(this);
+    this.logout = this.logout.bind(this);
     this.queryYelp = this.queryYelp.bind(this);
     this.queryCrime = this.queryCrime.bind(this);
     this.setSelectedDate = this.setSelectedDate.bind(this);
@@ -44,12 +46,26 @@ class App extends React.Component {
     this.setMapDestinations = this.setMapDestinations.bind(this);
   }
 
+  login() {
+    Axios.get('/login/facebook')
+    .then((res) => {
+    })
+    .catch( error => console.log(error));
+  }
+
+  logout() {
+    Axios.get('/logout')
+    .then((res) => {
+    })
+    .catch( error => console.log(error));
+  }
+
   removeSavedTrip(trip) {
     return Axios.post('/removeSavedTrip', trip)
       .then((res) => {
         console.log('Correctly removed trip');
       })
-      .catch(error => console.log(error));
+      .catch( error => console.log(error));
   }
 
   getSavedTrips() {
@@ -149,10 +165,12 @@ class App extends React.Component {
     return (
       <Router>
         <div>
-          <Navbar
+          <NavbarInstance
             location={this.state.location}
             getSavedTrips={this.getSavedTrips}
             geoLocation={this.state.geoLocation}
+            login={this.login}
+            logout={this.logout}
             handleIsSentFalse={this.handleIsSentFalse}
             setMapDestinations={this.setMapDestinations}
           />
