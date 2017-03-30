@@ -42,6 +42,7 @@ class App extends React.Component {
     this.handleIsSentFalse = this.handleIsSentFalse.bind(this);
     this.removeSavedTrip = this.removeSavedTrip.bind(this);
     this.setMapDestinations = this.setMapDestinations.bind(this);
+    this.storePhoneNumbers = this.storePhoneNumbers.bind(this);
   }
 
   removeSavedTrip(trip) {
@@ -81,6 +82,10 @@ class App extends React.Component {
   setSelectedDate({ startDate, endDate }) {
     this.startDate = startDate === null ? this.startDate : startDate;
     this.endDate = endDate === null ? this.endDate : endDate;
+  }
+
+  storePhoneNumbers({ number }) {
+
   }
 
   selectDestination(yelpLocation) {
@@ -201,7 +206,9 @@ class App extends React.Component {
           <Route
             path="/entry"
             component={() => (
-              <PhoneEntry/>
+              <PhoneEntry
+                storePhoneNumbers={this.state.storePhoneNumbers}
+              />
             )}
           />
           <Route

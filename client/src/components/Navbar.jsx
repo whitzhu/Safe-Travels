@@ -7,6 +7,7 @@ const propTypes = {
   location: PropTypes.string.isRequired,
   getSavedTrips: PropTypes.func.isRequired,
   setMapDestinations: PropTypes.func.isRequired,
+  // storePhoneNumbers: PropTypes.func.isRequired
 };
 
 const Navbar = props => (
@@ -29,7 +30,7 @@ const Navbar = props => (
             { props.location ? <li onClick={props.setMapDestinations}><Link to="/map">Map</Link></li> : null
             }
             {
-              <Link to="/entry">Entry</Link>
+              <li><Link to="/entry">Entry</Link></li>
             }
           </ul>
           <ul className="nav navbar-nav navbar-right">
