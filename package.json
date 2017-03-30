@@ -29,6 +29,7 @@
     "passport-facebook": "^2.1.1",
     "react": "^15.4.2",
     "react-addons-shallow-compare": "^15.4.2",
+    "react-bootstrap": "^0.30.8",
     "react-dates": "^8.2.0",
     "react-dom": "^15.4.2",
     "react-google-places-suggest": "^2.0.1",
@@ -52,6 +53,7 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.10.0",
+    "extract-text-webpack-plugin": "^2.1.0",
     "style-loader": "^0.14.1",
     "webpack": "^2.2.1"
   },
