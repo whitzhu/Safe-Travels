@@ -4,6 +4,7 @@ const userSchema = mongoose.Schema({
   username: String,
   userID: String,
   email: String,
+  phoneNumber: String,
   trips: [{
     _id: false,
     yelpID: String,
