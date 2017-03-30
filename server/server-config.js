@@ -118,33 +118,13 @@ app.post('/yelp', (req, res) => {
   const query = encodeURIComponent(req.body.query);
   const price = req.body.price.length ? `&price=${encodeURIComponent(req.body.price)}` : '';
 
-  let finalResult;
 
-   util.yelpSearch(location, query, price)
-     .then( results => {
-        finalResult = JSON.parse(results);
-        let businesses = finalResult.businesses;
-        return businesses;
-     })
-     .then( businesses => {
-        Promise.map(businesses, (business, index) => {
-          return util.yelpHours(business.id)
-          .then( (businessInfo) => {
-            if ( businessInfo.indexOf('html') > 0) {
-              return null;
-            } else {
-              let parseBody = JSON.parse(businessInfo);
-              let hours = parseBody.hours;
-              business.hours = hours
-              console.log('business hours', business.hours);
-            }
-          })
-        })
-        .then( () => {
-          res.status(200).send(finalResult);
-        })
-     })
-    .catch(err => console.error('Promise map business hours error', err.message));
+  util.yelpSearch(location, query, price)
+    .then( (businesses) => {
+      console.error('yelpSearch success')
+      res.status(200).send(businesses);
+    })
+    .catch(err => console.error('yelpSearch Error', err.message));
 });
 
 app.get('/weather', (req, res) => {
