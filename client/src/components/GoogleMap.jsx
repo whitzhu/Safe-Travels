@@ -5,6 +5,7 @@ const propTypes = {
   geoLocation: PropTypes.object.isRequired,
   crimeData: PropTypes.string.isRequired,
   mapDestinations: PropTypes.array.isRequired,
+  savedTrips: PropTypes.array.isRequired
 };
 
 const defaultProps = {
@@ -46,12 +47,14 @@ class GoogleMap extends React.Component {
   }
 
   calcRoute(directionsService, directionsDisplay) {
-    if (this.props.mapDestinations && this.props.mapDestinations.length > 1) {
+    console.log('Within calcRoute, check this.props:', this.props);
+    if (this.props.savedTrips && this.props.savedTrips.length > 1) {
       const destinations = [];
-      this.props.mapDestinations.forEach((value) => {
+      this.props.savedTrips.forEach((poi) => {
+        console.log('....Current destination looks like:', destinations);
         destinations.push({
-          location: value.location.display_address[0] + value.location.display_address[1],
-          stopover: true,
+          location: poi.address + poi.city + ',' + poi.state + poi.zipCode,
+          stopover: true
         });
       });
 
