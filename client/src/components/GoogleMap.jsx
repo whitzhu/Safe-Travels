@@ -27,7 +27,7 @@ class GoogleMap extends React.Component {
     this.map = this.createMap();
     directionsDisplay.setMap(this.map);
 
-    this.createMarkers(this.map);
+    // this.createMarkers(this.map);
     this.calcRoute(directionsService, directionsDisplay);
   }
 
