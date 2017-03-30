@@ -42,7 +42,7 @@ class App extends React.Component {
     this.handleIsSentFalse = this.handleIsSentFalse.bind(this);
     this.removeSavedTrip = this.removeSavedTrip.bind(this);
     this.setMapDestinations = this.setMapDestinations.bind(this);
-    this.storePhoneNumbers = this.storePhoneNumbers.bind(this);
+    this.storePhoneNumber = this.storePhoneNumber.bind(this);
   }
 
   removeSavedTrip(trip) {
@@ -84,7 +84,7 @@ class App extends React.Component {
     this.endDate = endDate === null ? this.endDate : endDate;
   }
 
-  storePhoneNumbers({ number }) {
+  storePhoneNumber({ number }) {
 
   }
 

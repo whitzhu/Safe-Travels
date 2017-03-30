@@ -236,7 +236,20 @@ app.post('/zip', (req, res) => {
       console.log('Got an error in getWeatherForecast:', err.code, err.message);
     })
   )
-})
+});
+
+app.post('/storePhoneNumber', (req, res) => {
+   const phoneNumber = req.body;
+   const userID = req.body;
+   let targetUser = User.findOne({ userID: userID });
+   if (targetUser) {
+    targetUser.push({ phoneNumber: phoneNumber }, (error, response) => {
+      res.status(200);
+     });  
+   } else {
+    res.sendStatus(400);
+   }
+});
 
 app.get('/*', (req, res) => {
   res.redirect('/');

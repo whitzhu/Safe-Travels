@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 
 const propTypes = {
-  // storePhoneNumbers: PropTypes.func.isRequired
+  // storePhoneNumber: PropTypes.func.isRequired
 };
 
 class PhoneEntry extends React.Component {

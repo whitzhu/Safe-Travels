@@ -7,7 +7,7 @@ const propTypes = {
   location: PropTypes.string.isRequired,
   getSavedTrips: PropTypes.func.isRequired,
   setMapDestinations: PropTypes.func.isRequired,
-  // storePhoneNumbers: PropTypes.func.isRequired
+  // storePhoneNumber: PropTypes.func.isRequired
 };
 
 const Navbar = props => (
