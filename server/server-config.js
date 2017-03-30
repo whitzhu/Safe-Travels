@@ -222,21 +222,18 @@ app.post('/removeSavedTrip', (req, res) => {
 });
 
 app.post('/zip', (req, res) => {
-  console.log('this is the SMS bodyyy!!!!!', req.body.Body);
-  const twilio = require('twilio');
   let twiml = new twilio.TwimlResponse();
   let zipCode = zip.cleanUserInputAsZipcode(req.body.Body);
 
   Promise.resolve((zip.getWeatherForecast(zipCode))
     .then( (results) => {
-      console.log('---11111-----', results);
       twiml.message(results);
 
       res.writeHead(200, {'Content-Type': 'text/xml'});
       res.end(twiml.toString());
     })
     .catch( (err) => {
-      console.log('err', err);
+      console.log('Got an error in getWeatherForecast:', err.code, err.message);
     })
   )
 })
