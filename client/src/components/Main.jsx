@@ -45,9 +45,9 @@ class Main extends React.Component {
   }
 
   handleShowMap() {
-    this.setState({
-      showMap: !this.state.showMap,
-    });
+    // this.setState({
+    //   showMap: !this.state.showMap,
+    // });
   }
 
   render() {

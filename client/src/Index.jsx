@@ -201,6 +201,7 @@ class App extends React.Component {
             path="/map"
             component={() =>
               (<GoogleMap
+                savedTrips={this.state.savedTrips}
                 geoLocation={this.state.geoLocation}
                 crimeData={this.state.crimeData}
                 mapDestinations={this.state.mapDestinations}

@@ -11,7 +11,7 @@ const defaultProps = {
   mapDestinations: [],
 };
 
-class GoogleMap extends React.Component {
+class ProfileMap extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -111,9 +111,7 @@ class GoogleMap extends React.Component {
   render() {
     return (
       <div className="google-map">
-      {console.log('.......', this.props)}
         <div ref="map" className="map" />
-      }
       </div>);
   }
 }
