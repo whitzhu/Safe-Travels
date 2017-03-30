@@ -7,7 +7,10 @@ import './style.css';
 import Entrance from './components/Entrance';
 import Main from './components/Main';
 import Login from './components/Login';
+<<<<<<< HEAD
 import PhoneEntry from './components/PhoneEntry';
+=======
+>>>>>>> 7c309f3b8fb80170ef8829017e355662192771c8
 import NavbarInstance from './components/NavbarInstance';
 import Profile from './components/Profile';
 import PlanTrip from './components/PlanTrip';
@@ -46,6 +49,20 @@ class App extends React.Component {
     this.removeSavedTrip = this.removeSavedTrip.bind(this);
     this.setMapDestinations = this.setMapDestinations.bind(this);
     this.storePhoneNumber = this.storePhoneNumber.bind(this);
+  }
+
+  login() {
+    Axios.get('/login/facebook')
+    .then((res) => {
+    })
+    .catch( error => console.log(error));
+  }
+
+  logout() {
+    Axios.get('/logout')
+    .then((res) => {
+    })
+    .catch( error => console.log(error));
   }
 
   login() {
