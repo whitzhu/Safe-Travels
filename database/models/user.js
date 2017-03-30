@@ -8,6 +8,7 @@ const userSchema = mongoose.Schema({
     _id: false,
     yelpID: String,
     name: String,
+    hours: Array,
     longitude: Number,
     latitude: Number,
     displayAddress: String,

@@ -17,6 +17,17 @@ const TripEntry = ({trip}) => {
             </h4>
             <h5>Address: {trip.address}</h5>
             <h5>{trip.city}, {trip.state} {trip.zipCode}</h5>
+            <p>Hours:
+            {
+              trip.hours[0].open.map( (trip, index) => (
+                <p
+                key={index}
+                >
+                  {trip.day}: {trip.start}-{trip.end}
+                </p>
+              ))
+            }
+            </p>
           </div>
           <br />
         </div>

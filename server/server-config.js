@@ -179,23 +179,40 @@ app.post('/saveTrip', (req, res) => {
   const dateEnd = body.endDate || null;
   const imageUrl = body.destination.image_url;
   const informationUrl = body.destination.url;
-  const trip = { yelpID, name, longitude, latitude, displayAddress, address, city, state, zipCode, dateStart, dateEnd, imageUrl, informationUrl };
   const user = req.user;
 
-
-
-  if (user) {
-    const email = user.email;
-    User.findByIdAndUpdate(
-      user._id,
-      { $addToSet: { trips: trip } },
-      { safe: true, new: true, upsert: true },
-      (err, result) => {
-        res.sendStatus(201);
-      });
-  } else {
-    res.sendStatus(400);
-  }
+  util.yelpHours(yelpID)
+    .then( (businessInfo) => {
+      let hours;
+      if ( businessInfo.indexOf('hmtl') > 0) {
+        hours = null;
+      } else {
+        const parseBusinessInfo = JSON.parse(businessInfo);
+        hours = parseBusinessInfo.hours;
+        hours[0].open.forEach( (time, index) => {
+          time.day = time.day === undefined ? util.formatDay(index) : util.formatDay(time.day);
+          time.start = util.formatTime(time.start);
+          time.end = util.formatTime(time.end);
+        })
+      }
+      const trip = { yelpID, name, hours, longitude, latitude, displayAddress, address, city, state, zipCode, dateStart, dateEnd, imageUrl, informationUrl };
+      return trip;
+    })
+    .then( (trip) => {
+      if (user) {
+        const email = user.email;
+        User.findByIdAndUpdate(
+          user._id,
+          { $addToSet: { trips: trip } },
+          { safe: true, new: true, upsert: true },
+          (err, result) => {
+            res.sendStatus(201);
+          });
+      } else {
+        res.sendStatus(400);
+      }
+    })
+    .catch(err => console.error('yelpHour Error', err.message));
 });
 
 app.post('/removeSavedTrip', (req, res) => {
