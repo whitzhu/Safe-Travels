@@ -8,7 +8,7 @@
     "node": ">=6.4.0"
   },
   "scripts": {
-    "start": "node server/server.js",
+    "start": "nodemon server/server.js",
     "react-dev": "webpack -d --watch",
     "server-dev": "concurrently \"nodemon server/index.js\" \"open http://localhost:5000\""
   },
