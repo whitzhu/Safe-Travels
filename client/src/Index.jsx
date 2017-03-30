@@ -7,10 +7,7 @@ import './style.css';
 import Entrance from './components/Entrance';
 import Main from './components/Main';
 import Login from './components/Login';
-<<<<<<< HEAD
 import PhoneEntry from './components/PhoneEntry';
-=======
->>>>>>> 7c309f3b8fb80170ef8829017e355662192771c8
 import NavbarInstance from './components/NavbarInstance';
 import Profile from './components/Profile';
 import PlanTrip from './components/PlanTrip';

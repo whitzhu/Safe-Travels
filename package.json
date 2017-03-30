@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "nodemon server/server.js",
-    "react-dev": "webpack -d --watch",
+    "react-dev": "webpack --progress --colors --watch",
     "server-dev": "concurrently \"nodemon server/index.js\" \"open http://localhost:5000\""
   },
   "dependencies": {
