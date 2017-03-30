@@ -1,18 +1,17 @@
 const bodyParser = require('body-parser');
 const express = require('express');
 const https = require('https');
-const request = require('request');
+const Promise = require('bluebird');
+const request = Promise.promisifyAll(require('request'), { multiArgs: true });
 const database = require('./../database/index');
 const User = require('./../database/models/user');
+const twilio = require('twilio');
 const ApiKeys = require('../config/api-config');
 const passport = require('passport');
 const Strategy = require('passport-facebook').Strategy;
 const cookie = require('cookie-parser');
 const session = require('express-session');
-const util = require('./util.js');
-const rp = require('request-promise');
-
-const Promise = require('bluebird');
+const zip = require('./zip');
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
