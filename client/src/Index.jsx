@@ -7,6 +7,7 @@ import './style.css';
 import Entrance from './components/Entrance';
 import Main from './components/Main';
 import Login from './components/Login';
+import PhoneEntry from './components/PhoneEntry';
 import Navbar from './components/Navbar';
 import Profile from './components/Profile';
 import GoogleMap from './components/GoogleMap';
@@ -196,6 +197,12 @@ class App extends React.Component {
                 savedTrips={this.state.savedTrips}
                 removeSavedTrip={this.removeSavedTrip}
               />)}
+          />
+          <Route
+            path="/entry"
+            component={() => (
+              <PhoneEntry/>
+            )}
           />
           <Route
             path="/map"
