@@ -23,7 +23,10 @@ const NavbarInstance = props => (
         <Navbar.Collapse>
            <Nav>
             { document.cookie.replace(/(?:(?:^|.*;\s*)isLoggedIn\s*\=\s*([^;]*).*$)|^.*$/, '$1') === 'true' ?
-              <NavItem><Link to="/profile">Profile</Link></NavItem>
+              <Nav>
+                <NavItem><Link to="/profile">Profile</Link></NavItem>
+                <NavItem><Link to="/plan-trip">Plan Trip</Link></NavItem>
+              </Nav>
               :
               null
             }

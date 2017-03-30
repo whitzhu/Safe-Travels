@@ -62,6 +62,20 @@ class App extends React.Component {
     .catch( error => console.log(error));
   }
 
+  login() {
+    Axios.get('/login/facebook')
+    .then((res) => {
+    })
+    .catch( error => console.log(error));
+  }
+
+  logout() {
+    Axios.get('/logout')
+    .then((res) => {
+    })
+    .catch( error => console.log(error));
+  }
+
   removeSavedTrip(trip) {
     return Axios.post('/removeSavedTrip', trip)
       .then((res) => {
