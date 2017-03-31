@@ -243,60 +243,35 @@ app.post('/removeSavedTrip', (req, res) => {
 });
 
 
-// app.post('/zip', (req, res) => {
-//   let twiml = new twilio.TwimlResponse();
-//   let zipCode = zip.cleanUserInputAsZipcode(req.body.Body);
-
-//   Promise.resolve((zip.getWeatherForecast(zipCode))
-//     .then( (results) => {
-//       twiml.message(results);
-
-//       res.writeHead(200, {'Content-Type': 'text/xml'});
-//       res.end(twiml.toString());
-//     })
-//     .catch( (err) => {
-//       console.log('Got an error in getWeatherForecast:', err.code, err.message);
-//     })
-//   )
-// });
-
 
 app.post('/zip', (req,res) => {
   let twiml = new twilio.TwimlResponse();
-  let city = req.body.Body;
+  let reply = req.body.Body;
+  if (isNaN(Number(reply))) {
+    Promise.resolve(zip.getShows(reply))
+      .then((results) => {
+        twiml.message(results);
 
-  Promise.resolve(zip.getShows(city))
-    .then((results) => {
-      twiml.message(results);
+        res.writeHead(200,{'Content-Type': 'text/xml'});
+        res.end(twiml.toString());
+      })
+      .catch( (err) => {
+        console.log('There was an error in getting the shows:', err.code, err.message );
+      })
+  } else {
+    let zipCode = zip.cleanUserInputAsZipcode(reply);
+    Promise.resolve((zip.getWeatherForecast(zipCode))
+      .then( (results) => {
+        twiml.message(results);
 
-      res.writeHead(200,{'Content-Type': 'text/xml'});
-      res.end(twiml.toString());
-    })
-    .catch( (err) => {
-      console.log('There was an error in getting the shows:', err.code, err.message );
-    })
-  // let test = `https://www.eventbriteapi.com/v3/events/search/?sort_by=best&location.address=sanfran&categories=103&token=${ApiKeys.eventBriteToken}`;
-  // request({
-  //   uri: test,
-  //   method: 'GET',
-
-  // }, (error,response,body) => {
-  //   let results = [];
-  //   events = JSON.parse(body).events;
-  //   console.log(events);
-  //   if (error) {
-  //     throw error;
-  //   } else {
-  //     for (let i = 0; i < 5; i++) {
-  //       let name = events[i].name.text;
-  //       let time = events[i].start.local.slice(0,10);
-  //       results.push([name,time]);
-  //     }
-  //     res.status(200).send(results);
-  //   }
-  // })
-
-
+        res.writeHead(200, {'Content-Type': 'text/xml'});
+        res.end(twiml.toString());
+      })
+      .catch( (err) => {
+        console.log('Got an error in getWeatherForecast:', err.code, err.message);
+      })
+    )
+  }
 })
 
 app.post('/storePhoneNumber', (req, res) => {

@@ -8,7 +8,7 @@ const askForZipCode = (number, name) => {
   client.messages.create({
     to: number,
     from: ApiKeys.twilioNumber,
-    body: `Hey ${name.split(' ')[0]}, text me your zip code and I can forecast the weather. Just like this: 94102. Give it a try :)`
+    body: `Hey ${name.split(' ')[0]}, if you want weather information, please text me your zipcode like so : 94102, but if you want shows information, please let me know of your requested city, just like: San Francisco. Give it a try!`
   }, (err, message) => {
     if (err) {
       console.log(err);
@@ -37,8 +37,8 @@ const getEachNum = (contacts, callback) => {
     callback(contacts[name], name);
   }
 }
-// getEachNum(ApiKeys.testContacts, askForZipCode);
-getEachNum(ApiKeys.testContacts, askForCity);
+getEachNum(ApiKeys.testContacts, askForZipCode);
+// getEachNum(ApiKeys.testContacts, askForCity);
 
 const convertToFahrenheit = function (degrees) {
   return (degrees - 273) * 9 / 5 + 32;
@@ -46,10 +46,10 @@ const convertToFahrenheit = function (degrees) {
 
 
 const getShows = (city) => {
-  let test = `https://www.eventbriteapi.com/v3/events/search/?sort_by=best&location.address=${city}&categories=103&token=${ApiKeys.eventBriteToken}`;
+  let eventsLink = `https://www.eventbriteapi.com/v3/events/search/?sort_by=best&location.address=${city}&categories=103&token=${ApiKeys.eventBriteToken}`;
   return new Promise ( (resolve, reject) => {
     request({
-      uri: test,
+      uri: eventsLink,
       method: 'GET',
     }, (error,response,body) => {
       let shows = `These are the hottest shows in ${city}: \n`;
@@ -60,7 +60,7 @@ const getShows = (city) => {
       } else {
         for (let i = 0; i < 5; i++) {
           let name = events[i].name.text;
-          let date = events[i].start.local.slice(0,10);
+          let date = events[i].start.local.slice(0, 10);
           shows += name + ' ' + '\n' + 'Date: ' + date + '\n' + '\n'
         }
       }
