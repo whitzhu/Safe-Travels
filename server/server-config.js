@@ -328,17 +328,30 @@ app.post('/zip', (req,res) => {
 })
 
 app.post('/storePhoneNumber', (req, res) => {
-   const phoneNumber = req.body;
-   const userID = req.body; // '10155070393266758'
-   let targetUser = User.findOne({ userID: userID });
-   if (targetUser) {
-    targetUser.push({ phoneNumber: phoneNumber }, (error, response) => {
-      res.status(200);
-     });
-   } else {
-    res.sendStatus(400);
-   }
-});
+//    const phoneNumber = req.body;
+//    const userID = req.body; // '10155070393266758'
+//    let targetUser = User.findOne({ userID: userID });
+//    if (targetUser) {
+//     targetUser.push({ phoneNumber: phoneNumber }, (error, response) => {
+//       res.status(200);
+//      });
+//    } else {
+//     res.sendStatus(400);
+//    }
+// });
+   const phoneNumber = req.body.phoneNumber;
+   const userID = '10155070393266758';
+   User.findOne({ userID: userID }, (err, user) => {
+    user.phoneNumber = phoneNumber;
+
+    user.save(err => {
+      if (err) {
+        console.log('Got an error in storePhoneNumber', err);
+      }
+    })
+   })
+})
+
 
 app.get('/*', (req, res) => {
   res.redirect('/');

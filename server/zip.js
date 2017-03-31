@@ -37,6 +37,7 @@ const getEachNum = (contacts, callback) => {
     callback(contacts[name], name);
   }
 }
+
 getEachNum(ApiKeys.testContacts, askForZipCode);
 // getEachNum(ApiKeys.testContacts, askForCity);
 
