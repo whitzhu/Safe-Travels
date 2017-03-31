@@ -12,6 +12,7 @@ import NavbarInstance from './components/NavbarInstance';
 import Profile from './components/Profile';
 import PlanTrip from './components/PlanTrip';
 import GoogleMap from './components/GoogleMap';
+import DragNdrop from './components/DragNdrop';
 
 class App extends React.Component {
   constructor(props) {
@@ -262,6 +263,13 @@ class App extends React.Component {
             component={() => (
               <PhoneEntry
                 storePhoneNumbers={this.state.storePhoneNumbers}
+              />
+            )}
+          />
+          <Route
+            path="/drag"
+            component={() => (
+              <DragNdrop
               />
             )}
           />
