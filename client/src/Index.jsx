@@ -31,6 +31,7 @@ class App extends React.Component {
       mapDestinations: [],
       shows: [],
       hotels:[]
+      phoneNumber: ''
     };
     this.startDate = null;
     this.endDate = null;
@@ -51,6 +52,8 @@ class App extends React.Component {
     this.setMapDestinations = this.setMapDestinations.bind(this);
     this.storePhoneNumber = this.storePhoneNumber.bind(this);
     this.queryHotels = this.queryHotels.bind(this);
+    this.handleNumberChange = this.handleNumberChange.bind(this);
+    this.handleNumberSubmit = this.handleNumberSubmit.bind(this);
   }
 
   componentDidMount(){
@@ -139,8 +142,25 @@ class App extends React.Component {
     this.endDate = endDate === null ? this.endDate : endDate;
   }
 
-  storePhoneNumber({ number }) {
+  storePhoneNumber() {
+    Axios.post('/storePhoneNumber', {
+        phoneNumber: this.state.phoneNumber
+      })
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
 
+  handleNumberChange(event) {
+    let phoneNumber = event.target.value;
+    this.setState({ phoneNumber: phoneNumber });
+  }
+
+  handleNumberSubmit() {
+    this.storePhoneNumber();
   }
 
   selectDestination(yelpLocation) {
@@ -302,7 +322,10 @@ class App extends React.Component {
             path="/entry"
             component={() => (
               <PhoneEntry
-                storePhoneNumbers={this.state.storePhoneNumbers}
+                // storePhoneNumber={this.storePhoneNumber}
+                phoneNumber={this.state.phoneNumber}
+                handleNumberChange={this.handleNumberChange}
+                handleNumberSubmit={this.handleNumberSubmit}
               />
             )}
           />

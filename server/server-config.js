@@ -329,7 +329,7 @@ app.post('/zip', (req,res) => {
 
 app.post('/storePhoneNumber', (req, res) => {
    const phoneNumber = req.body;
-   const userID = req.body;
+   const userID = req.body; // '10155070393266758'
    let targetUser = User.findOne({ userID: userID });
    if (targetUser) {
     targetUser.push({ phoneNumber: phoneNumber }, (error, response) => {
@@ -339,7 +339,6 @@ app.post('/storePhoneNumber', (req, res) => {
     res.sendStatus(400);
    }
 });
-
 
 app.get('/*', (req, res) => {
   res.redirect('/');
