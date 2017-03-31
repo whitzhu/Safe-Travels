@@ -23,7 +23,6 @@ passport.deserializeUser((id, done) => {
     done(err, user);
   });
 });
-
 const app = express();
 
 app.use(cookie('deserializeUsercious cookie'));
@@ -94,8 +93,8 @@ app.get('/crime', (req, res) => {
       lat: loc.lat,
       lon: loc.lon,
       key,
-      radius,
-    },
+      radius
+          },
   };
 
   request(rOpt, (error, response, body) => {
@@ -126,6 +125,8 @@ app.post('/yelp', (req, res) => {
     })
     .catch(err => console.error('yelpSearch Error', err.message));
 });
+
+
 
 app.get('/weather', (req, res) => {
   // const location = encodeURIComponent(req.query.location);
@@ -241,22 +242,62 @@ app.post('/removeSavedTrip', (req, res) => {
   }
 });
 
-app.post('/zip', (req, res) => {
-  let twiml = new twilio.TwimlResponse();
-  let zipCode = zip.cleanUserInputAsZipcode(req.body.Body);
 
-  Promise.resolve((zip.getWeatherForecast(zipCode))
-    .then( (results) => {
+// app.post('/zip', (req, res) => {
+//   let twiml = new twilio.TwimlResponse();
+//   let zipCode = zip.cleanUserInputAsZipcode(req.body.Body);
+
+//   Promise.resolve((zip.getWeatherForecast(zipCode))
+//     .then( (results) => {
+//       twiml.message(results);
+
+//       res.writeHead(200, {'Content-Type': 'text/xml'});
+//       res.end(twiml.toString());
+//     })
+//     .catch( (err) => {
+//       console.log('Got an error in getWeatherForecast:', err.code, err.message);
+//     })
+//   )
+// });
+
+
+app.post('/zip', (req,res) => {
+  let twiml = new twilio.TwimlResponse();
+  let city = req.body.Body;
+
+  Promise.resolve(zip.getShows(city))
+    .then((results) => {
       twiml.message(results);
 
-      res.writeHead(200, {'Content-Type': 'text/xml'});
+      res.writeHead(200,{'Content-Type': 'text/xml'});
       res.end(twiml.toString());
     })
     .catch( (err) => {
-      console.log('Got an error in getWeatherForecast:', err.code, err.message);
+      console.log('There was an error in getting the shows:', err.code, err.message );
     })
-  )
-});
+  // let test = `https://www.eventbriteapi.com/v3/events/search/?sort_by=best&location.address=sanfran&categories=103&token=${ApiKeys.eventBriteToken}`;
+  // request({
+  //   uri: test,
+  //   method: 'GET',
+
+  // }, (error,response,body) => {
+  //   let results = [];
+  //   events = JSON.parse(body).events;
+  //   console.log(events);
+  //   if (error) {
+  //     throw error;
+  //   } else {
+  //     for (let i = 0; i < 5; i++) {
+  //       let name = events[i].name.text;
+  //       let time = events[i].start.local.slice(0,10);
+  //       results.push([name,time]);
+  //     }
+  //     res.status(200).send(results);
+  //   }
+  // })
+
+
+})
 
 app.post('/storePhoneNumber', (req, res) => {
    const phoneNumber = req.body;

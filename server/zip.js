@@ -18,15 +18,55 @@ const askForZipCode = (number, name) => {
   })
 }
 
+const askForCity = (number, name) => {
+  client.messages.create({
+    to: number,
+    from: ApiKeys.twilioNumber,
+    body: `Hey ${name.split(' ')[0]}, please respond with the city name and I can give you the best local shows. Just like this: San Francisco. Give it a try :)`
+  }, (err, message) => {
+    if (err) {
+      throw err;
+    } else (
+      console.log(message.sid))
+  })
+}
+
+
 const getEachNum = (contacts, callback) => {
   for (let name of Object.keys(contacts)) {
     callback(contacts[name], name);
   }
 }
-getEachNum(ApiKeys.testContacts, askForZipCode);
+// getEachNum(ApiKeys.testContacts, askForZipCode);
+getEachNum(ApiKeys.testContacts, askForCity);
 
 const convertToFahrenheit = function (degrees) {
   return (degrees - 273) * 9 / 5 + 32;
+}
+
+
+const getShows = (city) => {
+  let test = `https://www.eventbriteapi.com/v3/events/search/?sort_by=best&location.address=${city}&categories=103&token=${ApiKeys.eventBriteToken}`;
+  return new Promise ( (resolve, reject) => {
+    request({
+      uri: test,
+      method: 'GET',
+    }, (error,response,body) => {
+      let shows = `These are the hottest shows in ${city}: \n`;
+      events = JSON.parse(body).events;
+      console.log(events);
+      if (error) {
+        throw error;
+      } else {
+        for (let i = 0; i < 5; i++) {
+          let name = events[i].name.text;
+          let date = events[i].start.local.slice(0,10);
+          shows += name + ' ' + '\n' + 'Date: ' + date + '\n' + '\n'
+        }
+      }
+    return resolve(shows);
+    })   
+  }) 
 }
 
 const getWeatherForecast = (zipCode) => {
@@ -56,3 +96,4 @@ const cleanUserInputAsZipcode = (input) => {
 
 exports.getWeatherForecast = getWeatherForecast;
 exports.cleanUserInputAsZipcode = cleanUserInputAsZipcode;
+exports.getShows = getShows;
