@@ -14,7 +14,6 @@ import PlanTrip from './components/PlanTrip';
 import GoogleMap from './components/GoogleMap';
 import ItinerarySideBar from './components/ItinerarySideBar';
 
-
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -352,6 +351,13 @@ class App extends React.Component {
                 phoneNumber={this.state.phoneNumber}
                 handleNumberChange={this.handleNumberChange}
                 handleNumberSubmit={this.handleNumberSubmit}
+              />
+            )}
+          />
+          <Route
+            path="/drag"
+            component={() => (
+              <DragNdrop
               />
             )}
           />
