@@ -126,7 +126,35 @@ app.post('/yelp', (req, res) => {
     .catch(err => console.error('yelpSearch Error', err.message));
 });
 
+app.post('/hotels', (req,res) => {
+  let headers = {
+    Authorization: `Bearer ${ApiKeys.homeAwayApiToken.access_token}`
+  }
 
+  let search = 'https://ws.homeaway.com/public/search?q=San+Francisco+US&pageSize=15&locale=en'
+
+  request({
+    uri: search,
+    method: 'GET',
+    headers: headers
+  }, (error,response,body) => {
+    let listings = JSON.parse(body).entries;
+    if (error) {
+      console.log('+======ERROR======+', error)
+    } else {
+      var entries = [];
+      listings.forEach((item,index) => {
+        let entry = {};
+        entry.name = item.headline;
+        entry.accommodation = item.accommodation;
+        entry.thumbnail = item.thumbnail.secureUri;
+        entry.price = item.priceQuote;
+        entries.push(entry);
+      })
+      res.status(201).send(entries);
+    }
+  })
+})
 
 app.get('/weather', (req, res) => {
   // const location = encodeURIComponent(req.query.location);
