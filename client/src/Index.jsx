@@ -84,6 +84,7 @@ class App extends React.Component {
 
   removeSavedTripState(id) {
     const newSavedTrips = this.state.savedTrips;
+    newSavedTrips.splice(id,1);
     this.setState({
       savedTrips: newSavedTrips
     });
