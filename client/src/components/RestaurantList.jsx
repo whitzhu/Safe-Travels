@@ -15,8 +15,8 @@ export default class RestaurantList extends React.Component {
     super(props);
     this.state = {
       destination: undefined,
-      price: this.props.price,
-      style: this.props.style
+      price: '',
+      style: ''
     };
 
     this.handleChange = this.handleChange.bind(this);
