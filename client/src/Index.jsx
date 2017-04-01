@@ -29,6 +29,7 @@ class App extends React.Component {
       yelpPrice: '3',
       yelpStyle: 'casual',
       mapDestinations: [],
+      shows: []
     };
     this.startDate = null;
     this.endDate = null;
@@ -39,6 +40,7 @@ class App extends React.Component {
     this.logout = this.logout.bind(this);
     this.queryYelp = this.queryYelp.bind(this);
     this.queryCrime = this.queryCrime.bind(this);
+    this.queryShows = this.queryShows.bind(this);
     this.setSelectedDate = this.setSelectedDate.bind(this);
     this.handleIsSent = this.handleIsSent.bind(this);
     this.getSavedTrips = this.getSavedTrips.bind(this);
@@ -48,6 +50,10 @@ class App extends React.Component {
     this.setMapDestinations = this.setMapDestinations.bind(this);
     this.storePhoneNumber = this.storePhoneNumber.bind(this);
   }
+
+  // componentDidMount(){
+  //   this.queryShows();
+  // }
 
   login() {
     Axios.get('/login/facebook')
@@ -162,6 +168,21 @@ class App extends React.Component {
     });
   }
 
+  queryShows(){
+    let dummyData = {
+      query: 'Rave',
+      location: 'San Francisco'
+    }
+    return Axios.post('/shows', dummyData)
+    .then((shows) => {
+      console.log('success fetching shows/events from server');
+      this.setState({shows: shows})
+    })
+    .catch((error) => {
+        console.log(error);
+    })
+  }
+
   queryYelp(search) {
     const statePrice = search.price ? search.price : '3';
     const stateStyle = search.style ? search.style : 'casual';
@@ -239,6 +260,8 @@ class App extends React.Component {
                 yelpStyle={this.state.yelpStyle}
                 selectDestination={this.selectDestination}
                 handleIsSentFalse={this.handleIsSentFalse}
+                queryShows={this.queryShows}
+                showsData={this.state.shows}
               />)}
           />
           <Route path="/login" component={Login} />

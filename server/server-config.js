@@ -170,7 +170,8 @@ app.get('/savedTrips', (req, res) => {
 });
 
 app.post('/shows', (req,res) => {
-  let queryLink = `https://www.eventbriteapi.com/v3/events/search/?q=hiphop&sort_by=best&location.address=san+fran&token=${ApiKeys.eventBriteToken}`;
+  let body = req.body;
+  let queryLink = `https://www.eventbriteapi.com/v3/events/search/?q=${body.query}&sort_by=best&location.address=${body.location}&token=${ApiKeys.eventBriteToken}`;
   request({
     uri: queryLink,
     method: 'GET',
@@ -188,7 +189,8 @@ app.post('/shows', (req,res) => {
         shows.push(event);
       }
     }
-    res.send(shows);
+    console.log(shows)
+    res.status(201).send(shows);
   })
 })
 
