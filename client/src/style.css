@@ -1,5 +1,4 @@
 
-
 .google-map {
   height: 100%;
   position: absolute;
@@ -38,6 +37,26 @@
   margin-left: 10px;
 }
 
+/*Calendar*/
+.calendar-col {
+  border: 1px grey solid;
+  height: 500px;
+}
+
+.calendar-col-date {
+  height: 40px;
+}
+
+.cal-cal-date {
+  max-height: 40px;
+  background-color: blue;
+}
+
+/*Trip Entry*/
+.trip-entry-image {
+  width: 100%;
+}
+
 /*yelp restaurant styling*/
 .yelp-img {
   width: 300px;
@@ -67,20 +86,6 @@
 .attraction-title {
   padding-left: 45px;
   margin-bottom: 20px;
-}
-
-/* styling for Navbar Buttons */
-.NavbarButton {
-  color: white;
-  padding: 15px 20px;
-  position: relative;
-  display: block;
-  color: #777;
-  text-decoration: none;
-  background-color: transparent;
-  box-sizing: border-box;
-  border: none;
-  line-height: 20px;
 }
 
 /*styling weather*/

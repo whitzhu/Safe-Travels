@@ -29,7 +29,16 @@ class App extends React.Component {
       yelpPrice: '3',
       yelpStyle: 'casual',
       mapDestinations: [],
+      calCol: [
+        { date: new Date(), tripEntry:[]},
+        { date: new Date(), tripEntry:[]},
+        { date: new Date(), tripEntry:[]},
+        { date: new Date(), tripEntry:[]},
+        { date: new Date(), tripEntry:[]},
+        { date: new Date(), tripEntry:[]},
+      ],
     };
+
     this.startDate = null;
     this.endDate = null;
     this.mapDestinations = [];
@@ -47,34 +56,7 @@ class App extends React.Component {
     this.removeSavedTrip = this.removeSavedTrip.bind(this);
     this.setMapDestinations = this.setMapDestinations.bind(this);
     this.storePhoneNumber = this.storePhoneNumber.bind(this);
-  }
-
-  login() {
-    Axios.get('/login/facebook')
-    .then((res) => {
-    })
-    .catch( error => console.log(error));
-  }
-
-  logout() {
-    Axios.get('/logout')
-    .then((res) => {
-    })
-    .catch( error => console.log(error));
-  }
-
-  login() {
-    Axios.get('/login/facebook')
-    .then((res) => {
-    })
-    .catch( error => console.log(error));
-  }
-
-  logout() {
-    Axios.get('/logout')
-    .then((res) => {
-    })
-    .catch( error => console.log(error));
+    this.updateCalEntry = this.updateCalEntry.bind(this);
   }
 
   login() {
@@ -196,6 +178,14 @@ class App extends React.Component {
       .catch(error => console.log(error));
   }
 
+  updateCalEntry(tripEntry, id) {
+    let newCalCol = this.state.calCol;
+    newCalCol[id].tripEntry = tripEntry;
+    this.setState({
+      calCol: newCalCol
+    });
+  }
+
   render() {
     return (
       <Router>
@@ -254,8 +244,10 @@ class App extends React.Component {
             path="/plan-trip"
             component={() => (
               <PlanTrip
+                calCol={this.state.calCol}
                 savedTrips={this.state.savedTrips}
                 removeSavedTrip={this.removeSavedTrip}
+                updateCalEntry={this.updateCalEntry}
               />)}
           />
           <Route
