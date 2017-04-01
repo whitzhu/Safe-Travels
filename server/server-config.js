@@ -169,6 +169,29 @@ app.get('/savedTrips', (req, res) => {
   }
 });
 
+app.post('/shows', (req,res) => {
+  let queryLink = `https://www.eventbriteapi.com/v3/events/search/?q=hiphop&sort_by=best&location.address=san+fran&token=${ApiKeys.eventBriteToken}`;
+  request({
+    uri: queryLink,
+    method: 'GET',
+  }, (error,response,body) => {
+    body = JSON.parse(body).top_match_events;
+    let shows = [];
+    if (error) {
+      throw error;
+    } else {
+      for (let i = 0; i < body.length; i++) {
+        let event = {};
+        event.name = body[i].name.text;
+        event.date = body[i].start.local.slice(0,10);
+        event.thumbnail = body[i].logo.original.url;
+        shows.push(event);
+      }
+    }
+    res.send(shows);
+  })
+})
+
 app.post('/saveTrip', (req, res) => {
   const body = req.body;
   const yelpID = body.destination.id;
