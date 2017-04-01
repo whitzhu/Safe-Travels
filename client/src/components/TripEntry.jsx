@@ -26,14 +26,8 @@ const tripSource = {
     const dropResult = monitor.getDropResult();
     const componentId = dropResult.componentId;
     props.updateCalEntry(tripEntry, componentId)
-    // console.log('====inside enddrage==========tripEntry',tripEntry);
-    // console.log('==endDrag===dragSource==item', item);
-    // console.log('==endDrag===dragSource==getDropResult', dropResult);
   }
 
-  // isDragging(props, monidropResultor) {
-  //   return monitor.getItem().id === props.id
-  // }
 }
 
 function collect(connect, monitor) {
@@ -50,7 +44,7 @@ class TripEntry extends Component {
   }
 
   render() {
-    const { trip, connectDragSource, isDragging } = this.props;
+    const { index, trip, removeSavedTrip, removeSavedTripState, connectDragSource, isDragging } = this.props;
     return connectDragSource(
       <div>
       <Row>
@@ -63,6 +57,13 @@ class TripEntry extends Component {
               </h4>
               <h5>Address: {trip.address}</h5>
               <h5>{trip.city}, {trip.state} {trip.zipCode}</h5>
+              <a
+                onClick={() => {
+                  removeSavedTrip(trip);
+                  removeSavedTripState(index);
+                }}
+                className='remove-trip'
+              >Remove Trip</a>
               <Accordion>
                 <Panel header="Hours">
                 {trip.hours[0].open.map( (trip, index) => (

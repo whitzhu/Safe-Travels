@@ -52,6 +52,10 @@
   background-color: blue;
 }
 
+.cal-col-trip-entry {
+  max-height: 100px;
+}
+
 /*Trip Entry*/
 .trip-entry-image {
   width: 100%;
