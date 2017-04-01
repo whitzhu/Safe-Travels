@@ -34,8 +34,17 @@ class App extends React.Component {
       phoneNumber: '',
       startDate: '',
       endDate: '',
-      sevenDayForecast: []
+      sevenDayForecast: [],
+      calCol: [
+        { date: new Date(), tripEntry:[]},
+        { date: new Date(), tripEntry:[]},
+        { date: new Date(), tripEntry:[]},
+        { date: new Date(), tripEntry:[]},
+        { date: new Date(), tripEntry:[]},
+        { date: new Date(), tripEntry:[]},
+      ],
     };
+
     this.startDate = null;
     this.endDate = null;
     this.mapDestinations = [];
@@ -58,6 +67,7 @@ class App extends React.Component {
     this.handleNumberChange = this.handleNumberChange.bind(this);
     this.handleNumberSubmit = this.handleNumberSubmit.bind(this);
     this.handleSendItinerary = this.handleSendItinerary.bind(this);
+    this.updateCalEntry = this.updateCalEntry.bind(this);
   }
 
   componentDidMount(){
@@ -278,6 +288,14 @@ class App extends React.Component {
       .catch(error => console.log(error));
   }
 
+  updateCalEntry(tripEntry, id) {
+    let newCalCol = this.state.calCol;
+    newCalCol[id].tripEntry = tripEntry;
+    this.setState({
+      calCol: newCalCol
+    });
+  }
+
   render() {
     return (
       <Router>
@@ -339,8 +357,10 @@ class App extends React.Component {
             path="/plan-trip"
             component={() => (
               <PlanTrip
+                calCol={this.state.calCol}
                 savedTrips={this.state.savedTrips}
                 removeSavedTrip={this.removeSavedTrip}
+                updateCalEntry={this.updateCalEntry}
               />)}
           />
           <Route
