@@ -5,14 +5,13 @@ const propTypes = {
   geoLocation: PropTypes.object.isRequired,
   crimeData: PropTypes.string.isRequired,
   mapDestinations: PropTypes.array.isRequired,
-  savedTrips: PropTypes.array.isRequired
 };
 
 const defaultProps = {
   mapDestinations: [],
 };
 
-class GoogleMap extends React.Component {
+class ProfileMap extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -27,7 +26,7 @@ class GoogleMap extends React.Component {
     this.map = this.createMap();
     directionsDisplay.setMap(this.map);
 
-    // this.createMarkers(this.map);
+    this.createMarkers(this.map);
     this.calcRoute(directionsService, directionsDisplay);
   }
 
@@ -47,14 +46,12 @@ class GoogleMap extends React.Component {
   }
 
   calcRoute(directionsService, directionsDisplay) {
-    console.log('Within calcRoute, check this.props:', this.props);
-    if (this.props.savedTrips && this.props.savedTrips.length > 1) {
+    if (this.props.mapDestinations && this.props.mapDestinations.length > 1) {
       const destinations = [];
-      this.props.savedTrips.forEach((poi) => {
-        console.log('....Current destination looks like:', destinations);
+      this.props.mapDestinations.forEach((value) => {
         destinations.push({
-          location: poi.address + poi.city + ',' + poi.state + poi.zipCode,
-          stopover: true
+          location: value.location.display_address[0] + value.location.display_address[1],
+          stopover: true,
         });
       });
 
@@ -114,9 +111,7 @@ class GoogleMap extends React.Component {
   render() {
     return (
       <div className="google-map">
-      {console.log('.......', this.props)}
         <div ref="map" className="map" />
-      }
       </div>);
   }
 }

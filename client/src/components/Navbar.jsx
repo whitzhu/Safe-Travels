@@ -10,6 +10,11 @@ const propTypes = {
   // storePhoneNumber: PropTypes.func.isRequired
 };
 
+const handleOnClick = () => {
+  props.getSavedTrips();
+  props.setMapDestinations();
+}
+
 const Navbar = props => (
   <div>
     <nav className="navbar navbar-default navbar-static-top">
@@ -30,11 +35,10 @@ const Navbar = props => (
               <li><Link to="/main">Recommendations</Link></li> :
               <li className="main-nav">Please Enter Destination</li>
             }
-            { props.location ? <li onClick={props.setMapDestinations}><Link to="/map">Map</Link></li> : null
-            }
             {
               <li><Link to="/entry">Entry</Link></li>
             }
+            { props.location ? <li onClick={handleOnClick}><Link to="/map">Map</Link></li> : null }
           </ul>
           <ul className="nav navbar-nav navbar-right">
             <li>
