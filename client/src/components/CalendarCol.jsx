@@ -47,7 +47,6 @@ class CalendarCol extends Component {
 
   render() {
     const {caldata, id,connectDropTarget, isOver, isOverCurrent, canDrop, item } = this.props;
-    console.log('=======caldata.tripEntry', caldata.tripEntry);
     return connectDropTarget(
       <div>
         <Col
@@ -60,7 +59,7 @@ class CalendarCol extends Component {
         >
           <p>Date {caldata.date.getDay()}</p>
           {caldata.tripEntry.map( (trip, index) => (
-            <CalColTripEntry trip={trip}/>
+            <CalColTripEntry key={index} trip={trip}/>
           ))}
         </Col>
       </div>

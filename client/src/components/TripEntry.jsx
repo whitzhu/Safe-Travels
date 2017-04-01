@@ -25,7 +25,9 @@ const tripSource = {
     const item = monitor.getItem();
     const dropResult = monitor.getDropResult();
     const componentId = dropResult.componentId;
-    props.updateCalEntry(tripEntry, componentId)
+    const tripEntryId = component.props.index;
+    props.updateCalEntry(tripEntry, componentId);
+    props.removeSavedTripState(tripEntryId);
   }
 
 }
