@@ -169,6 +169,31 @@ app.get('/savedTrips', (req, res) => {
   }
 });
 
+app.post('/shows', (req,res) => {
+  let body = req.body;
+  let queryLink = `https://www.eventbriteapi.com/v3/events/search/?q=${body.query}&sort_by=best&location.address=${body.location}&token=${ApiKeys.eventBriteToken}`;
+  request({
+    uri: queryLink,
+    method: 'GET',
+  }, (error,response,body) => {
+    body = JSON.parse(body).top_match_events;
+    let shows = [];
+    if (error) {
+      throw error;
+    } else {
+      for (let i = 0; i < body.length; i++) {
+        let event = {};
+        event.name = body[i].name.text;
+        event.date = body[i].start.local.slice(0,10);
+        event.thumbnail = body[i].logo.original.url;
+        shows.push(event);
+      }
+    }
+    console.log(shows)
+    res.status(201).send(shows);
+  })
+})
+
 app.post('/saveTrip', (req, res) => {
   const body = req.body;
   const yelpID = body.destination.id;
