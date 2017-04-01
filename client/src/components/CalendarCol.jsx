@@ -9,7 +9,6 @@ const calendarColTarget = {
     const canDrop = monitor.canDrop();
     const dragIndex = monitor.getItem().index;
     const hoverColDate = props.id;
-    // console.log('getItem', monitor.getItem(), 'dragIndex', dragIndex, '====hoverColDate', hoverColDate, 'props', props);
   },
 
   drop(props, monitor, component) {

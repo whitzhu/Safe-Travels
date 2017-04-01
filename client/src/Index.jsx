@@ -75,6 +75,7 @@ class App extends React.Component {
     this.savetripEntryContainer = this.savetripEntryContainer.bind(this);
     this.storeCalendar = this.storeCalendar.bind(this);
     this.getCalendar = this.getCalendar.bind(this);
+    this.updateCalEntry = this.updateCalEntry.bind(this);
   }
 
   componentDidMount(){
@@ -317,7 +318,6 @@ class App extends React.Component {
       calCol: newCalCol
     });
   }
-
   removeCalEntry(entryId, tripIndex) {
     console.log('=====entryId', entryId, '=====tripIndex', tripIndex);
     let newCalCol = this.state.calCol;

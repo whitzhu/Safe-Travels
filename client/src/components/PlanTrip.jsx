@@ -61,5 +61,6 @@ class PlanTrip extends Component {
   }
 }
 
+
 PlanTrip.propTypes = propTypes;
 export default DragDropContext(HTML5Backend)(PlanTrip);
