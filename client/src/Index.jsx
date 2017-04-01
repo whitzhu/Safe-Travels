@@ -7,8 +7,10 @@ import './style.css';
 import Entrance from './components/Entrance';
 import Main from './components/Main';
 import Login from './components/Login';
-import Navbar from './components/Navbar';
+import PhoneEntry from './components/PhoneEntry';
+import NavbarInstance from './components/NavbarInstance';
 import Profile from './components/Profile';
+import PlanTrip from './components/PlanTrip';
 import GoogleMap from './components/GoogleMap';
 
 class App extends React.Component {
@@ -32,6 +34,8 @@ class App extends React.Component {
     this.mapDestinations = [];
     this.setLocationFromSearch = this.setLocationFromSearch.bind(this);
     this.setGeoLocationFromSearch = this.setGeoLocationFromSearch.bind(this);
+    this.login = this.login.bind(this);
+    this.logout = this.logout.bind(this);
     this.queryYelp = this.queryYelp.bind(this);
     this.queryCrime = this.queryCrime.bind(this);
     this.setSelectedDate = this.setSelectedDate.bind(this);
@@ -41,6 +45,49 @@ class App extends React.Component {
     this.handleIsSentFalse = this.handleIsSentFalse.bind(this);
     this.removeSavedTrip = this.removeSavedTrip.bind(this);
     this.setMapDestinations = this.setMapDestinations.bind(this);
+    this.storePhoneNumber = this.storePhoneNumber.bind(this);
+  }
+
+  login() {
+    Axios.get('/login/facebook')
+    .then((res) => {
+    })
+    .catch( error => console.log(error));
+  }
+
+  logout() {
+    Axios.get('/logout')
+    .then((res) => {
+    })
+    .catch( error => console.log(error));
+  }
+
+  login() {
+    Axios.get('/login/facebook')
+    .then((res) => {
+    })
+    .catch( error => console.log(error));
+  }
+
+  logout() {
+    Axios.get('/logout')
+    .then((res) => {
+    })
+    .catch( error => console.log(error));
+  }
+
+  login() {
+    Axios.get('/login/facebook')
+    .then((res) => {
+    })
+    .catch( error => console.log(error));
+  }
+
+  logout() {
+    Axios.get('/logout')
+    .then((res) => {
+    })
+    .catch( error => console.log(error));
   }
 
   removeSavedTrip(trip) {
@@ -48,7 +95,7 @@ class App extends React.Component {
       .then((res) => {
         console.log('Correctly removed trip');
       })
-      .catch(error => console.log(error));
+      .catch( error => console.log(error));
   }
 
   getSavedTrips() {
@@ -80,6 +127,10 @@ class App extends React.Component {
   setSelectedDate({ startDate, endDate }) {
     this.startDate = startDate === null ? this.startDate : startDate;
     this.endDate = endDate === null ? this.endDate : endDate;
+  }
+
+  storePhoneNumber({ number }) {
+
   }
 
   selectDestination(yelpLocation) {
@@ -140,7 +191,6 @@ class App extends React.Component {
               yelpStyle: stateStyle,
             });
           })
-          .catch(error => console.log(error));
       })
       .catch(error => console.log(error));
   }
@@ -149,10 +199,12 @@ class App extends React.Component {
     return (
       <Router>
         <div>
-          <Navbar
+          <NavbarInstance
             location={this.state.location}
             getSavedTrips={this.getSavedTrips}
             geoLocation={this.state.geoLocation}
+            login={this.login}
+            logout={this.logout}
             handleIsSentFalse={this.handleIsSentFalse}
             setMapDestinations={this.setMapDestinations}
           />
@@ -196,6 +248,22 @@ class App extends React.Component {
                 savedTrips={this.state.savedTrips}
                 removeSavedTrip={this.removeSavedTrip}
               />)}
+          />
+          <Route
+            path="/plan-trip"
+            component={() => (
+              <PlanTrip
+                savedTrips={this.state.savedTrips}
+                removeSavedTrip={this.removeSavedTrip}
+              />)}
+          />
+          <Route
+            path="/entry"
+            component={() => (
+              <PhoneEntry
+                storePhoneNumbers={this.state.storePhoneNumbers}
+              />
+            )}
           />
           <Route
             path="/map"

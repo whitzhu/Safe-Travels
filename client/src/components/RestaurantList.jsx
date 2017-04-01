@@ -43,8 +43,9 @@ const RestaurantList = props => (
       <option value="restaurant">Restaurant</option>
     </select>
     <ol>
-      {props.restaurants.map(value =>
+      {props.restaurants.map((value, index) =>
         <RestaurantListEntry
+          key={index}
           restaurant={value}
           selectDestination={props.selectDestination}
           saveDestination={props.saveDestination}

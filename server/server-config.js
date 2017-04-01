@@ -1,14 +1,18 @@
 const bodyParser = require('body-parser');
 const express = require('express');
 const https = require('https');
-const request = require('request');
+const Promise = require('bluebird');
+const request = Promise.promisifyAll(require('request'), { multiArgs: true });
 const database = require('./../database/index');
 const User = require('./../database/models/user');
+const twilio = require('twilio');
 const ApiKeys = require('../config/api-config');
 const passport = require('passport');
 const Strategy = require('passport-facebook').Strategy;
 const cookie = require('cookie-parser');
 const session = require('express-session');
+const zip = require('./zip');
+const util = require('./util.js');
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
@@ -19,10 +23,9 @@ passport.deserializeUser((id, done) => {
     done(err, user);
   });
 });
-
 const app = express();
 
-app.use(cookie('delicious cookie'));
+app.use(cookie('deserializeUsercious cookie'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({
@@ -90,8 +93,8 @@ app.get('/crime', (req, res) => {
       lat: loc.lat,
       lon: loc.lon,
       key,
-      radius,
-    },
+      radius
+          },
   };
 
   request(rOpt, (error, response, body) => {
@@ -112,30 +115,27 @@ app.post('/yelp', (req, res) => {
   console.log(req.body);
   const location = encodeURIComponent(req.body.location);
   const query = encodeURIComponent(req.body.query);
-  // only search price if provided
   const price = req.body.price.length ? `&price=${encodeURIComponent(req.body.price)}` : '';
-  // default sort by rating
-  const url = `https://api.yelp.com/v3/businesses/search?term=${query}&location=${location}${price}&sort_by=rating&limit=9`;
-  request({
-    uri: url,
-    headers: {
-      Authorization: `Bearer ${ApiKeys.yelpApiToken.token}`,
-    },
-    method: 'GET',
-  }, (error, response, body) => {
-    if (error) {
-      console.error('Yelp GET request error');
-    } else {
-      console.log('Yelp GET request successful');
-      res.status(200).send(body);
-    }
-  });
+
+
+  util.yelpSearch(location, query, price)
+    .then( (businesses) => {
+      console.log('yelpSearch success')
+      res.status(200).send(businesses);
+    })
+    .catch(err => console.error('yelpSearch Error', err.message));
 });
 
+
+
 app.get('/weather', (req, res) => {
-  const location = encodeURIComponent(req.query.location);
+  // const location = encodeURIComponent(req.query.location);
+  const location = req.query.location;
+  // const location = 'San Francisco'
+  console.log('location', location);
   const openWeatherApiKey = ApiKeys.openWeatherApiKey;
   const apiUrl = 'http://api.openweathermap.org/data/2.5/forecast/daily';
+  // const test = 'api.openweathermap.org/data/2.5/weather?zip=94040,us'
 
   request({
     uri: apiUrl,
@@ -171,7 +171,11 @@ app.get('/savedTrips', (req, res) => {
 
 app.post('/saveTrip', (req, res) => {
   const body = req.body;
+  const yelpID = body.destination.id;
   const name = body.destination.name;
+  const longitude = body.destination.coordinates.longitude;
+  const latitude = body.destination.coordinates.latitude;
+  const displayAddress = body.destination.location.display_address;
   const address = body.destination.location.address1;
   const city = body.destination.location.city;
   const state = body.destination.location.state;
@@ -180,20 +184,40 @@ app.post('/saveTrip', (req, res) => {
   const dateEnd = body.endDate || null;
   const imageUrl = body.destination.image_url;
   const informationUrl = body.destination.url;
-  const trip = { name, address, city, state, zipCode, dateStart, dateEnd, imageUrl, informationUrl };
   const user = req.user;
-  if (user) {
-    const email = user.email;
-    User.findByIdAndUpdate(
-      user._id,
-      { $addToSet: { trips: trip } },
-      { safe: true, new: true, upsert: true },
-      (err, result) => {
-        res.sendStatus(201);
-      });
-  } else {
-    res.sendStatus(400);
-  }
+
+  util.yelpHours(yelpID)
+    .then( (businessInfo) => {
+      let hours;
+      if ( businessInfo.indexOf('hmtl') > 0) {
+        hours = null;
+      } else {
+        const parseBusinessInfo = JSON.parse(businessInfo);
+        hours = parseBusinessInfo.hours;
+        hours[0].open.forEach( (time, index) => {
+          time.day = time.day === undefined ? util.formatDay(index) : util.formatDay(time.day);
+          time.start = util.formatTime(time.start);
+          time.end = util.formatTime(time.end);
+        })
+      }
+      const trip = { yelpID, name, hours, longitude, latitude, displayAddress, address, city, state, zipCode, dateStart, dateEnd, imageUrl, informationUrl };
+      return trip;
+    })
+    .then( (trip) => {
+      if (user) {
+        const email = user.email;
+        User.findByIdAndUpdate(
+          user._id,
+          { $addToSet: { trips: trip } },
+          { safe: true, new: true, upsert: true },
+          (err, result) => {
+            res.sendStatus(201);
+          });
+      } else {
+        res.sendStatus(400);
+      }
+    })
+    .catch(err => console.error('yelpHour Error', err.message));
 });
 
 app.post('/removeSavedTrip', (req, res) => {
@@ -203,7 +227,7 @@ app.post('/removeSavedTrip', (req, res) => {
   if (user) {
     User.findByIdAndUpdate(
       user._id,
-      { $pull: { trips: body } }, 
+      { $pull: { trips: body } },
       (error, result) => {
         if(error) {
           console.log(error);
@@ -216,6 +240,51 @@ app.post('/removeSavedTrip', (req, res) => {
     res.sendStatus(400);
     console.log('user was not signed in');
   }
+});
+
+
+
+app.post('/zip', (req,res) => {
+  let twiml = new twilio.TwimlResponse();
+  let reply = req.body.Body;
+  if (isNaN(Number(reply))) {
+    Promise.resolve(zip.getShows(reply))
+      .then((results) => {
+        twiml.message(results);
+
+        res.writeHead(200,{'Content-Type': 'text/xml'});
+        res.end(twiml.toString());
+      })
+      .catch( (err) => {
+        console.log('There was an error in getting the shows:', err.code, err.message );
+      })
+  } else {
+    let zipCode = zip.cleanUserInputAsZipcode(reply);
+    Promise.resolve((zip.getWeatherForecast(zipCode))
+      .then( (results) => {
+        twiml.message(results);
+
+        res.writeHead(200, {'Content-Type': 'text/xml'});
+        res.end(twiml.toString());
+      })
+      .catch( (err) => {
+        console.log('Got an error in getWeatherForecast:', err.code, err.message);
+      })
+    )
+  }
+})
+
+app.post('/storePhoneNumber', (req, res) => {
+   const phoneNumber = req.body;
+   const userID = req.body;
+   let targetUser = User.findOne({ userID: userID });
+   if (targetUser) {
+    targetUser.push({ phoneNumber: phoneNumber }, (error, response) => {
+      res.status(200);
+     });
+   } else {
+    res.sendStatus(400);
+   }
 });
 
 app.get('/*', (req, res) => {
