@@ -45,9 +45,9 @@ class Main extends React.Component {
   }
 
   handleShowMap() {
-    this.setState({
-      showMap: !this.state.showMap,
-    });
+    // this.setState({
+    //   showMap: !this.state.showMap,
+    // });
   }
 
   render() {
@@ -72,14 +72,6 @@ class Main extends React.Component {
             />
           </div>
           <hr className="hr-style" />
-          <div className="row">
-            <h3 className="attraction-title">Check out some of these attractions!</h3>
-            <AttractionList
-              saveDestination={this.saveDestination}
-              attractions={this.props.attractionResults.businesses || []}
-              selectDestination={this.props.selectDestination}
-            />
-          </div>
           <hr className="hr-style" />
           <div className="row seven-cols weather">
             <Weather
