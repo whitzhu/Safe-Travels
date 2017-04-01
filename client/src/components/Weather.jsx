@@ -4,6 +4,7 @@ import '../weather-icons.css';
 
 const propTypes = {
   location: PropTypes.string.isRequired,
+  getSevenDayForecast: PropTypes.func.isRequired
 };
 
 export default class Weather extends React.Component {

@@ -16,7 +16,7 @@ const propTypes = {
   yelpStyle: PropTypes.string.isRequired,
   attractionResults: PropTypes.object.isRequired,
   crimeData: PropTypes.array.isRequired,
-  geoLocation: PropTypes.object.isRequired,
+  geoLocation: PropTypes.object.isRequired
 };
 
 const defaultProps = {

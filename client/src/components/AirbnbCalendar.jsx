@@ -12,14 +12,27 @@ export default class AirbnbCalendar extends React.Component {
       focusedInput: null,
       startDate: null,
       endDate: null,
+      dateStorage: []
     };
     this.onDatesChange = this.onDatesChange.bind(this);
     this.onFocusChange = this.onFocusChange.bind(this);
+    this.dateArray = [];
   }
 
   onDatesChange({ startDate, endDate }) {
-    this.setState({ startDate, endDate });
-    this.props.setSelectedDate({ startDate, endDate });
+    if (startDate !== null) {
+        this.dateArray[0] = startDate;
+    }
+    if (endDate !== null) {
+      this.dateArray[1] = endDate;
+    }
+    this.setState({
+      dateStorage: this.dateArray
+    })
+
+    if (this.state.dateStorage[0] !== undefined && this.state.dateStorage[1] !== undefined) {
+      this.props.setSelectedDate(this.state.dateStorage[0], this.state.dateStorage[1]);
+    }
   }
 
   onFocusChange(focusedInput) {
