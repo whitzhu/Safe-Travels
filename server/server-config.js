@@ -23,7 +23,6 @@ passport.deserializeUser((id, done) => {
     done(err, user);
   });
 });
-
 const app = express();
 
 app.use(cookie('deserializeUsercious cookie'));
@@ -94,8 +93,8 @@ app.get('/crime', (req, res) => {
       lat: loc.lat,
       lon: loc.lon,
       key,
-      radius,
-    },
+      radius
+          },
   };
 
   request(rOpt, (error, response, body) => {
@@ -126,6 +125,8 @@ app.post('/yelp', (req, res) => {
     })
     .catch(err => console.error('yelpSearch Error', err.message));
 });
+
+
 
 app.get('/weather', (req, res) => {
   // const location = encodeURIComponent(req.query.location);
@@ -241,22 +242,37 @@ app.post('/removeSavedTrip', (req, res) => {
   }
 });
 
-app.post('/zip', (req, res) => {
+
+
+app.post('/zip', (req,res) => {
   let twiml = new twilio.TwimlResponse();
-  let zipCode = zip.cleanUserInputAsZipcode(req.body.Body);
+  let reply = req.body.Body;
+  if (isNaN(Number(reply))) {
+    Promise.resolve(zip.getShows(reply))
+      .then((results) => {
+        twiml.message(results);
 
-  Promise.resolve((zip.getWeatherForecast(zipCode))
-    .then( (results) => {
-      twiml.message(results);
+        res.writeHead(200,{'Content-Type': 'text/xml'});
+        res.end(twiml.toString());
+      })
+      .catch( (err) => {
+        console.log('There was an error in getting the shows:', err.code, err.message );
+      })
+  } else {
+    let zipCode = zip.cleanUserInputAsZipcode(reply);
+    Promise.resolve((zip.getWeatherForecast(zipCode))
+      .then( (results) => {
+        twiml.message(results);
 
-      res.writeHead(200, {'Content-Type': 'text/xml'});
-      res.end(twiml.toString());
-    })
-    .catch( (err) => {
-      console.log('Got an error in getWeatherForecast:', err.code, err.message);
-    })
-  )
-});
+        res.writeHead(200, {'Content-Type': 'text/xml'});
+        res.end(twiml.toString());
+      })
+      .catch( (err) => {
+        console.log('Got an error in getWeatherForecast:', err.code, err.message);
+      })
+    )
+  }
+})
 
 app.post('/storePhoneNumber', (req, res) => {
    const phoneNumber = req.body;
