@@ -29,7 +29,8 @@ class App extends React.Component {
       yelpPrice: '3',
       yelpStyle: 'casual',
       mapDestinations: [],
-      shows: []
+      shows: [],
+      hotels:[]
     };
     this.startDate = null;
     this.endDate = null;
@@ -49,11 +50,13 @@ class App extends React.Component {
     this.removeSavedTrip = this.removeSavedTrip.bind(this);
     this.setMapDestinations = this.setMapDestinations.bind(this);
     this.storePhoneNumber = this.storePhoneNumber.bind(this);
+    this.queryHotels = this.queryHotels.bind(this);
   }
 
-  // componentDidMount(){
-  //   this.queryShows();
-  // }
+  componentDidMount(){
+    this.queryShows();
+    this.queryHotels();
+  }
 
   login() {
     Axios.get('/login/facebook')
@@ -166,6 +169,20 @@ class App extends React.Component {
     .catch((error) => {
       console.log(error);
     });
+  }
+
+  queryHotels() {
+    let dummyData = {
+      location: 'San Francisco'
+    }
+    return Axios.post('/hotels', dummyData)
+    .then((listings) => {
+      console.log('success fetching hotel data from server');
+      this.setState({hotels: listings.data})
+    })
+    .catch((error) => {
+      console.log(error);
+    })
   }
 
   queryShows(){
