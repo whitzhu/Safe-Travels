@@ -76,6 +76,7 @@ class App extends React.Component {
     this.storeCalendar = this.storeCalendar.bind(this);
     this.getCalendar = this.getCalendar.bind(this);
     this.updateCalEntry = this.updateCalEntry.bind(this);
+    this.removeSavedTripState = this.removeSavedTripState.bind(this);
   }
 
   componentDidMount(){
