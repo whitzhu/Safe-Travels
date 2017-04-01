@@ -57,6 +57,7 @@ class App extends React.Component {
     this.setMapDestinations = this.setMapDestinations.bind(this);
     this.storePhoneNumber = this.storePhoneNumber.bind(this);
     this.updateCalEntry = this.updateCalEntry.bind(this);
+    this.removeSavedTripState = this.removeSavedTripState.bind(this);
   }
 
   login() {
@@ -79,6 +80,13 @@ class App extends React.Component {
         console.log('Correctly removed trip');
       })
       .catch( error => console.log(error));
+  }
+
+  removeSavedTripState(id) {
+    const newSavedTrips = this.state.savedTrips;
+    this.setState({
+      savedTrips: newSavedTrips
+    });
   }
 
   getSavedTrips() {
@@ -180,7 +188,7 @@ class App extends React.Component {
 
   updateCalEntry(tripEntry, id) {
     let newCalCol = this.state.calCol;
-    newCalCol[id].tripEntry = tripEntry;
+    newCalCol[id].tripEntry = newCalCol[id].tripEntry.concat([tripEntry]);
     this.setState({
       calCol: newCalCol
     });
@@ -247,6 +255,7 @@ class App extends React.Component {
                 calCol={this.state.calCol}
                 savedTrips={this.state.savedTrips}
                 removeSavedTrip={this.removeSavedTrip}
+                removeSavedTripState={this.removeSavedTripState}
                 updateCalEntry={this.updateCalEntry}
               />)}
           />

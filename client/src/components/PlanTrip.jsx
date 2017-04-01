@@ -9,7 +9,7 @@ const propTypes = {
   savedTrips: PropTypes.array.isRequired,
 };
 
-const PlanTrip  = ({savedTrips, calCol, updateCalEntry}) => (
+const PlanTrip  = ({savedTrips, removeSavedTrip, removeSavedTripState, calCol, updateCalEntry}) => (
   <div>
 
     <Grid>
@@ -19,8 +19,11 @@ const PlanTrip  = ({savedTrips, calCol, updateCalEntry}) => (
         {savedTrips.map( (trip, index) => (
          <TripEntry
           key={index}
+          index={index}
           trip={trip}
           updateCalEntry={updateCalEntry}
+          removeSavedTrip={removeSavedTrip}
+          removeSavedTripState={removeSavedTripState}
         />
         ))}
       </Col>

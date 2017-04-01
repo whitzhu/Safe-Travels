@@ -2,6 +2,7 @@ import React, { Component, PropTypes} from 'react';
 import { ItemTypes } from './Constants';
 import { DropTarget } from 'react-dnd';
 import { Row, Col } from 'react-bootstrap';
+import CalColTripEntry from './CalColTripEntry';
 
 const calendarColTarget = {
   hover(props, monitor, component) {
@@ -46,6 +47,7 @@ class CalendarCol extends Component {
 
   render() {
     const {caldata, id,connectDropTarget, isOver, isOverCurrent, canDrop, item } = this.props;
+    console.log('=======caldata.tripEntry', caldata.tripEntry);
     return connectDropTarget(
       <div>
         <Col
@@ -57,6 +59,9 @@ class CalendarCol extends Component {
           className='calendar-col' id='cal-col-1'
         >
           <p>Date {caldata.date.getDay()}</p>
+          {caldata.tripEntry.map( (trip, index) => (
+            <CalColTripEntry trip={trip}/>
+          ))}
         </Col>
       </div>
     );
