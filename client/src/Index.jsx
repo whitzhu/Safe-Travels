@@ -73,6 +73,7 @@ class App extends React.Component {
     this.removeSavedTripState = this.removeSavedTripState.bind(this);
     this.removeCalEntry = this.removeCalEntry.bind(this);
     this.savetripEntryContainer = this.savetripEntryContainer.bind(this);
+    this.storeCalendar = this.storeCalendar.bind(this);
   }
 
   componentDidMount(){
@@ -336,6 +337,15 @@ class App extends React.Component {
     .catch(error => console.log(error));
   }
 
+  storeCalendar() {
+    console.log('client --- storeCalendar()', this.state.calCol);
+    Axios.post('/saveTrip/calendar', {
+      planCalendar: this.state.calCol
+      })
+    .then(response => console.log('storeCalendar Success '))
+    .catch(error => console.log('storeCalendar Error: ', error));
+  }
+
   render() {
     return (
       <Router>
@@ -399,11 +409,13 @@ class App extends React.Component {
               <PlanTrip
                 calCol={this.state.calCol}
                 savedTrips={this.state.savedTrips}
+                savedTripEntryContainer={this.state.savedTripEntryContainer}
                 savetripEntryContainer={this.savetripEntryContainer}
                 removeSavedTrip={this.removeSavedTrip}
                 removeSavedTripState={this.removeSavedTripState}
                 updateCalEntry={this.updateCalEntry}
                 removeCalEntry={this.removeCalEntry}
+                storeCalendar={this.storeCalendar}
               />)}
           />
           <Route

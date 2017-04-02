@@ -10,13 +10,13 @@ const propTypes = {
   savedTrips: PropTypes.array.isRequired,
 };
 
-const PlanTrip  = ({savedTrips, removeSavedTrip, removeSavedTripState, calCol, updateCalEntry, removeCalEntry, savetripEntryContainer}) => (
+const PlanTrip  = ({savedTrips, savedTripEntryContainer, storeCalendar, removeSavedTrip, removeSavedTripState, calCol, updateCalEntry, removeCalEntry, savetripEntryContainer}) => (
   <div>
     <Grid>
       <Row>
         <Col xs={3} md={3}>
           <TripEntryContainer
-            savedTrips={savedTrips}
+            savedTrips={savedTripEntryContainer}
             updateCalEntry={updateCalEntry}
             removeSavedTrip={removeSavedTrip}
             removeSavedTripState={removeSavedTripState}
@@ -34,6 +34,7 @@ const PlanTrip  = ({savedTrips, removeSavedTrip, removeSavedTripState, calCol, u
         </Col>
         <Col xs={9} md={9}>
           <h1>Calendar</h1>
+          <button onClick={storeCalendar}>Save Calendar</button>
           <Calendar
             calCol={calCol}
             removeCalEntry={removeCalEntry}
