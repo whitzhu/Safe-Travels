@@ -61,10 +61,15 @@
   height: 500px;
 }
 
+/*Trip Entry Container*/
+.trip-entry-container {
+  height: 500px;
+}
 /*Trip Entry*/
 .trip-entry-image {
   width: 100%;
 }
+
 
 /*yelp restaurant styling*/
 .yelp-img {

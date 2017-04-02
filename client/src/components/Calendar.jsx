@@ -11,7 +11,6 @@ class Calendar extends React.Component {
 
   render() {
     const {calCol, updateCalEntry, removeCalEntry, savetripEntryContainer} = this.props;
-
     return (
       <div>
         <Grid>

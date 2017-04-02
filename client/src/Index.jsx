@@ -37,6 +37,7 @@ class App extends React.Component {
       sevenDayForecast: [],
       tripEntryContainer: [],
       savedTripEntryContainer: [],
+      tripEntryContainer: [],
       calCol: [
         { date: '2017-04-02', tripEntry:[]},
         { date: '2017-04-03', tripEntry:[]},
@@ -77,6 +78,8 @@ class App extends React.Component {
     this.getCalendar = this.getCalendar.bind(this);
     this.updateCalEntry = this.updateCalEntry.bind(this);
     this.removeSavedTripState = this.removeSavedTripState.bind(this);
+    this.removeCalEntry = this.removeCalEntry.bind(this);
+    this.savetripEntryContainer = this.savetripEntryContainer.bind(this);
   }
 
   componentDidMount(){
@@ -356,6 +359,26 @@ class App extends React.Component {
         this.setState({ calCol: res.data });
 
     });
+  }
+
+  removeCalEntry(entryId, tripIndex) {
+    console.log('=====entryId', entryId, '=====tripIndex', tripIndex);
+    let newCalCol = this.state.calCol;
+    console.log("newCalCol[entryId].tripEntry-======",newCalCol[entryId].tripEntry );
+    newCalCol[entryId].tripEntry.splice(tripIndex, 1);
+    this.setState({
+      calCol: newCalCol
+    });
+  }
+
+  upDate(destination) {
+    return Axios.post('/saveTrip', {
+      destination,
+      startDate: this.props.startDate,
+      endDate: this.props.endDate,
+    })
+    .then(response => console.log(response))
+    .catch(error => console.log(error));
   }
 
   render() {

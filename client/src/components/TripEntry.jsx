@@ -27,7 +27,6 @@ const tripSource = {
     const componentId = dropResult.componentId;
     const tripEntryId = component.props.index;
     const type = dropResult.type;
-    // console.log('=========endDrag dropResult.type', );
     if (type === 'calendar') {
       props.updateCalEntry(tripEntry, componentId);
       props.removeSavedTripState(tripEntryId);

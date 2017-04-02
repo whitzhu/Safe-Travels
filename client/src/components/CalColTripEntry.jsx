@@ -21,9 +21,7 @@ const calColTripEntrySource = {
     const dropResult = monitor.getDropResult();
     const componentId = dropResult.componentId;
     const type = dropResult.type;
-    // console.log("==========CalColTripEntry, dropResult", dropResult);
-    console.log("==========PROPS is", props);
-    console.log("==========savetripEntryContainer is", props.savetripEntryContainer);
+
     if (type === 'tripContainer') {
       props.removeCalEntry(props.entryId, props.tripIndex);
       props.savetripEntryContainer(tripEntry);

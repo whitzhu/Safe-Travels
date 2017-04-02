@@ -16,8 +16,6 @@ const calendarColTarget = {
       return;
     }
 
-    console.log("CalendarCol==drop()==", component);
-
     return {
       moved: true,
       componentId: component.props.id,
@@ -71,5 +69,3 @@ class CalendarCol extends Component {
 }
 
 export default DropTarget(ItemTypes.TRIPENTRY, calendarColTarget, collect)(CalendarCol);
-
-
