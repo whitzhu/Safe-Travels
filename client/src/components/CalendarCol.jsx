@@ -46,7 +46,7 @@ class CalendarCol extends Component {
   }
 
   render() {
-    const {caldata, removeCalEntry, savetripEntryContainer, id, connectDropTarget, isOver, isOverCurrent, canDrop, item } = this.props;
+    const {caldata, updateCalEntry, removeCalEntry, savetripEntryContainer, id, connectDropTarget, isOver, isOverCurrent, canDrop, item } = this.props;
     return connectDropTarget(
       <div>
         <Col
@@ -66,6 +66,7 @@ class CalendarCol extends Component {
               trip={trip}
               removeCalEntry={removeCalEntry}
               savetripEntryContainer={savetripEntryContainer}
+              updateCalEntry={updateCalEntry}
             />
           ))}
         </Col>

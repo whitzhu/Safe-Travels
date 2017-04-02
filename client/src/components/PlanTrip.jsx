@@ -30,6 +30,7 @@ const PlanTrip  = ({savedTrips, removeSavedTrip, removeSavedTripState, calCol, u
             calCol={calCol}
             removeCalEntry={removeCalEntry}
             savetripEntryContainer={savetripEntryContainer}
+            updateCalEntry={updateCalEntry}
           />
         </Col>
       </Row>
