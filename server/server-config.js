@@ -297,7 +297,7 @@ app.post('/removeSavedTrip', (req, res) => {
 
 app.post('/sendItinerary', (req, res) => {
   let message = req.body.message;
-  zip.getEachNum({'Gary Wong': '+14156974834'}, message);
+  zip.getEachNum(ApiKeys.testContacts, message);
   res.sendStatus(201);
 })
 
