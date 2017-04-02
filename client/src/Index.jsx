@@ -37,12 +37,12 @@ class App extends React.Component {
       sevenDayForecast: [],
       tripEntryContainer: [],
       calCol: [
-        { date: new Date(), tripEntry:[]},
-        { date: new Date(), tripEntry:[]},
-        { date: new Date(), tripEntry:[]},
-        { date: new Date(), tripEntry:[]},
-        { date: new Date(), tripEntry:[]},
-        { date: new Date(), tripEntry:[]},
+        { date: '2017-04-02', tripEntry:[]},
+        { date: '2017-04-03', tripEntry:[]},
+        { date: '2017-04-04', tripEntry:[]},
+        { date: '2017-04-05', tripEntry:[]},
+        { date: '2017-04-06', tripEntry:[]},
+        { date: '2017-04-07', tripEntry:[]},
       ],
     };
 
