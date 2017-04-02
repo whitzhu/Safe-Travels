@@ -29,6 +29,8 @@ passport.deserializeUser((id, done) => {
 });
 const app = express();
 
+var profileIdCheck;
+
 app.use(cookie('deserializeUsercious cookie'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -48,6 +50,7 @@ passport.use(new Strategy({
   profileFields: ['id', 'displayName', 'email'],
 },
   (accessToken, refreshToken, profile, done) => {
+    profileIdCheck = profile.id;
     User.findOne({ userID: profile.id }, (err, oldUser) => {
       if (oldUser) {
         done(null, oldUser);
@@ -336,9 +339,10 @@ app.post('/zip', (req, res) => {
 })
 
 app.post('/storePhoneNumber', (req, res) => {
-  console.log('/storePhoneNumber Post received:', req);
+  // console.log('/storePhoneNumber Post received:', req);
    const phoneNumber = req.body.phoneNumber;
-   const userID = '10155097447419242';
+   const userID = profileIdCheck;
+   // console.log('....Testing similarity:', userID, '...', profileIdCheck);
    User.findOne({ userID: userID }, (err, user) => {
     user.phoneNumber = phoneNumber;
 
