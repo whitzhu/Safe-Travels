@@ -167,7 +167,11 @@ class App extends React.Component {
       })
   }
 
-  handleNumberSubmit() {
+  handleNumberSubmit(number) {
+    console.log('indexJSX: handleNumberSubmit called');
+    this.setState({
+      phoneNumber: number
+    })
     this.storePhoneNumber();
   }
 

@@ -336,8 +336,9 @@ app.post('/zip', (req, res) => {
 })
 
 app.post('/storePhoneNumber', (req, res) => {
+  console.log('/storePhoneNumber Post received:', req);
    const phoneNumber = req.body.phoneNumber;
-   const userID = '10155070393266758';
+   const userID = '10155097447419242';
    User.findOne({ userID: userID }, (err, user) => {
     user.phoneNumber = phoneNumber;
 
