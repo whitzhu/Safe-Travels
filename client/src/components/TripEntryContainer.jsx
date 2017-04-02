@@ -44,7 +44,7 @@ class tripEntryContainer extends Component {
   }
 
   render() {
-    const {savedTrips, updateCalEntry, removeSavedTrip, removeSavedTripState, connectDropTarget, isOver, isOverCurrent, canDrop, item } = this.props;
+    const {savedTrips, planTripEntryContainer, updateCalEntry, removeSavedTrip, removeSavedTripState, connectDropTarget, isOver, isOverCurrent, canDrop, item } = this.props;
     return connectDropTarget(
       <div>
         <Col
@@ -56,7 +56,7 @@ class tripEntryContainer extends Component {
           className='trip-entry-container'
         >
          <h1>Plan Trip</h1>
-        {savedTrips.map( (trip, index) => (
+        {planTripEntryContainer.map( (trip, index) => (
           <TripEntry
             key={index}
             index={index}

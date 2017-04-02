@@ -29,7 +29,7 @@ class App extends React.Component {
       yelpPrice: '3',
       yelpStyle: 'casual',
       mapDestinations: [],
-      tripEntryContainer: [],
+      planTripEntryContainer: [],
       calCol: [
         { date: new Date(), tripEntry:[]},
         { date: new Date(), tripEntry:[]},
@@ -79,9 +79,9 @@ class App extends React.Component {
 
   savetripEntryContainer(trip) {
     this.setState({
-      tripEntryContainer: this.state.tripEntryContainer.concat([trip])
+      planTripEntryContainer: this.state.planTripEntryContainer.concat([trip])
     });
-    console.log('======savetripEntryContainer RESULT tripEntryContainer', this.state.tripEntryContainer);
+    console.log('======saveplanTripEntryContainer RESULT planTripEntryContainer', this.state.planTripEntryContainer);
   }
 
   removeSavedTrip(trip) {
@@ -290,6 +290,7 @@ class App extends React.Component {
                 removeSavedTripState={this.removeSavedTripState}
                 updateCalEntry={this.updateCalEntry}
                 removeCalEntry={this.removeCalEntry}
+                planTripEntryContainer={this.state.planTripEntryContainer}
               />)}
           />
           <Route
