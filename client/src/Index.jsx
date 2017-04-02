@@ -430,13 +430,6 @@ class App extends React.Component {
             )}
           />
           <Route
-            path="/drag"
-            component={() => (
-              <DragNdrop
-              />
-            )}
-          />
-          <Route
             path="/map"
             component={() =>
               (<GoogleMap
