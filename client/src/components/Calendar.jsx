@@ -20,20 +20,6 @@ class Calendar extends React.Component {
             <h1>May</h1>
           </Row>
           <Row>
-            <Col xs={2} md={2} className='calendar-col-date'>
-            </Col>
-            <Col xs={2} md={2} className='calendar-col-date'>
-            </Col>
-            <Col xs={2} md={2} className='calendar-col-date'>
-            </Col>
-            <Col xs={2} md={2} className='calendar-col-date'>
-            </Col>
-            <Col xs={2} md={2} className='calendar-col-date'>
-            </Col>
-            <Col xs={2} md={2} className='calendar-col-date'>
-            </Col>
-          </Row>
-          <Row>
             {calCol.map( (caldata, index, id) =>
               <CalendarCol
                 key={index}
