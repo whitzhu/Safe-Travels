@@ -27,6 +27,10 @@ const calColTripEntrySource = {
     if (type === 'tripContainer') {
       props.removeCalEntry(props.entryId, props.tripIndex);
       props.savetripEntryContainer(tripEntry);
+    } else if (type === 'calendar') {
+      console.log('---------calendar');
+      props.removeCalEntry(props.entryId, props.tripIndex);
+      props.updateCalEntry(tripEntry, componentId);
     }
   }
 }

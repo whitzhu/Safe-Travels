@@ -11,7 +11,7 @@ class Calendar extends React.Component {
   }
 
   render() {
-    const {calCol, removeCalEntry, savetripEntryContainer} = this.props;
+    const {calCol, updateCalEntry, removeCalEntry, savetripEntryContainer} = this.props;
 
     return (
       <div>
@@ -41,6 +41,7 @@ class Calendar extends React.Component {
                 caldata={caldata}
                 removeCalEntry={removeCalEntry}
                 savetripEntryContainer={savetripEntryContainer}
+                updateCalEntry={updateCalEntry}
                 type='calendar'
               />
             )}
