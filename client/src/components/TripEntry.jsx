@@ -26,10 +26,13 @@ const tripSource = {
     const dropResult = monitor.getDropResult();
     const componentId = dropResult.componentId;
     const tripEntryId = component.props.index;
-    props.updateCalEntry(tripEntry, componentId);
-    props.removeSavedTripState(tripEntryId);
+    const type = dropResult.type;
+    // console.log('=========endDrag dropResult.type', );
+    if (type === 'calendar') {
+      props.updateCalEntry(tripEntry, componentId);
+      props.removeSavedTripState(tripEntryId);
+    }
   }
-
 }
 
 function collect(connect, monitor) {

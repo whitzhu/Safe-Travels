@@ -1,38 +1,37 @@
 import React, { PropTypes } from 'react';
-import TripEntry from './TripEntry';
-import Calendar from './Calendar';
 import { Grid, Row, Col } from 'react-bootstrap';
 import HTML5Backend from 'react-dnd-html5-backend';
 import { DragDropContext } from 'react-dnd';
+import TripEntryContainer from './TripEntryContainer';
+import TripEntry from './TripEntry';
+import Calendar from './Calendar';
 
 const propTypes = {
   savedTrips: PropTypes.array.isRequired,
 };
 
-const PlanTrip  = ({savedTrips, removeSavedTrip, removeSavedTripState, calCol, updateCalEntry}) => (
+const PlanTrip  = ({savedTrips, removeSavedTrip, removeSavedTripState, calCol, updateCalEntry, removeCalEntry, savetripEntryContainer}) => (
   <div>
-
     <Grid>
       <Row>
-      <Col xs={3} md={3}>
-        <h1>Plan Trip</h1>
-        {savedTrips.map( (trip, index) => (
-         <TripEntry
-          key={index}
-          index={index}
-          trip={trip}
-          updateCalEntry={updateCalEntry}
-          removeSavedTrip={removeSavedTrip}
-          removeSavedTripState={removeSavedTripState}
-        />
-        ))}
-      </Col>
-      <Col xs={9} md={9}>
-        <h1>Calendar</h1>
-        <Calendar
-        calCol={calCol}
-        />
-      </Col>
+        <Col xs={3} md={3}>
+          <TripEntryContainer
+            savedTrips={savedTrips}
+            updateCalEntry={updateCalEntry}
+            removeSavedTrip={removeSavedTrip}
+            removeSavedTripState={removeSavedTripState}
+            type='tripContainer'
+          >
+          </TripEntryContainer>
+        </Col>
+        <Col xs={9} md={9}>
+          <h1>Calendar</h1>
+          <Calendar
+            calCol={calCol}
+            removeCalEntry={removeCalEntry}
+            savetripEntryContainer={savetripEntryContainer}
+          />
+        </Col>
       </Row>
     </Grid>
   </div>

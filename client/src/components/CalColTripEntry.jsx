@@ -4,10 +4,11 @@ import { DragSource } from 'react-dnd';
 import { ItemTypes } from './Constants';
 import { Row, Col } from 'react-bootstrap';
 
+let tripEntry;
 const calColTripEntrySource = {
   beginDrag(props, monitor, Component) {
     const item = {id: props.id};
-    // tripEntry = Component.props.trip
+    tripEntry = Component.props.trip
     return item;
   },
 
@@ -19,6 +20,14 @@ const calColTripEntrySource = {
     const item = monitor.getItem();
     const dropResult = monitor.getDropResult();
     const componentId = dropResult.componentId;
+    const type = dropResult.type;
+    // console.log("==========CalColTripEntry, dropResult", dropResult);
+    console.log("==========PROPS is", props);
+    console.log("==========savetripEntryContainer is", props.savetripEntryContainer);
+    if (type === 'tripContainer') {
+      props.removeCalEntry(props.entryId, props.tripIndex);
+      props.savetripEntryContainer(tripEntry);
+    }
   }
 }
 

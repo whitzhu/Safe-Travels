@@ -2,9 +2,9 @@ import React, { Component, PropTypes} from 'react';
 import { ItemTypes } from './Constants';
 import { DropTarget } from 'react-dnd';
 import { Row, Col } from 'react-bootstrap';
-import CalColTripEntry from './CalColTripEntry';
+import TripEntry from './TripEntry';
 
-const calendarColTarget = {
+const tripEntryContainerTarget = {
   hover(props, monitor, component) {
     const canDrop = monitor.canDrop();
   },
@@ -13,8 +13,6 @@ const calendarColTarget = {
     if ( monitor.didDrop()) {
       return;
     }
-
-    console.log("==========drop, calendar-col, component", component);
 
     return {
       moved: true,
@@ -34,7 +32,7 @@ function collect (connect, monitor) {
   }
 }
 
-class CalendarCol extends Component {
+class tripEntryContainer extends Component {
   renderOverlay(color) {
     return (
       <div
@@ -46,34 +44,34 @@ class CalendarCol extends Component {
   }
 
   render() {
-    const {caldata, removeCalEntry, savetripEntryContainer, id, connectDropTarget, isOver, isOverCurrent, canDrop, item } = this.props;
+    const {savedTrips, updateCalEntry, removeSavedTrip, removeSavedTripState, connectDropTarget, isOver, isOverCurrent, canDrop, item } = this.props;
     return connectDropTarget(
       <div>
         <Col
-          xs={2}
-          md={2}
+          xs={12}
+          md={12}
           style={{
             backgroundColor: isOver ? 'red' : 'white',
           }}
-          className='calendar-col' id='cal-col-1'
+          className='trip-entry-container'
         >
-          <p>Date {caldata.date.getDay()}</p>
-          {caldata.tripEntry.map( (trip, index) => (
-            <CalColTripEntry
-              key={index}
-              entryId={id}
-              tripIndex={index}
-              trip={trip}
-              removeCalEntry={removeCalEntry}
-              savetripEntryContainer={savetripEntryContainer}
-            />
-          ))}
+         <h1>Plan Trip</h1>
+        {savedTrips.map( (trip, index) => (
+          <TripEntry
+            key={index}
+            index={index}
+            trip={trip}
+            updateCalEntry={updateCalEntry}
+            removeSavedTrip={removeSavedTrip}
+            removeSavedTripState={removeSavedTripState}
+          />
+        ))}
         </Col>
       </div>
     );
   }
 }
 
-export default DropTarget(ItemTypes.TRIPENTRY, calendarColTarget, collect)(CalendarCol);
+export default DropTarget(ItemTypes.TRIPENTRY, tripEntryContainerTarget, collect)(tripEntryContainer);
 
 
