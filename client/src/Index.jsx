@@ -38,6 +38,7 @@ class App extends React.Component {
       tripEntryContainer: [],
       savedTripEntryContainer: [],
       tripEntryContainer: [],
+      savedTripEntryContainer: [],
       calCol: [
         { date: '2017-04-02', tripEntry:[]},
         { date: '2017-04-03', tripEntry:[]},

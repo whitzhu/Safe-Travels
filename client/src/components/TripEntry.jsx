@@ -82,3 +82,12 @@ class TripEntry extends Component {
 TripEntry.propTypes = propTypes;
 export default DragSource(ItemTypes.TRIPENTRY, tripSource, collect)(TripEntry);
 
+/*<Accordion>
+  <Panel header="Hours">
+  {trip.hours[0].open.map( (trip, index) => (
+    <p key={index} id={index}>
+      {trip.day}: {trip.start}-{trip.end}
+    </p>
+  ))}
+  </Panel>
+</Accordion>*/
