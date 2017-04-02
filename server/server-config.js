@@ -287,26 +287,22 @@ app.post('/saveTrip/calendar', (req, res) => {
   const body = req.body;
   const user = req.user;
   const planCalendar = body.planCalendar;
-  console.log('addtocalendardb==========', planCalendar);
   if (user) {
     User.findByIdAndUpdate(
       user._id,
-      { planCalendar: planCalendar },
+      { $addToSet: { planCalendar: planCalendar } },
       { safe: true, new: true, upsert: true },
       (err, result) => {
         if (err) {
           console.error('/saveTrip/calendar ERROR: ', err);
           res.sendStatus(400);
         }
-        console.log('/saveTrip/calendar Success');
         res.sendStatus(201);
       });
   } else {
     res.sendStatus(404);
   }
 });
-
-
 
 app.post('/removeSavedTrip', (req, res) => {
   const body = req.body;
