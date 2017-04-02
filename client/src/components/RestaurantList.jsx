@@ -33,12 +33,12 @@ export default class RestaurantList extends React.Component {
   }
 
   handleSubmit(event) {
-    console.log('User submitted: ' + this.state.style);
+    console.log('User submitted: ' + this.state.query);
     event.preventDefault();
     this.props.queryYelp({
       destination: this.state.destination,
       price: event.target.value,
-      style: this.state.style
+      style: this.state.query
     });
   }
 
