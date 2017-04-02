@@ -22,11 +22,16 @@ const calColTripEntrySource = {
     const componentId = dropResult.componentId;
     const type = dropResult.type;
     // console.log("==========CalColTripEntry, dropResult", dropResult);
-    console.log("==========PROPS is", props);
-    console.log("==========savetripEntryContainer is", props.savetripEntryContainer);
+    // console.log("==========PROPS is", props);
+    // console.log("==========savetripEntryContainer is", props.savetripEntryContainer);
     if (type === 'tripContainer') {
       props.removeCalEntry(props.entryId, props.tripIndex);
       props.savetripEntryContainer(tripEntry);
+    } else if (type === 'calendar') {
+      //remove this CalEntry
+      //append to next Calentry
+      console.log('updateCalEntry=======');
+      props.updateCalEntry(tripEntry, componentId);
     }
   }
 }

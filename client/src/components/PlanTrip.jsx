@@ -10,21 +10,18 @@ const propTypes = {
   savedTrips: PropTypes.array.isRequired,
 };
 
-
-
-
-
 class PlanTrip extends Component {
   constructor(props) {
     super(props);
   }
 
-  // componentWillMount() {
-  //   this.props.getPlanTrips();
-  // }
+  componentWillMount() {
+    this.props.getPlanTrips();
+  }
 
   render() {
-    const {savedTrips, planTripEntryContainer, removeTripEntryContainerState, getPlanTrips, removeSavedTrip, removeSavedTripState, calCol, updateCalEntry, removeCalEntry, savetripEntryContainer} = this.props;
+    const {savedTrips, removeTripEntryContainerState, planTripEntryContainer, getPlanTrips, removeSavedTrip, removeSavedTripState, calCol, updateCalEntry, removeCalEntry, savetripEntryContainer} = this.props;
+
     return (
       <div>
         <Grid>

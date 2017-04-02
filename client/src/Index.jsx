@@ -61,6 +61,8 @@ class App extends React.Component {
     this.removeSavedTripState = this.removeSavedTripState.bind(this);
     this.removeCalEntry = this.removeCalEntry.bind(this);
     this.savetripEntryContainer = this.savetripEntryContainer.bind(this);
+    this.getPlanTrips = this.getPlanTrips.bind(this);
+    this.removeTripEntryContainerState = this.removeTripEntryContainerState.bind(this);
   }
 
   login() {
@@ -81,7 +83,18 @@ class App extends React.Component {
     this.setState({
       planTripEntryContainer: this.state.planTripEntryContainer.concat([trip])
     });
-    console.log('======saveplanTripEntryContainer RESULT planTripEntryContainer', this.state.planTripEntryContainer);
+
+    console.log('======savetripEntryContainer RESULT planTripEntryContainer', this.state.planTripEntryContainer);
+  }
+
+  getPlanTrips() {
+    Axios.get('/savedTrips/planTrips')
+      .then((res) => {
+        this.setState({
+          planTripEntryContainer:res.data
+        });
+      })
+      .catch( error => console.log(error));
   }
 
   removeSavedTrip(trip) {
@@ -93,10 +106,29 @@ class App extends React.Component {
   }
 
   removeSavedTripState(id) {
+    console.log('removeTripEntryContainerState', 'id, ', id);
     const newSavedTrips = this.state.savedTrips;
+    console.log('STATE', this.state.savedTrips);
     newSavedTrips.splice(id,1);
     this.setState({
       savedTrips: newSavedTrips
+    });
+    console.log('NEW STATE', this.state.savedTrips);
+  }
+
+  removeTripEntryContainer(trip) {
+    // return Axios.post('/removeSavedTrip', trip)
+    //   .then((res) => {
+    //     console.log('Correctly removed trip');
+    //   })
+    //   .catch( error => console.log(error));
+  }
+
+  removeTripEntryContainerState(id) {
+    const newTripEntryContainer = this.state.planTripEntryContainer;
+    newTripEntryContainer.splice(id,1);
+    this.setState({
+      planTripEntryContainer: newTripEntryContainer
     });
   }
 
@@ -285,12 +317,14 @@ class App extends React.Component {
               <PlanTrip
                 calCol={this.state.calCol}
                 savedTrips={this.state.savedTrips}
+                planTripEntryContainer={this.state.planTripEntryContainer}
                 savetripEntryContainer={this.savetripEntryContainer}
                 removeSavedTrip={this.removeSavedTrip}
                 removeSavedTripState={this.removeSavedTripState}
                 updateCalEntry={this.updateCalEntry}
                 removeCalEntry={this.removeCalEntry}
-                planTripEntryContainer={this.state.planTripEntryContainer}
+                getPlanTrips={this.getPlanTrips}
+                removeTripEntryContainerState={this.removeTripEntryContainerState}
               />)}
           />
           <Route

@@ -11,27 +11,13 @@ class Calendar extends React.Component {
   }
 
   render() {
-    const {calCol, removeCalEntry, savetripEntryContainer} = this.props;
+    const {calCol, removeCalEntry, updateCalEntry, savetripEntryContainer} = this.props;
 
     return (
       <div>
         <Grid>
           <Row>
-            <h1>May</h1>
-          </Row>
-          <Row>
-            <Col xs={2} md={2} className='calendar-col-date'>
-            </Col>
-            <Col xs={2} md={2} className='calendar-col-date'>
-            </Col>
-            <Col xs={2} md={2} className='calendar-col-date'>
-            </Col>
-            <Col xs={2} md={2} className='calendar-col-date'>
-            </Col>
-            <Col xs={2} md={2} className='calendar-col-date'>
-            </Col>
-            <Col xs={2} md={2} className='calendar-col-date'>
-            </Col>
+            <h1>Month</h1>
           </Row>
           <Row>
             {calCol.map( (caldata, index, id) =>
@@ -39,6 +25,7 @@ class Calendar extends React.Component {
                 key={index}
                 id={index}
                 caldata={caldata}
+                updateCalEntry={updateCalEntry}
                 removeCalEntry={removeCalEntry}
                 savetripEntryContainer={savetripEntryContainer}
                 type='calendar'

@@ -12,7 +12,7 @@ let tripEntry;
 const tripSource = {
   beginDrag(props, monitor, Component) {
     const item = {id: props.id};
-    // console.log('==beginDrag===dragSource==Component', Component);
+    console.log('==beginDrag===dragSource==Component', Component);
     tripEntry = Component.props.trip
     return item;
   },
@@ -30,7 +30,7 @@ const tripSource = {
     // console.log('=========endDrag dropResult.type', );
     if (type === 'calendar') {
       props.updateCalEntry(tripEntry, componentId);
-      props.removeSavedTripState(tripEntryId);
+      props.removeTripEntryContainerState(tripEntryId);
     }
   }
 }

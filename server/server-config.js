@@ -24,6 +24,7 @@ passport.deserializeUser((id, done) => {
   });
 });
 
+
 const app = express();
 
 app.use(cookie('deserializeUsercious cookie'));
@@ -168,6 +169,24 @@ app.get('/savedTrips', (req, res) => {
   }
 });
 
+app.get('/savedTrips/planTrips', (req, res) => {
+  const user = req.user;
+  if (user) {
+    User.findOne({
+      _id: user._id,
+    }, (error, response) => {
+      if (error) {
+        console.error('MongoDB planTrips err', error);
+        res.sendStatus(400);
+      } else {
+        res.status(200).json(response.planTrips);
+      }
+    });
+  } else {
+    res.sendStatus(400);
+  }
+});
+
 app.post('/saveTrip', (req, res) => {
   const body = req.body;
   const yelpID = body.destination.id;
@@ -207,7 +226,10 @@ app.post('/saveTrip', (req, res) => {
         const email = user.email;
         User.findByIdAndUpdate(
           user._id,
-          { $addToSet: { trips: trip } },
+          { $addToSet: {
+            trips: trip,
+            planTrips: trip,
+            } },
           { safe: true, new: true, upsert: true },
           (err, result) => {
             res.sendStatus(201);
