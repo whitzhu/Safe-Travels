@@ -59,8 +59,6 @@ class CalColTripEntry extends Component {
               <p className=''>
                 <a href={trip.informationUrl} >{trip.name}</a>
               </p>
-              <p>Address: {trip.address}</p>
-              <p>{trip.city}, {trip.state} {trip.zipCode}</p>
             </div>
           </Col>
         </Row>
