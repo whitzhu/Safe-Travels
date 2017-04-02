@@ -35,6 +35,7 @@ class App extends React.Component {
       startDate: '',
       endDate: '',
       sevenDayForecast: [],
+      tripEntryContainer: [],
       calCol: [
         { date: new Date(), tripEntry:[]},
         { date: new Date(), tripEntry:[]},
@@ -69,6 +70,8 @@ class App extends React.Component {
     this.handleSendItinerary = this.handleSendItinerary.bind(this);
     this.updateCalEntry = this.updateCalEntry.bind(this);
     this.removeSavedTripState = this.removeSavedTripState.bind(this);
+    this.removeCalEntry = this.removeCalEntry.bind(this);
+    this.savetripEntryContainer = this.savetripEntryContainer.bind(this);
   }
 
   componentDidMount(){
@@ -116,6 +119,13 @@ class App extends React.Component {
     .then((res) => {
     })
     .catch( error => console.log(error));
+  }
+
+  savetripEntryContainer(trip) {
+    this.setState({
+      tripEntryContainer: this.state.tripEntryContainer.concat([trip])
+    });
+    console.log('======savetripEntryContainer RESULT tripEntryContainer', this.state.tripEntryContainer);
   }
 
   removeSavedTrip(trip) {
@@ -305,6 +315,26 @@ class App extends React.Component {
     });
   }
 
+  removeCalEntry(entryId, tripIndex) {
+    console.log('=====entryId', entryId, '=====tripIndex', tripIndex);
+    let newCalCol = this.state.calCol;
+    console.log("newCalCol[entryId].tripEntry-======",newCalCol[entryId].tripEntry );
+    newCalCol[entryId].tripEntry.splice(tripIndex, 1);
+    this.setState({
+      calCol: newCalCol
+    });
+  }
+
+  upDate(destination) {
+    return Axios.post('/saveTrip', {
+      destination,
+      startDate: this.props.startDate,
+      endDate: this.props.endDate,
+    })
+    .then(response => console.log(response))
+    .catch(error => console.log(error));
+  }
+
   render() {
     return (
       <Router>
@@ -368,9 +398,11 @@ class App extends React.Component {
               <PlanTrip
                 calCol={this.state.calCol}
                 savedTrips={this.state.savedTrips}
+                savetripEntryContainer={this.savetripEntryContainer}
                 removeSavedTrip={this.removeSavedTrip}
                 removeSavedTripState={this.removeSavedTripState}
                 updateCalEntry={this.updateCalEntry}
+                removeCalEntry={this.removeCalEntry}
               />)}
           />
           <Route
