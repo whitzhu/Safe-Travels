@@ -58,6 +58,7 @@ class App extends React.Component {
     this.queryHotels = this.queryHotels.bind(this);
     this.handleNumberChange = this.handleNumberChange.bind(this);
     this.handleNumberSubmit = this.handleNumberSubmit.bind(this);
+    this.handleSendItinerary = this.handleSendItinerary.bind(this);
   }
 
   componentDidMount(){
@@ -180,6 +181,19 @@ class App extends React.Component {
 
   handleIsSentFalse() {
     this.setState({ isSent: false });
+  }
+
+  handleSendItinerary(e) {
+    e.preventDefault();
+    Axios.post('/sendItinerary', {
+      message: this.state
+    })
+    .then(res => {
+      console.log(res);
+    })
+    .catch(err => {
+      console.log(err);
+    })
   }
 
   queryCrime(geoLocation) {
@@ -358,6 +372,7 @@ class App extends React.Component {
                 savedTrips={this.state.savedTrips}
                 startDate={this.state.startDate}
                 endDate={this.state.endDate}
+                handleSendItinerary={this.handleSendItinerary}
               />)
             }
           />

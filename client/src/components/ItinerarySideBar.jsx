@@ -4,9 +4,10 @@ const propTypes = {
   location: PropTypes.string.isRequired,
   startDate: PropTypes.string.isRequired,
   endDate: PropTypes.string.isRequired,
-  attractions: PropTypes.array.isRequired,
-  restaurants: PropTypes.array.isRequired,
-  savedTrips: PropTypes.array.isRequired
+  attractions: PropTypes.object.isRequired,
+  restaurants: PropTypes.object.isRequired,
+  savedTrips: PropTypes.array.isRequired,
+  handleSendItinerary: PropTypes.func.isRequired
 }
 
 class ItinerarySideBar extends React.Component {
@@ -15,7 +16,7 @@ class ItinerarySideBar extends React.Component {
   } 
 
   render() {
-    const {location, startDate, endDate, attractions, restaurants} = this.props;
+    const {location, startDate, endDate, attractions, restaurants, handleSendItinerary} = this.props;
     const listAttractions = attractions.businesses.map((attraction, index) =>
       <li key={index}>{attraction.name}</li>
     );
@@ -26,7 +27,7 @@ class ItinerarySideBar extends React.Component {
     return (
       <div>
         <div className="container">
-          <form>
+          <form onSubmit={(e) => this.props.handleSendItinerary(e)}>
             <h1>Your Trip</h1>
             <h2>From:</h2>
               <h3>{startDate}</h3>
@@ -44,7 +45,6 @@ class ItinerarySideBar extends React.Component {
                 <ul>{listRestaurants}</ul>
               </h3>
             <input type="submit" value="Send Itinerary To My Phone" />
-            <input type="submit" value="Be My Trip Assistant" />
           </form>
         </div>
       </div>

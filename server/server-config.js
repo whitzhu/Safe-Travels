@@ -295,9 +295,13 @@ app.post('/removeSavedTrip', (req, res) => {
   }
 });
 
+app.post('/sendItinerary', (req, res) => {
+  let message = req.body.message;
+  zip.getEachNum({'Gary Wong': '+14156974834'}, message);
+  res.sendStatus(201);
+})
 
-
-app.post('/zip', (req,res) => {
+app.post('/zip', (req, res) => {
   let twiml = new twilio.TwimlResponse();
   let reply = req.body.Body;
   if (isNaN(Number(reply))) {
@@ -328,17 +332,6 @@ app.post('/zip', (req,res) => {
 })
 
 app.post('/storePhoneNumber', (req, res) => {
-//    const phoneNumber = req.body;
-//    const userID = req.body; // '10155070393266758'
-//    let targetUser = User.findOne({ userID: userID });
-//    if (targetUser) {
-//     targetUser.push({ phoneNumber: phoneNumber }, (error, response) => {
-//       res.status(200);
-//      });
-//    } else {
-//     res.sendStatus(400);
-//    }
-// });
    const phoneNumber = req.body.phoneNumber;
    const userID = '10155070393266758';
    User.findOne({ userID: userID }, (err, user) => {

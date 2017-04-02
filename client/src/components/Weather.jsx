@@ -3,8 +3,7 @@ import Axios from 'axios';
 import '../weather-icons.css';
 
 const propTypes = {
-  location: PropTypes.string.isRequired,
-  getSevenDayForecast: PropTypes.func.isRequired
+  location: PropTypes.string.isRequired
 };
 
 export default class Weather extends React.Component {
