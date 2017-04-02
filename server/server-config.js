@@ -299,9 +299,13 @@ app.post('/removeSavedTrip', (req, res) => {
   }
 });
 
+app.post('/sendItinerary', (req, res) => {
+  let message = req.body.message;
+  zip.getEachNum(ApiKeys.testContacts, message);
+  res.sendStatus(201);
+})
 
-
-app.post('/zip', (req,res) => {
+app.post('/zip', (req, res) => {
   let twiml = new twilio.TwimlResponse();
   let reply = req.body.Body;
   if (isNaN(Number(reply))) {
@@ -332,17 +336,19 @@ app.post('/zip', (req,res) => {
 })
 
 app.post('/storePhoneNumber', (req, res) => {
-   const phoneNumber = req.body;
-   const userID = req.body;
-   let targetUser = User.findOne({ userID: userID });
-   if (targetUser) {
-    targetUser.push({ phoneNumber: phoneNumber }, (error, response) => {
-      res.status(200);
-     });
-   } else {
-    res.sendStatus(400);
-   }
-});
+   const phoneNumber = req.body.phoneNumber;
+   const userID = '10155070393266758';
+   User.findOne({ userID: userID }, (err, user) => {
+    user.phoneNumber = phoneNumber;
+
+    user.save(err => {
+      if (err) {
+        console.log('Got an error in storePhoneNumber', err);
+      }
+    })
+   })
+})
+
 
 app.post('/api/url', (req, res) => {
   var targetUrl = req.body.url || 'http://bluerival.com/';

@@ -10,6 +10,7 @@ const propTypes = {
   queryCrime: PropTypes.func.isRequired,
   setLocationFromSearch: PropTypes.func.isRequired,
   setGeoLocationFromSearch: PropTypes.func.isRequired,
+  setSelectedDate: PropTypes.func.isRequired
 };
 
 class Entrance extends React.Component {
