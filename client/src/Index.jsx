@@ -36,6 +36,7 @@ class App extends React.Component {
       endDate: '',
       sevenDayForecast: [],
       tripEntryContainer: [],
+      savedTripEntryContainer: [],
       calCol: [
         { date: '2017-04-02', tripEntry:[]},
         { date: '2017-04-03', tripEntry:[]},
@@ -123,7 +124,7 @@ class App extends React.Component {
 
   savetripEntryContainer(trip) {
     this.setState({
-      tripEntryContainer: this.state.tripEntryContainer.concat([trip])
+      savedTripEntryContainer: this.state.savedTripEntryContainer.concat([trip])
     });
     console.log('======savetripEntryContainer RESULT tripEntryContainer', this.state.tripEntryContainer);
   }

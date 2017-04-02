@@ -23,6 +23,14 @@ const PlanTrip  = ({savedTrips, removeSavedTrip, removeSavedTripState, calCol, u
             type='tripContainer'
           >
           </TripEntryContainer>
+          <TripEntryContainer
+            savedTrips={savedTrips}
+            updateCalEntry={updateCalEntry}
+            removeSavedTrip={removeSavedTrip}
+            removeSavedTripState={removeSavedTripState}
+            type='tripContainer'
+          >
+          </TripEntryContainer>
         </Col>
         <Col xs={9} md={9}>
           <h1>Calendar</h1>

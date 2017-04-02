@@ -57,27 +57,19 @@ class TripEntry extends Component {
           <div className="card card-block">
             <img className='trip-entry-image' src={trip.imageUrl} alt="restaurant" />
             <div>
-              <h4 className="card-title restaurant-li">
+              <h5 className="card-title restaurant-li">
                 <a href={trip.informationUrl} >{trip.name}</a>
-              </h4>
-              <h5>Address: {trip.address}</h5>
-              <h5>{trip.city}, {trip.state} {trip.zipCode}</h5>
+              </h5>
+              <p>
+                {trip.displayAddress}
+              </p>
               <a
                 onClick={() => {
                   removeSavedTrip(trip);
                   removeSavedTripState(index);
                 }}
                 className='remove-trip'
-              >Remove Trip</a>
-              <Accordion>
-                <Panel header="Hours">
-                {trip.hours[0].open.map( (trip, index) => (
-                  <p key={index} id={index}>
-                    {trip.day}: {trip.start}-{trip.end}
-                  </p>
-                ))}
-                </Panel>
-              </Accordion>
+              >Remove</a>
             </div>
             <br />
           </div>
@@ -91,3 +83,12 @@ class TripEntry extends Component {
 TripEntry.propTypes = propTypes;
 export default DragSource(ItemTypes.TRIPENTRY, tripSource, collect)(TripEntry);
 
+/*<Accordion>
+  <Panel header="Hours">
+  {trip.hours[0].open.map( (trip, index) => (
+    <p key={index} id={index}>
+      {trip.day}: {trip.start}-{trip.end}
+    </p>
+  ))}
+  </Panel>
+</Accordion>*/
