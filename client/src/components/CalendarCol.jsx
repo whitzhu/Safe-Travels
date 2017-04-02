@@ -7,6 +7,9 @@ import CalColTripEntry from './CalColTripEntry';
 const calendarColTarget = {
   hover(props, monitor, component) {
     const canDrop = monitor.canDrop();
+    const dragIndex = monitor.getItem().index;
+    const hoverColDate = props.id;
+    // console.log('getItem', monitor.getItem(), 'dragIndex', dragIndex, '====hoverColDate', hoverColDate, 'props', props);
   },
 
   drop(props, monitor, component) {
@@ -14,7 +17,7 @@ const calendarColTarget = {
       return;
     }
 
-    console.log("==========drop, calendar-col, component", component);
+    console.log("CalendarCol==drop()==", component);
 
     return {
       moved: true,
@@ -35,15 +38,6 @@ function collect (connect, monitor) {
 }
 
 class CalendarCol extends Component {
-  renderOverlay(color) {
-    return (
-      <div
-        style={{
-          backgroundColor: color,
-        }}
-      />
-    );
-  }
 
   render() {
     const {caldata, updateCalEntry, removeCalEntry, savetripEntryContainer, id, connectDropTarget, isOver, isOverCurrent, canDrop, item } = this.props;
@@ -57,10 +51,12 @@ class CalendarCol extends Component {
           }}
           className='calendar-col' id='cal-col-1'
         >
-          <p>Date {caldata.date.getDay()}</p>
+          <p>{caldata.date.slice(-2)}</p>
           {caldata.tripEntry.map( (trip, index) => (
             <CalColTripEntry
-              key={index}
+              key={trip.yelpID}
+              id={trip.yelpID}
+              index={index}
               entryId={id}
               tripIndex={index}
               trip={trip}

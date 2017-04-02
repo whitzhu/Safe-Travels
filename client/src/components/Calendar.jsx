@@ -17,7 +17,7 @@ class Calendar extends React.Component {
       <div>
         <Grid>
           <Row>
-            <h1>May</h1>
+            <h1>April</h1>
           </Row>
           <Row>
             {calCol.map( (caldata, index, id) =>
