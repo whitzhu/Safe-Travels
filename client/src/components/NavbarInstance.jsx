@@ -21,6 +21,7 @@ const NavbarInstance = props => (
         </Navbar.Header>
         <Navbar.Collapse>
            <Nav>
+              <NavItem><Link to="/drag" onClick={props.getSavedTrips}>Drag</Link></NavItem>
             { document.cookie.replace(/(?:(?:^|.*;\s*)isLoggedIn\s*\=\s*([^;]*).*$)|^.*$/, '$1') === 'true' ?
               <Nav>
                 <NavItem><Link to="/profile" onClick={props.getSavedTrips}>Profile</Link></NavItem>

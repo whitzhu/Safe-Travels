@@ -71,10 +71,6 @@ class App extends React.Component {
     this.handleNumberChange = this.handleNumberChange.bind(this);
     this.handleNumberSubmit = this.handleNumberSubmit.bind(this);
     this.handleSendItinerary = this.handleSendItinerary.bind(this);
-    this.updateCalEntry = this.updateCalEntry.bind(this);
-    this.removeSavedTripState = this.removeSavedTripState.bind(this);
-    this.removeCalEntry = this.removeCalEntry.bind(this);
-    this.savetripEntryContainer = this.savetripEntryContainer.bind(this);
     this.storeCalendar = this.storeCalendar.bind(this);
     this.getCalendar = this.getCalendar.bind(this);
     this.updateCalEntry = this.updateCalEntry.bind(this);
@@ -104,32 +100,11 @@ class App extends React.Component {
     .catch( error => console.log(error));
   }
 
-  login() {
-    Axios.get('/login/facebook')
-    .then((res) => {
-    })
-    .catch( error => console.log(error));
-  }
-
-  logout() {
-    Axios.get('/logout')
-    .then((res) => {
-    })
-    .catch( error => console.log(error));
-  }
-
-  login() {
-    Axios.get('/login/facebook')
-    .then((res) => {
-    })
-    .catch( error => console.log(error));
-  }
-
-  logout() {
-    Axios.get('/logout')
-    .then((res) => {
-    })
-    .catch( error => console.log(error));
+  savetripEntryContainer(trip) {
+    this.setState({
+      tripEntryContainer: this.state.tripEntryContainer.concat([trip])
+    });
+    console.log('======savetripEntryContainer RESULT tripEntryContainer', this.state.tripEntryContainer);
   }
 
   savetripEntryContainer(trip) {
@@ -477,6 +452,13 @@ class App extends React.Component {
                 phoneNumber={this.state.phoneNumber}
                 handleNumberChange={this.handleNumberChange}
                 handleNumberSubmit={this.handleNumberSubmit}
+              />
+            )}
+          />
+          <Route
+            path="/drag"
+            component={() => (
+              <DragNdrop
               />
             )}
           />

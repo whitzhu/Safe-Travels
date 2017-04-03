@@ -92,10 +92,6 @@ body {
   border-radius: 4px;
 }
 
-/*Trip Entry Container*/
-.trip-entry-container {
-  height: 500px;
-}
 /*Trip Entry*/
 .trip-entry-image {
   width: 100%;

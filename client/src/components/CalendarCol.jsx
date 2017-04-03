@@ -15,7 +15,6 @@ const calendarColTarget = {
     if ( monitor.didDrop()) {
       return;
     }
-
     return {
       moved: true,
       componentId: component.props.id,
@@ -37,6 +36,7 @@ function collect (connect, monitor) {
 class CalendarCol extends Component {
 
   render() {
+
     const {caldata, updateCalEntry, updateSavedTrip, removeCalEntry, savetripEntryContainer, id, connectDropTarget, isOver, isOverCurrent, canDrop, item } = this.props;
     return connectDropTarget(
       <div>
@@ -70,3 +70,4 @@ class CalendarCol extends Component {
 }
 
 export default DropTarget(ItemTypes.TRIPENTRY, calendarColTarget, collect)(CalendarCol);
+
