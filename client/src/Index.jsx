@@ -41,7 +41,7 @@ class App extends React.Component {
     this.logout = this.logout.bind(this);
     this.queryYelp = this.queryYelp.bind(this);
     this.queryCrime = this.queryCrime.bind(this);
-    this.queryShows = this.queryShows.bind(this);
+    // this.queryShows = this.queryShows.bind(this);
     this.setSelectedDate = this.setSelectedDate.bind(this);
     this.handleIsSent = this.handleIsSent.bind(this);
     this.getSavedTrips = this.getSavedTrips.bind(this);
@@ -171,6 +171,18 @@ class App extends React.Component {
     });
   }
 
+  // queryShows(showQuery){
+  //   showQuery.query = showQuery.query || 'Events';
+  //   showQuery.location = showQuery.location || this.state.location;
+  //   return Axios.post('/shows', showQuery)
+  //   .then((shows) => {
+  //     console.log('success fetching shows/events from server', shows);
+  //     this.setState({restaurantResults: shows})
+  //   })
+  //   .catch((error) => {
+  //       console.log(error);
+  //   })
+  // }
   queryHotels() {
     let dummyData = {
       location: 'San Francisco'
@@ -182,21 +194,6 @@ class App extends React.Component {
     })
     .catch((error) => {
       console.log(error);
-    })
-  }
-
-  queryShows(){
-    let dummyData = {
-      query: 'Rave',
-      location: 'San Francisco'
-    }
-    return Axios.post('/shows', dummyData)
-    .then((shows) => {
-      console.log('success fetching shows/events from server');
-      this.setState({shows: shows})
-    })
-    .catch((error) => {
-        console.log(error);
     })
   }
 
@@ -213,6 +210,7 @@ class App extends React.Component {
     };
     return Axios.post('/yelp', yelpRestaurantQuery)
       .then((restaurants) => {
+        console.log('restaurants query to yelp provides:', restaurants.data);
         // must query attractions to get attractions
         // reset price prior to attractions query
         const yelpAttractionQuery = {

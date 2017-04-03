@@ -16,7 +16,8 @@ export default class RestaurantList extends React.Component {
     this.state = {
       destination: undefined,
       price: '',
-      style: ''
+      style: '',
+      query: ''
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -25,19 +26,19 @@ export default class RestaurantList extends React.Component {
 
   handleChange(event) {
     this.setState({
-      style: event.target.value,
+      query: event.target.value,
       destination: this.state.destination,
       price: this.state.price
     });
   }
 
   handleSubmit(event) {
-    console.log('User submitted: ' + this.state.style);
+    console.log('User submitted: ' + this.state.query);
     event.preventDefault();
     this.props.queryYelp({
       destination: this.state.destination,
       price: event.target.value,
-      style: this.state.style
+      style: this.state.query
     });
   }
 
@@ -67,16 +68,27 @@ export default class RestaurantList extends React.Component {
           className="yelp-select-style"
           value={this.props.style}
           onChange={(event) => {
-            this.setState({
-              style: event.target.value
-            })
-            this.props.queryYelp({
-              destination: this.state.destination,
-              price: this.state.price,
-              style: event.target.value
-            });
+            if (event.target.value === 'events') {
+              console.log('.....events parameter found');
+              this.setState({
+                query: event.target.value
+              });
+              this.props.queryShows({
+                query: event.target.value,
+              })
+            } else {
+              this.setState({
+                style: event.target.value
+              })
+              this.props.queryYelp({
+                destination: this.state.destination,
+                price: this.state.price,
+                style: event.target.value
+              });
+            }
           }}
         >
+          <option value="events">Events</option>
           <option value="bars">Bars</option>
           <option value="cafe">Cafe</option>
           <option value="casual">Casual</option>

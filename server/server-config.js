@@ -14,6 +14,10 @@ const session = require('express-session');
 const zip = require('./zip');
 const util = require('./util.js');
 
+//Url shortener module
+var GoogleUrl = require( 'google-url' );
+googleUrl = new GoogleUrl( { key: 'AIzaSyD2ewEtkat97qhTxOL5zUVquz7uZSzmrro' });
+
 passport.serializeUser((user, done) => {
   done(null, user.id);
 });
@@ -338,6 +342,17 @@ app.post('/storePhoneNumber', (req, res) => {
    } else {
     res.sendStatus(400);
    }
+});
+
+app.post('/api/url', (req, res) => {
+  var targetUrl = req.body.url || 'http://bluerival.com/';
+  googleUrl.shorten(targetUrl, function( err, shortUrl ) {
+    if (err) {
+      res.status(500).send(err)
+    } else {
+      res.status(200).send(shortUrl)
+    }
+  });
 });
 
 app.get('/*', (req, res) => {
