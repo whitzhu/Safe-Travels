@@ -48,8 +48,9 @@ class CalendarCol extends Component {
           }}
           className='calendar-col' id='cal-col-1'
         >
-          <p>{caldata.date.slice(-2)}</p>
-          {caldata.tripEntry.map( (trip, index) => (
+          <p>{caldata.date}</p>
+          {caldata.tripEntry.length > 0 ?
+            caldata.tripEntry.map( (trip, index) => (
             <CalColTripEntry
               key={trip.yelpID}
               id={trip.yelpID}
@@ -62,7 +63,10 @@ class CalendarCol extends Component {
               updateCalEntry={updateCalEntry}
               updateSavedTrip={updateSavedTrip}
             />
-          ))}
+          ))
+          :
+          null
+          }
         </Col>
       </div>
     );

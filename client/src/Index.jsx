@@ -82,8 +82,8 @@ class App extends React.Component {
   }
 
   componentDidMount(){
-    this.queryShows();
-    this.queryHotels();
+    // this.queryShows();
+    // this.queryHotels();
   }
 
   login() {
@@ -452,13 +452,6 @@ class App extends React.Component {
                 phoneNumber={this.state.phoneNumber}
                 handleNumberChange={this.handleNumberChange}
                 handleNumberSubmit={this.handleNumberSubmit}
-              />
-            )}
-          />
-          <Route
-            path="/drag"
-            component={() => (
-              <DragNdrop
               />
             )}
           />
