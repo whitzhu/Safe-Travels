@@ -17,6 +17,7 @@ body {
 /*jumbotron in Entrance styling*/
 .jumbotron {
   background-image: url('./img/bridge.jpg');
+  background-size: cover;
   height: 100vh;
 }
 
@@ -41,11 +42,25 @@ body {
 }
 
 /*Calendar*/
+.calendar-header {
+  display: flex;
+  flex-flow: row nowrap;
+  margin-bottom: 20px;
+  justify-content: space-between;
+}
+
+.cal-col-container {
+  border-radius: 4px;
+  border: 1px solid #dedede;
+}
+
 .calendar-col {
-  border: 1px #d6d5d5 solid;
+  border-left: 1px #dedede solid;
   height: 500px;
   text-align: center;
   margin-top: 10px;
+  height: 76vh;
+  overflow-y: scroll;
 }
 
 .calendar-col-first-entry {
@@ -65,11 +80,15 @@ body {
   max-height: 140px;
 }
 
+.save-calendar-btn {
+  margin-left: 20px;
+}
+
 /*Trip Entry Container*/
 .trip-entry-container {
   max-height: 85vh;
   overflow-y: scroll;
-  border: 1px solid #dce0e0 !important;
+  border: 1px solid #dedede !important;
   border-radius: 4px;
 }
 

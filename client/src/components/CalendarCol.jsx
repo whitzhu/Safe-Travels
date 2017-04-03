@@ -44,7 +44,7 @@ class CalendarCol extends Component {
           xs={2}
           md={2}
           style={{
-            backgroundColor: isOver ? 'red' : 'white',
+            backgroundColor: isOver ? '#dbeeff' : 'white',
           }}
           className='calendar-col' id='cal-col-1'
         >

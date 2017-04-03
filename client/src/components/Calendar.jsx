@@ -13,9 +13,6 @@ class Calendar extends React.Component {
     const {calCol, updateCalEntry, updateSavedTrip, removeCalEntry, savetripEntryContainer} = this.props;
     return (
       <div>
-        <Row>
-          <h1>April</h1>
-        </Row>
         <Row className='cal-col-container'>
           {calCol.map( (caldata, index, id) =>
             <CalendarCol

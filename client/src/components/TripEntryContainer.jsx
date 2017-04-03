@@ -51,7 +51,7 @@ class tripEntryContainer extends Component {
           xs={12}
           md={12}
           style={{
-            backgroundColor: isOver ? 'red' : 'white',
+            backgroundColor: isOver ? '#dbeeff' : 'white',
           }}
           className='trip-entry-container'
         >

@@ -1,5 +1,5 @@
-import React, { Component, PropTypes } from 'react';
-import { Grid, Row, Col } from 'react-bootstrap';
+import React, { PropTypes } from 'react';
+import { Grid, Row, Col, Button} from 'react-bootstrap';
 import HTML5Backend from 'react-dnd-html5-backend';
 import { DragDropContext } from 'react-dnd';
 import TripEntryContainer from './TripEntryContainer';
@@ -25,8 +25,10 @@ const PlanTrip  = ({savedTrips, savedTripEntryContainer, updateSavedTrip, storeC
           </TripEntryContainer>
         </Col>
         <Col xs={9} md={9}>
-          <h1>Calendar</h1>
-          <button onClick={storeCalendar}>Save Calendar</button>
+          <div className='calendar-header'>
+            <h4>April Calendar</h4>
+            <Button bsStyle="info" className='save-calendar-btn' onClick={storeCalendar}>Save Calendar</Button>
+          </div>
           <Calendar
             calCol={calCol}
             removeCalEntry={removeCalEntry}
