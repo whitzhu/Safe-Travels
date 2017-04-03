@@ -36,6 +36,12 @@ const NavbarInstance = props => (
               <NavItem>Please Enter Destination</NavItem>
             }
             { props.location ? <NavItem onClick={props.setMapDestinations}><Link to="/map">Map</Link></NavItem> : null }
+            {
+              <li><Link to="/entry">Entry</Link></li>
+            }
+            {
+              <li><Link to="/itinerary">Your Trip</Link></li>
+            }
           </Nav>
           <Nav pullRight>
               { document.cookie.replace(/(?:(?:^|.*;\s*)isLoggedIn\s*\=\s*([^;]*).*$)|^.*$/, '$1') === 'true' ?

@@ -29,6 +29,10 @@ passport.deserializeUser((id, done) => {
 });
 const app = express();
 
+var profileIdCheck;
+var profileName;
+var userNumber;
+
 app.use(cookie('deserializeUsercious cookie'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -48,6 +52,8 @@ passport.use(new Strategy({
   profileFields: ['id', 'displayName', 'email'],
 },
   (accessToken, refreshToken, profile, done) => {
+    profileName = profile.displayName;
+    profileIdCheck = profile.id;
     User.findOne({ userID: profile.id }, (err, oldUser) => {
       if (oldUser) {
         done(null, oldUser);
@@ -299,9 +305,15 @@ app.post('/removeSavedTrip', (req, res) => {
   }
 });
 
+app.post('/sendItinerary', (req, res) => {
+  let message = req.body.message;
+  // zip.getEachNum(ApiKeys.testContacts, message);
+  console.log('server-config check variables:', 'profileName:', profileName, 'phoneNumber:', userNumber)
+  zip.getEachNum({profileName: userNumber}, message);
+  res.sendStatus(201);
+})
 
-
-app.post('/zip', (req,res) => {
+app.post('/zip', (req, res) => {
   let twiml = new twilio.TwimlResponse();
   let reply = req.body.Body;
   if (isNaN(Number(reply))) {
@@ -332,17 +344,29 @@ app.post('/zip', (req,res) => {
 })
 
 app.post('/storePhoneNumber', (req, res) => {
-   const phoneNumber = req.body;
-   const userID = req.body;
-   let targetUser = User.findOne({ userID: userID });
-   if (targetUser) {
-    targetUser.push({ phoneNumber: phoneNumber }, (error, response) => {
-      res.status(200);
-     });
-   } else {
-    res.sendStatus(400);
-   }
-});
+  console.log('/storePhoneNumber Post received:', req.body.phoneNumber);
+   const insertNumber = req.body.phoneNumber || '+14156974834';
+   const userID = profileIdCheck || '10155070393266758';
+   const profName = profileName || 'Gary Wong';
+   userNumber = insertNumber;
+   console.log('....Testing similarity:', profileName);
+   User.findOne({ userID: userID }, (err, user) => {
+    if (user) {
+      user.phoneNumber = insertNumber;
+
+      user.save(err => {
+        if (err) {
+          console.log('Got an error in storePhoneNumber', err);
+        } else {
+          console.log(`Stored ${profName} number as ${insertNumber}`)
+        }
+      })
+    } else {
+      console.log('User was not found in /storePhoneNumber user.findOne')
+    }
+   })
+})
+
 
 app.post('/api/url', (req, res) => {
   var targetUrl = req.body.url || 'http://bluerival.com/';
