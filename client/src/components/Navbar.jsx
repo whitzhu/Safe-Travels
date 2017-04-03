@@ -39,6 +39,9 @@ const Navbar = props => (
               <li><Link to="/entry">Entry</Link></li>
             }
             { props.location ? <li onClick={handleOnClick}><Link to="/map">Map</Link></li> : null }
+            {
+              <li><Link to="/itinerary">Your Trip</Link></li>
+            }
           </ul>
           <ul className="nav navbar-nav navbar-right">
             <li>

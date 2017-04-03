@@ -12,6 +12,7 @@ import NavbarInstance from './components/NavbarInstance';
 import Profile from './components/Profile';
 import PlanTrip from './components/PlanTrip';
 import GoogleMap from './components/GoogleMap';
+import ItinerarySideBar from './components/ItinerarySideBar';
 
 
 class App extends React.Component {
@@ -30,7 +31,11 @@ class App extends React.Component {
       yelpStyle: 'casual',
       mapDestinations: [],
       shows: [],
-      hotels:[]
+      hotels:[],
+      phoneNumber: '',
+      startDate: '',
+      endDate: '',
+      sevenDayForecast: []
     };
     this.startDate = null;
     this.endDate = null;
@@ -51,6 +56,9 @@ class App extends React.Component {
     this.setMapDestinations = this.setMapDestinations.bind(this);
     this.storePhoneNumber = this.storePhoneNumber.bind(this);
     this.queryHotels = this.queryHotels.bind(this);
+    this.handleNumberChange = this.handleNumberChange.bind(this);
+    this.handleNumberSubmit = this.handleNumberSubmit.bind(this);
+    this.handleSendItinerary = this.handleSendItinerary.bind(this);
   }
 
   componentDidMount(){
@@ -134,13 +142,39 @@ class App extends React.Component {
     });
   }
 
-  setSelectedDate({ startDate, endDate }) {
-    this.startDate = startDate === null ? this.startDate : startDate;
-    this.endDate = endDate === null ? this.endDate : endDate;
+  setSelectedDate(startDate, endDate) {
+    startDate = JSON.stringify(startDate).split('').splice(1, 10).join('');
+    endDate = JSON.stringify(endDate).split('').splice(1, 10).join('');
+    this.setState({ startDate: startDate, endDate: endDate });
+    console.log('hereee', this.state.startDate);
+    console.log('hereee', this.state.endDate);
   }
 
-  storePhoneNumber({ number }) {
+  handleNumberChange(event) {
+    let phoneNumber = event.target.value;
+    this.setState({ phoneNumber: phoneNumber });
+  }
 
+  storePhoneNumber(number) {
+    console.log('Within indexJSX: storePhoneNumber', this.state.phoneNumber);
+    Axios.post('/storePhoneNumber', {
+        phoneNumber: number
+      })
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
+
+  handleNumberSubmit(number) {
+    console.log('Within indexJSX handleNumberSubmit:', number);
+    this.setState({
+      phoneNumber: number
+    })
+    console.log('state phonenumber:', this.state.phoneNumber)
+    this.storePhoneNumber(number);
   }
 
   selectDestination(yelpLocation) {
@@ -153,6 +187,19 @@ class App extends React.Component {
 
   handleIsSentFalse() {
     this.setState({ isSent: false });
+  }
+
+  handleSendItinerary(e) {
+    e.preventDefault();
+    Axios.post('/sendItinerary', {
+      message: this.state
+    })
+    .then(res => {
+      console.log(res);
+    })
+    .catch(err => {
+      console.log(err);
+    })
   }
 
   queryCrime(geoLocation) {
@@ -277,6 +324,7 @@ class App extends React.Component {
                 handleIsSentFalse={this.handleIsSentFalse}
                 queryShows={this.queryShows}
                 showsData={this.state.shows}
+                getSevenDayForecast={this.getSevenDayForecast}
               />)}
           />
           <Route path="/login" component={Login} />
@@ -300,7 +348,10 @@ class App extends React.Component {
             path="/entry"
             component={() => (
               <PhoneEntry
-                storePhoneNumbers={this.state.storePhoneNumbers}
+                // storePhoneNumber={this.storePhoneNumber}
+                phoneNumber={this.state.phoneNumber}
+                handleNumberChange={this.handleNumberChange}
+                handleNumberSubmit={this.handleNumberSubmit}
               />
             )}
           />
@@ -312,6 +363,20 @@ class App extends React.Component {
                 geoLocation={this.state.geoLocation}
                 crimeData={this.state.crimeData}
                 mapDestinations={this.state.mapDestinations}
+              />)
+            }
+          />
+          <Route
+            path="/itinerary"
+            component={() =>
+              (<ItinerarySideBar
+                location={this.state.location}
+                attractions={this.state.attractionResults}
+                restaurants={this.state.restaurantResults}
+                savedTrips={this.state.savedTrips}
+                startDate={this.state.startDate}
+                endDate={this.state.endDate}
+                handleSendItinerary={this.handleSendItinerary}
               />)
             }
           />

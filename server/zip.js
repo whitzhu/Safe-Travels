@@ -31,14 +31,46 @@ const askForCity = (number, name) => {
   })
 }
 
+const sendItinerary = (number, name, message) => {
+  let restaurantNames = `[ Restaurants ]\n`;
+  for (let i = 0; i < message.restaurantResults.businesses.length; i++) {
+    restaurantNames += ('- ' + message.restaurantResults.businesses[i].name + '\n');
+  }
 
-const getEachNum = (contacts, callback) => {
+  let attractionNames = `[ Attractions ]\n`;
+  for (let i = 0; i < message.attractionResults.businesses.length; i++) {
+    attractionNames += ('- ' + message.attractionResults.businesses[i].name + '\n');
+  }
+
+  const newMessage = `Hey ${name.split(' ')[0]}, this is your itinerary.\n\nYou are traveling to ${message.location} from ${message.startDate} to ${message.endDate}.\n\n${attractionNames}\n${restaurantNames}`;
+
+  client.messages.create({
+    to: number,
+    from: ApiKeys.twilioNumber,
+    body: newMessage,
+  }, (err, message) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(message.sid);
+    }
+  })
+}
+
+// getEachNum(ApiKeys.testContacts, askForCity);
+// getEachNum(ApiKeys.testContacts, askForZipCode);
+// const getEachNum = (contacts, callback) => {
+//   for (let name of Object.keys(contacts)) {
+//     callback(contacts[name], name);
+//   }
+// }
+
+const getEachNum = (contacts, message) => {
   for (let name of Object.keys(contacts)) {
-    callback(contacts[name], name);
+    sendItinerary(contacts[name], name, message);
   }
 }
-getEachNum(ApiKeys.testContacts, askForZipCode);
-// getEachNum(ApiKeys.testContacts, askForCity);
+// getEachNum(ApiKeys.testContacts, askForZipCode);
 
 const convertToFahrenheit = function (degrees) {
   return (degrees - 273) * 9 / 5 + 32;
@@ -97,3 +129,4 @@ const cleanUserInputAsZipcode = (input) => {
 exports.getWeatherForecast = getWeatherForecast;
 exports.cleanUserInputAsZipcode = cleanUserInputAsZipcode;
 exports.getShows = getShows;
+exports.getEachNum = getEachNum;
