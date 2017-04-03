@@ -287,22 +287,26 @@ app.post('/saveTrip/calendar', (req, res) => {
   const body = req.body;
   const user = req.user;
   const planCalendar = body.planCalendar;
+  console.log('addtocalendardb==========', planCalendar);
   if (user) {
     User.findByIdAndUpdate(
       user._id,
-      { $addToSet: { planCalendar: planCalendar } },
+      { planCalendar: planCalendar },
       { safe: true, new: true, upsert: true },
       (err, result) => {
         if (err) {
           console.error('/saveTrip/calendar ERROR: ', err);
           res.sendStatus(400);
         }
+        console.log('/saveTrip/calendar Success');
         res.sendStatus(201);
       });
   } else {
     res.sendStatus(404);
   }
 });
+
+
 
 app.post('/removeSavedTrip', (req, res) => {
   const body = req.body;
@@ -333,6 +337,25 @@ app.post('/sendItinerary', (req, res) => {
   zip.getEachNum({profileName: userNumber}, message);
   res.sendStatus(201);
 })
+
+app.get('/saveTrip/calendar', (req, res) => {
+  const user = req.user;
+  if (user) {
+    User.findOne({
+      _id: user._id,
+    }, (error, response) => {
+      console.log("===server, /calendar planCalendar=====", response.planCalendar);
+      // if (response.planCalendar[0] !== undefined ) {
+      //   response.planCalendar[0].map(day => {
+      //     console.log('======day', day.date);
+      //   })
+      // }
+      res.status(200).json(response.planCalendar);
+    });
+  } else {
+    res.sendStatus(400);
+  }
+});
 
 app.post('/zip', (req, res) => {
   let twiml = new twilio.TwimlResponse();
@@ -403,6 +426,5 @@ app.post('/api/url', (req, res) => {
 app.get('/*', (req, res) => {
   res.redirect('/');
 });
-
 
 module.exports = app;

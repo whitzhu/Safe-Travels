@@ -25,7 +25,7 @@ const NavbarInstance = props => (
             { document.cookie.replace(/(?:(?:^|.*;\s*)isLoggedIn\s*\=\s*([^;]*).*$)|^.*$/, '$1') === 'true' ?
               <Nav>
                 <NavItem><Link to="/profile" onClick={props.getSavedTrips}>Profile</Link></NavItem>
-                <NavItem><Link to="/plan-trip" onClick={props.getSavedTrips}>Plan Trip</Link></NavItem>
+                <NavItem><Link to="/plan-trip" onClick={()=> { props.getSavedTrips(); props.getCalendar();}}>Plan Trip</Link></NavItem>
               </Nav>
               :
               null

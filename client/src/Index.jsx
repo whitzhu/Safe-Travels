@@ -74,6 +74,7 @@ class App extends React.Component {
     this.removeCalEntry = this.removeCalEntry.bind(this);
     this.savetripEntryContainer = this.savetripEntryContainer.bind(this);
     this.storeCalendar = this.storeCalendar.bind(this);
+    this.getCalendar = this.getCalendar.bind(this);
   }
 
   componentDidMount(){
@@ -346,6 +347,16 @@ class App extends React.Component {
     .catch(error => console.log('storeCalendar Error: ', error));
   }
 
+ getCalendar() {
+    Axios.get('/saveTrip/calendar')
+    .then((res) => {
+      console.log('client --- getCalendar()', res.data);
+
+        this.setState({ calCol: res.data });
+
+    });
+  }
+
   render() {
     return (
       <Router>
@@ -353,6 +364,7 @@ class App extends React.Component {
           <NavbarInstance
             location={this.state.location}
             getSavedTrips={this.getSavedTrips}
+            getCalendar={this.getCalendar}
             geoLocation={this.state.geoLocation}
             login={this.login}
             logout={this.logout}
@@ -416,6 +428,7 @@ class App extends React.Component {
                 updateCalEntry={this.updateCalEntry}
                 removeCalEntry={this.removeCalEntry}
                 storeCalendar={this.storeCalendar}
+                getCalendar={this.getCalendar}
               />)}
           />
           <Route

@@ -39,10 +39,7 @@ const userSchema = mongoose.Schema({
     imageUrl: String,
     informationUrl: String,
   }],
-  planCalendar:[{
-    date: String,
-    trip: Object
-  }]
+  planCalendar: Array
 });
 
 const User = mongoose.model('User', userSchema);
