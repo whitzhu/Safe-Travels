@@ -12,7 +12,6 @@ let tripEntry;
 const tripSource = {
   beginDrag(props, monitor, Component) {
     const item = {id: props.id};
-    // console.log('==beginDrag===dragSource==Component', Component);
     tripEntry = Component.props.trip
     return item;
   },

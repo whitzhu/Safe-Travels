@@ -10,19 +10,11 @@ const propTypes = {
   savedTrips: PropTypes.array.isRequired,
 };
 
-const PlanTrip  = ({savedTrips, savedTripEntryContainer, storeCalendar, removeSavedTrip, removeSavedTripState, calCol, updateCalEntry, removeCalEntry, savetripEntryContainer}) => (
+const PlanTrip  = ({savedTrips, savedTripEntryContainer, updateSavedTrip, storeCalendar, removeSavedTrip, removeSavedTripState, calCol, updateCalEntry, removeCalEntry, savetripEntryContainer}) => (
   <div>
     <Grid>
       <Row>
         <Col xs={3} md={3}>
-          <TripEntryContainer
-            savedTrips={savedTripEntryContainer}
-            updateCalEntry={updateCalEntry}
-            removeSavedTrip={removeSavedTrip}
-            removeSavedTripState={removeSavedTripState}
-            type='tripContainer'
-          >
-          </TripEntryContainer>
           <TripEntryContainer
             savedTrips={savedTrips}
             updateCalEntry={updateCalEntry}
@@ -40,6 +32,7 @@ const PlanTrip  = ({savedTrips, savedTripEntryContainer, storeCalendar, removeSa
             removeCalEntry={removeCalEntry}
             savetripEntryContainer={savetripEntryContainer}
             updateCalEntry={updateCalEntry}
+            updateSavedTrip={updateSavedTrip}
           />
         </Col>
       </Row>

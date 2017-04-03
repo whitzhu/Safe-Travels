@@ -10,7 +10,7 @@ class Calendar extends React.Component {
   }
 
   render() {
-    const {calCol, updateCalEntry, removeCalEntry, savetripEntryContainer} = this.props;
+    const {calCol, updateCalEntry, updateSavedTrip, removeCalEntry, savetripEntryContainer} = this.props;
     return (
       <div>
         <Grid>
@@ -26,6 +26,7 @@ class Calendar extends React.Component {
                 removeCalEntry={removeCalEntry}
                 savetripEntryContainer={savetripEntryContainer}
                 updateCalEntry={updateCalEntry}
+                updateSavedTrip={updateSavedTrip}
                 type='calendar'
               />
             )}

@@ -340,13 +340,9 @@ app.get('/saveTrip/calendar', (req, res) => {
     User.findOne({
       _id: user._id,
     }, (error, response) => {
-      console.log("===server, /calendar planCalendar=====", response.planCalendar);
-      // if (response.planCalendar[0] !== undefined ) {
-      //   response.planCalendar[0].map(day => {
-      //     console.log('======day', day.date);
-      //   })
-      // }
-      res.status(200).json(response.planCalendar);
+      if (response.planCalendar.length > 0) {
+        res.status(200).json(response.planCalendar);
+      }
     });
   } else {
     res.sendStatus(400);

@@ -37,7 +37,7 @@ function collect (connect, monitor) {
 class CalendarCol extends Component {
 
   render() {
-    const {caldata, updateCalEntry, removeCalEntry, savetripEntryContainer, id, connectDropTarget, isOver, isOverCurrent, canDrop, item } = this.props;
+    const {caldata, updateCalEntry, updateSavedTrip, removeCalEntry, savetripEntryContainer, id, connectDropTarget, isOver, isOverCurrent, canDrop, item } = this.props;
     return connectDropTarget(
       <div>
         <Col
@@ -60,6 +60,7 @@ class CalendarCol extends Component {
               removeCalEntry={removeCalEntry}
               savetripEntryContainer={savetripEntryContainer}
               updateCalEntry={updateCalEntry}
+              updateSavedTrip={updateSavedTrip}
             />
           ))}
         </Col>

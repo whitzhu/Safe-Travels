@@ -82,6 +82,7 @@ class App extends React.Component {
     this.removeCalEntry = this.removeCalEntry.bind(this);
     this.savetripEntryContainer = this.savetripEntryContainer.bind(this);
     this.storeCalendar = this.storeCalendar.bind(this);
+    this.updateSavedTrip = this.updateSavedTrip.bind(this);
   }
 
   componentDidMount(){
@@ -135,7 +136,6 @@ class App extends React.Component {
     this.setState({
       savedTripEntryContainer: this.state.savedTripEntryContainer.concat([trip])
     });
-    console.log('======savetripEntryContainer RESULT tripEntryContainer', this.state.tripEntryContainer);
   }
 
   removeSavedTrip(trip) {
@@ -317,6 +317,14 @@ class App extends React.Component {
       .catch(error => console.log(error));
   }
 
+  updateSavedTrip(tripEntry) {
+    let newSavedTrips = this.state.savedTrips;
+    newSavedTrips = newSavedTrips.concat([tripEntry]);
+    this.setState({
+      savedTrips: newSavedTrips
+    });
+  }
+
   updateCalEntry(tripEntry, id) {
     let newCalCol = this.state.calCol;
     newCalCol[id].tripEntry = newCalCol[id].tripEntry.concat([tripEntry]);
@@ -325,9 +333,7 @@ class App extends React.Component {
     });
   }
   removeCalEntry(entryId, tripIndex) {
-    console.log('=====entryId', entryId, '=====tripIndex', tripIndex);
     let newCalCol = this.state.calCol;
-    console.log("newCalCol[entryId].tripEntry-======",newCalCol[entryId].tripEntry );
     newCalCol[entryId].tripEntry.splice(tripIndex, 1);
     this.setState({
       calCol: newCalCol
@@ -345,7 +351,6 @@ class App extends React.Component {
   }
 
   storeCalendar() {
-    console.log('client --- storeCalendar()', this.state.calCol);
     Axios.post('/saveTrip/calendar', {
       planCalendar: this.state.calCol
       })
@@ -356,10 +361,7 @@ class App extends React.Component {
  getCalendar() {
     Axios.get('/saveTrip/calendar')
     .then((res) => {
-      console.log('client --- getCalendar()', res.data);
-
-        this.setState({ calCol: res.data });
-
+      this.setState({ calCol: res.data });
     });
   }
 
@@ -464,6 +466,7 @@ class App extends React.Component {
                 removeCalEntry={this.removeCalEntry}
                 storeCalendar={this.storeCalendar}
                 getCalendar={this.getCalendar}
+                updateSavedTrip={this.updateSavedTrip}
               />)}
           />
           <Route
