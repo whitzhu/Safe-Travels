@@ -155,9 +155,10 @@ class App extends React.Component {
     this.setState({ phoneNumber: phoneNumber });
   }
 
-  storePhoneNumber() {
+  storePhoneNumber(number) {
+    console.log('Within indexJSX: storePhoneNumber', this.state.phoneNumber);
     Axios.post('/storePhoneNumber', {
-        phoneNumber: this.state.phoneNumber
+        phoneNumber: number
       })
       .then(res => {
         console.log(res);
@@ -168,11 +169,12 @@ class App extends React.Component {
   }
 
   handleNumberSubmit(number) {
-    console.log('indexJSX: handleNumberSubmit called');
+    console.log('Within indexJSX handleNumberSubmit:', number);
     this.setState({
       phoneNumber: number
     })
-    this.storePhoneNumber();
+    console.log('state phonenumber:', this.state.phoneNumber)
+    this.storePhoneNumber(number);
   }
 
   selectDestination(yelpLocation) {

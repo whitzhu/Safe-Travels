@@ -23,7 +23,7 @@ handleChange(event) {
 }
 
 handleSubmit() {
-  console.log('...PhoneEntry handleSubmit called');
+  console.log('...PhoneEntry handleSubmit called', this.state.phoneNumber);
   this.props.handleNumberSubmit(this.state.phoneNumber)
 }
 

@@ -30,6 +30,8 @@ passport.deserializeUser((id, done) => {
 const app = express();
 
 var profileIdCheck;
+var profileName;
+var userNumber;
 
 app.use(cookie('deserializeUsercious cookie'));
 app.use(bodyParser.json());
@@ -50,6 +52,7 @@ passport.use(new Strategy({
   profileFields: ['id', 'displayName', 'email'],
 },
   (accessToken, refreshToken, profile, done) => {
+    profileName = profile.displayName;
     profileIdCheck = profile.id;
     User.findOne({ userID: profile.id }, (err, oldUser) => {
       if (oldUser) {
@@ -304,7 +307,9 @@ app.post('/removeSavedTrip', (req, res) => {
 
 app.post('/sendItinerary', (req, res) => {
   let message = req.body.message;
-  zip.getEachNum(ApiKeys.testContacts, message);
+  // zip.getEachNum(ApiKeys.testContacts, message);
+  console.log('server-config check variables:', 'profileName:', profileName, 'phoneNumber:', userNumber)
+  zip.getEachNum({profileName: userNumber}, message);
   res.sendStatus(201);
 })
 
@@ -339,18 +344,26 @@ app.post('/zip', (req, res) => {
 })
 
 app.post('/storePhoneNumber', (req, res) => {
-  // console.log('/storePhoneNumber Post received:', req);
-   const phoneNumber = req.body.phoneNumber;
-   const userID = profileIdCheck;
-   // console.log('....Testing similarity:', userID, '...', profileIdCheck);
+  console.log('/storePhoneNumber Post received:', req.body.phoneNumber);
+   const insertNumber = req.body.phoneNumber || '+14156974834';
+   const userID = profileIdCheck || '10155070393266758';
+   const profName = profileName || 'Gary Wong';
+   userNumber = insertNumber;
+   console.log('....Testing similarity:', profileName);
    User.findOne({ userID: userID }, (err, user) => {
-    user.phoneNumber = phoneNumber;
+    if (user) {
+      user.phoneNumber = insertNumber;
 
-    user.save(err => {
-      if (err) {
-        console.log('Got an error in storePhoneNumber', err);
-      }
-    })
+      user.save(err => {
+        if (err) {
+          console.log('Got an error in storePhoneNumber', err);
+        } else {
+          console.log(`Stored ${profName} number as ${insertNumber}`)
+        }
+      })
+    } else {
+      console.log('User was not found in /storePhoneNumber user.findOne')
+    }
    })
 })
 
