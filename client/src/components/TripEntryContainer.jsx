@@ -55,7 +55,7 @@ class tripEntryContainer extends Component {
           }}
           className='trip-entry-container'
         >
-         <h1>Plan Trip</h1>
+         <h4>Plan Trip</h4>
         {savedTrips.map( (trip, index) => (
           <TripEntry
             key={index}

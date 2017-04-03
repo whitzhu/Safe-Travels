@@ -12,7 +12,7 @@ const propTypes = {
 
 const PlanTrip  = ({savedTrips, savedTripEntryContainer, updateSavedTrip, storeCalendar, removeSavedTrip, removeSavedTripState, calCol, updateCalEntry, removeCalEntry, savetripEntryContainer}) => (
   <div>
-    <Grid>
+    <Grid >
       <Row>
         <Col xs={3} md={3}>
           <TripEntryContainer

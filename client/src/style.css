@@ -1,3 +1,6 @@
+body {
+  color: #484848 !important;
+}
 
 .google-map {
   height: 100%;
@@ -39,8 +42,14 @@
 
 /*Calendar*/
 .calendar-col {
-  border: 1px grey solid;
+  border: 1px #d6d5d5 solid;
   height: 500px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.calendar-col-first-entry {
+  border: none;
 }
 
 .calendar-col-date {
@@ -58,7 +67,10 @@
 
 /*Trip Entry Container*/
 .trip-entry-container {
-  height: 500px;
+  max-height: 85vh;
+  overflow-y: scroll;
+  border: 1px solid #dce0e0 !important;
+  border-radius: 4px;
 }
 
 /*Trip Entry Container*/
